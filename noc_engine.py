@@ -100,6 +100,7 @@ class NocEngine:
             "session_2":         base_cc  + "/api/v1/session_details/2",
         }
         self.version_url = base_cc + "/api/v1/system/version"
+        self._firmware_version_url = base_cc + "/api/v1/config/ocpp/firmware_version"
 
         # Charger ID refresh URLs and cache file
         self._ocpp_serial_url = (
@@ -180,7 +181,46 @@ class NocEngine:
     # Message senders
     # ------------------------------------------------------------------
 
+    async def _fetch_firmware_version(self) -> str | None:
+        """
+        Fetch firmware version from the charger's OCPP config endpoint.
+        Returns the version string on success, or None on any failure.
+        """
+        import aiohttp
+
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(
+                    self._firmware_version_url,
+                    timeout=aiohttp.ClientTimeout(total=5),
+                ) as resp:
+                    if resp.status != 200:
+                        logger.debug(
+                            f"[NOC-Engine] Firmware version fetch: HTTP {resp.status}"
+                        )
+                        return None
+                    data = await resp.json(content_type=None)
+                    value = str(data.get("value", "")).replace("\x00", "").strip()
+                    if data.get("success") and value:
+                        return value
+        except Exception as e:
+            logger.debug(f"[NOC-Engine] Firmware version fetch failed: {e}")
+        return None
+
     async def _send_auth(self, ws: WSClient):
+        fetched = await self._fetch_firmware_version()
+        if fetched:
+            self.firmware_version = fetched
+            logger.info(
+                f"[NOC-Engine] Firmware version refreshed from "
+                f"{self._firmware_version_url}: {fetched}"
+            )
+        else:
+            logger.info(
+                f"[NOC-Engine] Firmware version fetch unavailable — "
+                f"using config value: {self.firmware_version}"
+            )
+
         msg = self._make_msg("auth", {
             "charger_id":       self.charger_id,
             "firmware_version": self.firmware_version,
