@@ -8,49 +8,36 @@ Usage:
     cd A-core/NocEngine
     python main.py
 
-    # Or with a custom config path:
-    python main.py --config /path/to/config.json
-
 Configuration:
-    Edit config.json to set your NOC server host/port and charger identity.
+    config.json is always loaded from this script's own directory.
+    Edit it to set your NOC server host/port and charger identity.
     The charger_id is resolved automatically at startup by polling the local
     charging_controller API (charge_box_serial_number) every 5 seconds until
     it succeeds — no fallback to config.json is used.
 """
 
-import argparse
 import asyncio
 import json
 import logging
-import os
 import signal
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
 # ---------------------------------------------------------------------------
-# Argument parsing
+# Load configuration  (always from this script's own directory)
 # ---------------------------------------------------------------------------
 
-_DEFAULT_CONFIG_PATH = os.environ.get(
-    "NOC_ENGINE_CONFIG", "/app/qflex/config/noc_engine/config.json"
-)
+config_path = Path(__file__).resolve().parent / "config.json"
+print(f"[NocEngine] Loading config: {config_path}", file=sys.stderr)
 
-parser = argparse.ArgumentParser(description="NocEngine — QFlex Remote Management")
-parser.add_argument(
-    "--config",
-    default=_DEFAULT_CONFIG_PATH,
-    help=f"Path to config.json (default: {_DEFAULT_CONFIG_PATH})",
-)
-args = parser.parse_args()
-
-# ---------------------------------------------------------------------------
-# Load configuration
-# ---------------------------------------------------------------------------
-
-config_path = Path(args.config)
 if not config_path.exists():
     print(f"[NocEngine] ERROR: Config file not found: {config_path}", file=sys.stderr)
+    try:
+        siblings = sorted(p.name for p in config_path.parent.iterdir())
+        print(f"[NocEngine]   Script dir files: {siblings}", file=sys.stderr)
+    except Exception as e:
+        print(f"[NocEngine]   Script dir files: <error: {e}>", file=sys.stderr)
     sys.exit(1)
 
 with open(config_path, "r") as f:

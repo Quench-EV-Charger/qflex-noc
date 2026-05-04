@@ -21,7 +21,6 @@ Modes:
   Remote test  (charger_ip='172.16.14.123') → hits real charger over LAN/WiFi
 
 Security:
-  - Only whitelisted ports are allowed (8003, 8002, 8006)
   - Maximum 10s timeout per command
 """
 
@@ -33,9 +32,6 @@ from typing import Any, Optional
 import aiohttp
 
 logger = logging.getLogger(__name__)
-
-# Security: only these service ports are allowed
-ALLOWED_PORTS = {8003, 8002, 8006}
 
 # Port → service name (for logging)
 PORT_NAMES = {
@@ -67,24 +63,6 @@ async def execute(command: dict, charger_ip: str = "localhost") -> dict:
     path           = command.get("path", "/")
     headers        = command.get("headers", {"accept": "application/json"})
     body           = command.get("body")
-
-    # ---------------------------------------------------------------
-    # Security check: reject disallowed ports
-    # ---------------------------------------------------------------
-    if target_port not in ALLOWED_PORTS:
-        logger.warning(
-            f"[Executor] cmd={command_id} REJECTED — port {target_port} not in whitelist "
-            f"{sorted(ALLOWED_PORTS)}"
-        )
-        return {
-            "command_id": command_id,
-            "status_code": 403,
-            "response": {
-                "error": f"Port {target_port} is not allowed.",
-                "allowed_ports": sorted(ALLOWED_PORTS),
-            },
-            "execution_time_ms": 0,
-        }
 
     url     = f"http://{charger_ip}:{target_port}{path}"
     service = PORT_NAMES.get(target_port, f"port-{target_port}")
