@@ -14,6 +14,7 @@ Features:
 import json
 import logging
 import ssl
+from typing import Any
 
 import websockets
 from websockets.exceptions import ConnectionClosed, WebSocketException
@@ -63,12 +64,12 @@ class WSClient:
 
     async def connect(self):
         """Open WebSocket connection to the NOC server."""
-        kwargs = dict(
-            ping_interval=20,       # Keep-alive pings every 20s (keeps NAT/ELB alive)
-            ping_timeout=None,      # Do NOT close if the server doesn't pong
-            close_timeout=5,
-            max_size=2 * 1024 * 1024,  # 2 MB max message size
-        )
+        kwargs: dict[str, Any] = {
+            "ping_interval": 20,       # Keep-alive pings every 20s (keeps NAT/ELB alive)
+            "ping_timeout": 20,        # Reconnect if server fails to pong within 20s
+            "close_timeout": 5,
+            "max_size": 2 * 1024 * 1024,  # 2 MB max message size
+        }
         if self._ssl is not None:
             kwargs["ssl"] = self._ssl
 

@@ -12,4 +12,4 @@ All notable changes follow [Keep a Changelog](https://keepachangelog.com/en/1.1.
 _TBD per task_
 
 ### Fixed
-_TBD per task_
+- WS `ping_timeout` was `None`; a frozen server left the engine hung indefinitely. Now `20s`.
