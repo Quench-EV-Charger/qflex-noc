@@ -114,12 +114,17 @@ async def _fetch(
 # Public collect() — called by noc_engine on every telemetry interval
 # ---------------------------------------------------------------------------
 
-async def collect(api_urls: Optional[dict] = None) -> dict:
+async def collect(
+    api_urls: Optional[dict] = None,
+    session: Optional[aiohttp.ClientSession] = None,
+) -> dict:
     """
     Collect telemetry from all configured local API sources.
 
     Args:
         api_urls: Optional dict overriding the default source URLs.
+        session:  Optional shared aiohttp.ClientSession. If None, a fresh
+                  session is created and closed inside this call.
 
     Returns:
         dict with:
@@ -128,9 +133,15 @@ async def collect(api_urls: Optional[dict] = None) -> dict:
     """
     urls = {**DEFAULT_APIS, **(api_urls or {})}
 
-    async with aiohttp.ClientSession() as session:
+    own_session = session is None
+    if own_session:
+        session = aiohttp.ClientSession()
+    try:
         tasks = [_fetch(session, key, url) for key, url in urls.items()]
         results = await asyncio.gather(*tasks, return_exceptions=True)
+    finally:
+        if own_session and session is not None:
+            await session.close()
 
     payload: dict = {}
     service_health: dict = {}

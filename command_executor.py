@@ -43,7 +43,11 @@ PORT_NAMES = {
 COMMAND_TIMEOUT_S = 10.0
 
 
-async def execute(command: dict, charger_ip: str = "localhost") -> dict:
+async def execute(
+    command: dict,
+    charger_ip: str = "localhost",
+    session: aiohttp.ClientSession | None = None,
+) -> dict:
     """
     Execute a proxy command received from the NOC server.
 
@@ -53,6 +57,9 @@ async def execute(command: dict, charger_ip: str = "localhost") -> dict:
         charger_ip: IP/hostname of the target charger.
                     'localhost' when running on the charger (default).
                     Real IP like '172.16.14.123' for remote/test mode.
+        session:    Optional shared aiohttp.ClientSession. If None, a fresh
+                    session is created and closed inside this call (slower
+                    on hot paths but works for stand-alone use).
 
     Returns:
         Dict with keys: command_id, status_code, response, execution_time_ms
@@ -70,38 +77,41 @@ async def execute(command: dict, charger_ip: str = "localhost") -> dict:
     logger.info(f"[Executor] cmd={command_id} → {method} {url} [{service}]")
 
     start = time.monotonic()
+    own_session = session is None
+    if own_session:
+        session = aiohttp.ClientSession()
+
     try:
-        async with aiohttp.ClientSession() as session:
-            kwargs: dict[str, Any] = {
-                "url": url,
-                "headers": headers,
-                "timeout": aiohttp.ClientTimeout(total=COMMAND_TIMEOUT_S),
+        kwargs: dict[str, Any] = {
+            "url": url,
+            "headers": headers,
+            "timeout": aiohttp.ClientTimeout(total=COMMAND_TIMEOUT_S),
+        }
+
+        # Attach request body for mutating methods
+        if body is not None and method in ("POST", "PUT", "PATCH"):
+            kwargs["json"] = body
+
+        async with session.request(method, **kwargs) as resp:  # type: ignore[union-attr]
+            elapsed_ms = int((time.monotonic() - start) * 1000)
+
+            # Try JSON first; fall back to raw text
+            try:
+                response_body = await resp.json(content_type=None)
+            except Exception:
+                text = await resp.text()
+                response_body = {"raw": text}
+
+            logger.info(
+                f"[Executor] cmd={command_id} status={resp.status} "
+                f"time={elapsed_ms}ms"
+            )
+            return {
+                "command_id": command_id,
+                "status_code": resp.status,
+                "response": response_body,
+                "execution_time_ms": elapsed_ms,
             }
-
-            # Attach request body for mutating methods
-            if body is not None and method in ("POST", "PUT", "PATCH"):
-                kwargs["json"] = body
-
-            async with session.request(method, **kwargs) as resp:
-                elapsed_ms = int((time.monotonic() - start) * 1000)
-
-                # Try JSON first; fall back to raw text
-                try:
-                    response_body = await resp.json(content_type=None)
-                except Exception:
-                    text = await resp.text()
-                    response_body = {"raw": text}
-
-                logger.info(
-                    f"[Executor] cmd={command_id} status={resp.status} "
-                    f"time={elapsed_ms}ms"
-                )
-                return {
-                    "command_id": command_id,
-                    "status_code": resp.status,
-                    "response": response_body,
-                    "execution_time_ms": elapsed_ms,
-                }
 
     except asyncio.TimeoutError:
         elapsed_ms = int((time.monotonic() - start) * 1000)
@@ -132,3 +142,7 @@ async def execute(command: dict, charger_ip: str = "localhost") -> dict:
             "response": {"error": str(e)},
             "execution_time_ms": elapsed_ms,
         }
+
+    finally:
+        if own_session and session is not None:
+            await session.close()

@@ -24,3 +24,4 @@ _TBD per task_
 ### Changed
 - `_chunked_uploads` moved off the module global onto the `NocEngine` instance; orphaned upload state (server dropped before final chunk) is now garbage-collected instead of leaking forever.
 - Fire-and-forget background tasks (command/proxy/upload/ssh handlers) are now tracked, cancelled on disconnect, and their exceptions logged.
+- Engine now holds a single shared `aiohttp.ClientSession` and passes it to telemetry, command executor, and session sync. Eliminates per-call session churn (FD/ephemeral-port pressure under load).

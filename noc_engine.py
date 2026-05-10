@@ -25,6 +25,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
+import aiohttp
 from websockets.exceptions import ConnectionClosed, WebSocketException
 
 from ws_client import WSClient, WebSocketException
@@ -123,6 +124,10 @@ class NocEngine:
         # Tracked fire-and-forget background tasks (commands, proxy, ssh, uploads)
         self._background_tasks: set[asyncio.Task] = set()
 
+        # Shared aiohttp session for outbound HTTP (telemetry, executor, session_sync,
+        # version polls, charger-id refresh, NOC URL refresh, proxy, devtools upload).
+        self.http_session: aiohttp.ClientSession | None = None
+
         # SSH Tunnel manager for remote SSH access
         self._ssh_manager = SSHTunnelManager()
 
@@ -196,23 +201,21 @@ class NocEngine:
         Fetch firmware version from the charger's OCPP config endpoint.
         Returns the version string on success, or None on any failure.
         """
-        import aiohttp
-
         try:
-            async with aiohttp.ClientSession() as session:
-                async with session.get(
-                    self._firmware_version_url,
-                    timeout=aiohttp.ClientTimeout(total=5),
-                ) as resp:
-                    if resp.status != 200:
-                        logger.debug(
-                            f"[NOC-Engine] Firmware version fetch: HTTP {resp.status}"
-                        )
-                        return None
-                    data = await resp.json(content_type=None)
-                    value = str(data.get("value", "")).replace("\x00", "").strip()
-                    if data.get("success") and value:
-                        return value
+            session = await self._ensure_http_session()
+            async with session.get(
+                self._firmware_version_url,
+                timeout=aiohttp.ClientTimeout(total=5),
+            ) as resp:
+                if resp.status != 200:
+                    logger.debug(
+                        f"[NOC-Engine] Firmware version fetch: HTTP {resp.status}"
+                    )
+                    return None
+                data = await resp.json(content_type=None)
+                value = str(data.get("value", "")).replace("\x00", "").strip()
+                if data.get("success") and value:
+                    return value
         except Exception as e:
             logger.debug(f"[NOC-Engine] Firmware version fetch failed: {e}")
         return None
@@ -263,29 +266,29 @@ class NocEngine:
                 return
 
             try:
-                async with aiohttp.ClientSession() as session:
-                    async with session.get(
-                        self.version_url,
-                        timeout=aiohttp.ClientTimeout(total=5)
-                    ) as resp:
-                        if resp.status == 200:
-                            data = await resp.json(content_type=None)
-                            logger.info(
-                                f"[NOC-Engine] 🔖 Version poll {poll_num}/{POLLS}: "
-                                f"{data.get('versions', {})}"
-                            )
-                            msg = self._make_msg("version_info", {
-                                "poll":     poll_num,
-                                "of":       POLLS,
-                                "versions": data.get("versions", {}),
-                                "source":   self.version_url,
-                            })
-                            await ws.send(msg)
-                        else:
-                            logger.warning(
-                                f"[NOC-Engine] 🔖 Version poll {poll_num}/{POLLS}: "
-                                f"HTTP {resp.status}"
-                            )
+                session = await self._ensure_http_session()
+                async with session.get(
+                    self.version_url,
+                    timeout=aiohttp.ClientTimeout(total=5)
+                ) as resp:
+                    if resp.status == 200:
+                        data = await resp.json(content_type=None)
+                        logger.info(
+                            f"[NOC-Engine] 🔖 Version poll {poll_num}/{POLLS}: "
+                            f"{data.get('versions', {})}"
+                        )
+                        msg = self._make_msg("version_info", {
+                            "poll":     poll_num,
+                            "of":       POLLS,
+                            "versions": data.get("versions", {}),
+                            "source":   self.version_url,
+                        })
+                        await ws.send(msg)
+                    else:
+                        logger.warning(
+                            f"[NOC-Engine] 🔖 Version poll {poll_num}/{POLLS}: "
+                            f"HTTP {resp.status}"
+                        )
             except Exception as e:
                 logger.warning(
                     f"[NOC-Engine] 🔖 Version poll {poll_num}/{POLLS} failed: {e}"
@@ -321,7 +324,10 @@ class NocEngine:
             if not ws.connected:
                 break
             try:
-                payload = await collect_telemetry(self.api_urls)
+                payload = await collect_telemetry(
+                    self.api_urls,
+                    session=await self._ensure_http_session(),
+                )
                 await ws.send(self._make_msg("telemetry", payload))
                 logger.info("[NOC-Engine] 📡 Telemetry sent")
             except Exception as e:
@@ -349,36 +355,36 @@ class NocEngine:
             hw_serial: str | None = None
 
             try:
-                async with aiohttp.ClientSession() as session:
-                    try:
-                        async with session.get(
-                            self._ocpp_serial_url,
-                            timeout=aiohttp.ClientTimeout(total=5),
-                        ) as resp:
-                            if resp.status == 200:
-                                data = await resp.json()
-                                serial = data.get("value", "").replace("\x00", "").strip()
-                                if data.get("success") and serial:
-                                    ocpp_serial = serial
-                    except Exception as e:
-                        logger.debug(
-                            f"[NOC-Engine] Charger ID refresh: OCPP fetch failed: {e}"
-                        )
+                session = await self._ensure_http_session()
+                try:
+                    async with session.get(
+                        self._ocpp_serial_url,
+                        timeout=aiohttp.ClientTimeout(total=5),
+                    ) as resp:
+                        if resp.status == 200:
+                            data = await resp.json()
+                            serial = data.get("value", "").replace("\x00", "").strip()
+                            if data.get("success") and serial:
+                                ocpp_serial = serial
+                except Exception as e:
+                    logger.debug(
+                        f"[NOC-Engine] Charger ID refresh: OCPP fetch failed: {e}"
+                    )
 
-                    try:
-                        async with session.get(
-                            self._hw_serial_url,
-                            timeout=aiohttp.ClientTimeout(total=5),
-                        ) as resp:
-                            if resp.status == 200:
-                                data = await resp.json()
-                                serial = str(data.get("serial_number", "")).replace("\x00", "").strip()
-                                if data.get("success") and serial:
-                                    hw_serial = serial
-                    except Exception as e:
-                        logger.debug(
-                            f"[NOC-Engine] Charger ID refresh: HW fetch failed: {e}"
-                        )
+                try:
+                    async with session.get(
+                        self._hw_serial_url,
+                        timeout=aiohttp.ClientTimeout(total=5),
+                    ) as resp:
+                        if resp.status == 200:
+                            data = await resp.json()
+                            serial = str(data.get("serial_number", "")).replace("\x00", "").strip()
+                            if data.get("success") and serial:
+                                hw_serial = serial
+                except Exception as e:
+                    logger.debug(
+                        f"[NOC-Engine] Charger ID refresh: HW fetch failed: {e}"
+                    )
             except Exception as e:
                 logger.debug(f"[NOC-Engine] Charger ID refresh error: {e}")
 
@@ -415,16 +421,16 @@ class NocEngine:
 
             new_url: str | None = None
             try:
-                async with aiohttp.ClientSession() as session:
-                    async with session.get(
-                        self._noc_url_url,
-                        timeout=aiohttp.ClientTimeout(total=5),
-                    ) as resp:
-                        if resp.status == 200:
-                            data = await resp.json()
-                            url = str(data.get("value", "")).strip()
-                            if data.get("success") and url:
-                                new_url = url
+                session = await self._ensure_http_session()
+                async with session.get(
+                    self._noc_url_url,
+                    timeout=aiohttp.ClientTimeout(total=5),
+                ) as resp:
+                    if resp.status == 200:
+                        data = await resp.json()
+                        url = str(data.get("value", "")).strip()
+                        if data.get("success") and url:
+                            new_url = url
             except Exception as e:
                 logger.debug(f"[NOC-Engine] NOC URL refresh error: {e}")
 
@@ -450,12 +456,13 @@ class NocEngine:
             logger.debug("[NOC-Engine] Session sync not available, skipping loop")
             return
         
-        # Initialize session sync manager
+        # Initialize session sync manager (shared HTTP session)
         session_sync = SessionSyncManager(
             noc_ws_client=ws,
             charger_id=self.charger_id,
             local_api_base=f"http://{self.charger_ip}:8003",
             poll_interval=30,
+            http_session=await self._ensure_http_session(),
         )
         
         await session_sync.start()
@@ -469,6 +476,22 @@ class NocEngine:
             # Ensure session sync background task doesn't leak on cancellation
             await session_sync.stop()
             logger.info("[NOC-Engine] 📝 Session sync stopped")
+
+    async def _ensure_http_session(self) -> aiohttp.ClientSession:
+        """Lazily create the shared aiohttp.ClientSession (re-creates if it was closed)."""
+        if self.http_session is None or self.http_session.closed:
+            self.http_session = aiohttp.ClientSession()
+            logger.debug("[NOC-Engine] aiohttp.ClientSession opened")
+        return self.http_session
+
+    async def _close_http_session(self):
+        """Close the shared aiohttp.ClientSession (idempotent)."""
+        if self.http_session is not None:
+            try:
+                await self.http_session.close()
+            except Exception as e:
+                logger.warning(f"[NOC-Engine] Error closing HTTP session: {e}")
+            self.http_session = None
 
     def _spawn_tracked(self, coro, name: str | None = None) -> asyncio.Task:
         """Schedule a fire-and-forget coroutine so we can cancel it later
@@ -600,8 +623,12 @@ class NocEngine:
             f"path={command.get('path')} → target={self.charger_ip}"
         )
         try:
-            # Pass charger_ip so executor targets the right host
-            result     = await execute_command(command, charger_ip=self.charger_ip)
+            # Pass charger_ip so executor targets the right host; share the engine's session.
+            result = await execute_command(
+                command,
+                charger_ip=self.charger_ip,
+                session=await self._ensure_http_session(),
+            )
             result_msg = self._make_msg("command_result", result)
             await ws.send(result_msg)
             logger.info(
@@ -792,22 +819,22 @@ class NocEngine:
                 logger.info(f"[NOC-Engine] Proxy text POST: target={target_url}, content_type={content_type}")
         
         try:
-            async with aiohttp.ClientSession() as session:
-                async with session.request(**request_kwargs) as resp:
-                    try:
-                        data = await resp.json(content_type=None)
-                    except:
-                        text = await resp.text()
-                        data = {"raw_response": text}
-                    
-                    response_msg = self._make_msg("proxy_response", {
-                        "request_id": request_id,
-                        "success": True,
-                        "status_code": resp.status,
-                        "data": data,
-                    })
-                    await ws.send(response_msg)
-                    logger.info(f"[NOC-Engine] 🔀 Proxy response sent: {request_id} (HTTP {resp.status})")
+            session = await self._ensure_http_session()
+            async with session.request(**request_kwargs) as resp:
+                try:
+                    data = await resp.json(content_type=None)
+                except Exception:
+                    text = await resp.text()
+                    data = {"raw_response": text}
+
+                response_msg = self._make_msg("proxy_response", {
+                    "request_id": request_id,
+                    "success": True,
+                    "status_code": resp.status,
+                    "data": data,
+                })
+                await ws.send(response_msg)
+                logger.info(f"[NOC-Engine] 🔀 Proxy response sent: {request_id} (HTTP {resp.status})")
                     
         except Exception as e:
             error_msg = self._make_msg("proxy_response", {
@@ -929,53 +956,50 @@ class NocEngine:
 
     async def _post_file_to_devtools(self, target: str, file_name: str, file_data: bytes) -> dict:
         """Post complete file to dev-tools service on port 8005."""
-        import aiohttp
-        import uuid
-        
         url = f"http://{self.charger_ip}:8005/api/v1/devtools/upload/{target}"
         logger.info(f"[NOC-Engine] Posting to {url}, file={file_name}, size={len(file_data)} bytes")
-        
+
         # Use aiohttp's FormData for proper multipart encoding
         form = aiohttp.FormData()
         form.add_field('file', file_data, filename=file_name, content_type='application/octet-stream')
-        
+
         try:
-            async with aiohttp.ClientSession() as session:
-                logger.info(f"[NOC-Engine] Sending POST request to port 8005 using FormData...")
-                async with session.post(
-                    url,
-                    data=form,
-                    timeout=aiohttp.ClientTimeout(total=300)
-                ) as resp:
-                    logger.info(f"[NOC-Engine] Got response from port 8005: status={resp.status}")
-                    response_text = await resp.text()
-                    logger.info(f"[NOC-Engine] Response body length: {len(response_text)}, content_type={resp.content_type}")
-                    logger.info(f"[NOC-Engine] Response body preview: {response_text[:1000] if response_text else '(empty)'}")
-                    
-                    # Parse JSON if possible
-                    data = None
-                    if resp.content_type == 'application/json' or response_text.strip().startswith('{'):
-                        try:
-                            data = json.loads(response_text)
-                            logger.info(f"[NOC-Engine] Parsed JSON response: {data}")
-                        except Exception as json_err:
-                            logger.warning(f"[NOC-Engine] Failed to parse JSON: {json_err}")
-                            data = {"raw_response": response_text}
-                    else:
+            session = await self._ensure_http_session()
+            logger.info(f"[NOC-Engine] Sending POST request to port 8005 using FormData...")
+            async with session.post(
+                url,
+                data=form,
+                timeout=aiohttp.ClientTimeout(total=300)
+            ) as resp:
+                logger.info(f"[NOC-Engine] Got response from port 8005: status={resp.status}")
+                response_text = await resp.text()
+                logger.info(f"[NOC-Engine] Response body length: {len(response_text)}, content_type={resp.content_type}")
+                logger.info(f"[NOC-Engine] Response body preview: {response_text[:1000] if response_text else '(empty)'}")
+
+                # Parse JSON if possible
+                data = None
+                if resp.content_type == 'application/json' or response_text.strip().startswith('{'):
+                    try:
+                        data = json.loads(response_text)
+                        logger.info(f"[NOC-Engine] Parsed JSON response: {data}")
+                    except Exception as json_err:
+                        logger.warning(f"[NOC-Engine] Failed to parse JSON: {json_err}")
                         data = {"raw_response": response_text}
-                    
-                    if resp.status < 400:
-                        logger.info(f"[NOC-Engine] Upload to port 8005 succeeded")
-                        return {"success": True, "data": data}
-                    else:
-                        # Extract error message with fallbacks
-                        error_msg = None
-                        if isinstance(data, dict):
-                            error_msg = data.get("detail") or data.get("message") or data.get("error") or str(data)
-                        if not error_msg:
-                            error_msg = response_text or f"HTTP {resp.status}"
-                        logger.error(f"[NOC-Engine] Upload to port 8005 failed: status={resp.status}, error={error_msg}")
-                        return {"success": False, "error": error_msg}
+                else:
+                    data = {"raw_response": response_text}
+
+                if resp.status < 400:
+                    logger.info(f"[NOC-Engine] Upload to port 8005 succeeded")
+                    return {"success": True, "data": data}
+                else:
+                    # Extract error message with fallbacks
+                    error_msg = None
+                    if isinstance(data, dict):
+                        error_msg = data.get("detail") or data.get("message") or data.get("error") or str(data)
+                    if not error_msg:
+                        error_msg = response_text or f"HTTP {resp.status}"
+                    logger.error(f"[NOC-Engine] Upload to port 8005 failed: status={resp.status}, error={error_msg}")
+                    return {"success": False, "error": error_msg}
         except asyncio.TimeoutError as te:
             logger.error(f"[NOC-Engine] Timeout posting to port 8005: {te}")
             return {"success": False, "error": f"Timeout connecting to port 8005: {te}"}
@@ -1001,6 +1025,9 @@ class NocEngine:
         logger.info(f"[NOC-Engine] Telemetry URLs:")
         for k, v in self.api_urls.items():
             logger.info(f"[NOC-Engine]   {k}: {v}")
+
+        # Open the shared HTTP session (used by telemetry, executor, session_sync, etc.)
+        await self._ensure_http_session()
 
         # Background sweeper for orphaned chunked uploads (engine-lifetime)
         if self._sweeper_task is None or self._sweeper_task.done():
@@ -1078,6 +1105,7 @@ class NocEngine:
             logger.info(f"[NOC-Engine] Reconnecting in {self.reconnect_delay}s ...")
             await asyncio.sleep(self.reconnect_delay)
 
+        await self._close_http_session()
         logger.info("[NOC-Engine] Stopped.")
 
 

@@ -49,6 +49,7 @@ class SessionSyncManager:
         charger_id: str,
         local_api_base: str = "http://localhost:8003",
         poll_interval: int = 30,
+        http_session: Optional[aiohttp.ClientSession] = None,
     ):
         """
         Args:
@@ -56,12 +57,15 @@ class SessionSyncManager:
             charger_id: Unique identifier for this charger
             local_api_base: Base URL for local charger APIs
             poll_interval: Seconds between polls (default: 30)
+            http_session: Optional shared aiohttp.ClientSession. If None, fresh
+                          sessions are opened per-call (back-compat for stand-alone use).
         """
         self.ws_client = noc_ws_client
         self.charger_id = charger_id
         self.api_base = local_api_base.rstrip("/")
         self.poll_interval = poll_interval
-        
+        self._http_session = http_session
+
         self._running = False
         self._task: Optional[asyncio.Task] = None
         
@@ -160,12 +164,14 @@ class SessionSyncManager:
     async def _fetch_active_sessions(self) -> list[dict]:
         """Fetch active sessions from local APIs for both guns."""
         active_sessions = []
-        
-        async with aiohttp.ClientSession() as session:
+
+        own_session = self._http_session is None
+        session = self._http_session if not own_session else aiohttp.ClientSession()
+        try:
             for gun_id in [1, 2]:
                 try:
                     url = f"{self.api_base}/api/v1/session_details/active/{gun_id}"
-                    async with session.get(url, timeout=aiohttp.ClientTimeout(total=5)) as resp:
+                    async with session.get(url, timeout=aiohttp.ClientTimeout(total=5)) as resp:  # type: ignore[union-attr]
                         if resp.status == 200:
                             data = await resp.json()
                             if data.get("success") and data.get("session"):
@@ -180,7 +186,10 @@ class SessionSyncManager:
                             logger.warning(f"[SessionSync] Active API error for gun {gun_id}: {resp.status}")
                 except Exception as e:
                     logger.error(f"[SessionSync] Failed to fetch active session gun {gun_id}: {e}")
-        
+        finally:
+            if own_session and session is not None:
+                await session.close()
+
         return active_sessions
     
     def _detect_completed_sessions(self, current_active: list[dict]) -> list[str]:
@@ -198,32 +207,38 @@ class SessionSyncManager:
     
     async def _fetch_history(self) -> list[dict]:
         """Fetch session history from local API (incremental)."""
+        own_session = False
+        session = None
         try:
             # Use hours parameter to limit data transfer
             # On first run: 24 hours, then incremental based on last_sync_time
             last_sync = self._state.get("last_sync_time", "")
             hours = self._calculate_hours_window(last_sync)
-            
+
             url = f"{self.api_base}/api/v1/session_details/history"
             params = {
                 "hours": hours,
                 "limit": 50,
                 "offset": 0,
             }
-            
-            async with aiohttp.ClientSession() as session:
-                async with session.get(url, params=params, timeout=aiohttp.ClientTimeout(total=10)) as resp:
-                    if resp.status == 200:
-                        data = await resp.json()
-                        if data.get("success"):
-                            sessions = data.get("sessions", [])
-                            logger.debug(f"[SessionSync] Fetched {len(sessions)} history sessions")
-                            return sessions
-                    else:
-                        logger.warning(f"[SessionSync] History API error: {resp.status}")
+
+            own_session = self._http_session is None
+            session = self._http_session if not own_session else aiohttp.ClientSession()
+            async with session.get(url, params=params, timeout=aiohttp.ClientTimeout(total=10)) as resp:  # type: ignore[union-attr]
+                if resp.status == 200:
+                    data = await resp.json()
+                    if data.get("success"):
+                        sessions = data.get("sessions", [])
+                        logger.debug(f"[SessionSync] Fetched {len(sessions)} history sessions")
+                        return sessions
+                else:
+                    logger.warning(f"[SessionSync] History API error: {resp.status}")
         except Exception as e:
             logger.error(f"[SessionSync] Failed to fetch history: {e}")
-        
+        finally:
+            if own_session and session is not None:
+                await session.close()
+
         return []
     
     def _calculate_hours_window(self, last_sync_time: str) -> int:
