@@ -2,7 +2,9 @@
 
 All notable changes follow [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and adhere to [Semantic Versioning](https://semver.org/).
 
-## [Unreleased] — 1.1.0-dev
+## [Unreleased]
+
+## [1.1.0] — 2026-05-10
 
 ### Added
 - Test suite (pytest + pytest-asyncio) under `tests/`.

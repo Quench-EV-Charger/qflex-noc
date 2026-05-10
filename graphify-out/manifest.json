@@ -1,0 +1,102 @@
+{
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\command_executor.py": {
+    "mtime": 1778422758.4742658,
+    "hash": "333a80bab58d60f2f889dbc558b709ea"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\main.py": {
+    "mtime": 1777895860.88535,
+    "hash": "e9838b9501de2b6c36f4cb187b523e3e"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\noc_engine.py": {
+    "mtime": 1778423245.2505422,
+    "hash": "31d106fccc00b508b371d5c01d65ede0"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\session_sync.py": {
+    "mtime": 1778422840.255819,
+    "hash": "b8b6cb65fc2618ae715d2b97c5ded560"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\ssh_tunnel.py": {
+    "mtime": 1778423017.7961662,
+    "hash": "657fb275732e6f4903e827d173f7794d"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\start.ps1": {
+    "mtime": 1777542788.5626945,
+    "hash": "f198e7ae672392cb7597b2eb7095d2ea"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\telemetry_collector.py": {
+    "mtime": 1778422777.837595,
+    "hash": "c29a09023fd6a0cfed6cc5ad672ab414"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\version_api.py": {
+    "mtime": 1778423189.3531246,
+    "hash": "f5e8d0101c8400e1bc704a395057b8fd"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\ws_client.py": {
+    "mtime": 1778421437.156537,
+    "hash": "2f7f67e37d033c7dc9dccd4f9b109bf9"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\__init__.py": {
+    "mtime": 1778421096.1466796,
+    "hash": "2756df910edb95e09dc286c7ed8ff4b7"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\tests\\conftest.py": {
+    "mtime": 1778421078.3696475,
+    "hash": "e8ed69f761284efa4e979115adc69515"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\tests\\test_noc_engine_session.py": {
+    "mtime": 1778423076.8159106,
+    "hash": "a43b4018a080f0034728168643d2b326"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\tests\\test_noc_engine_tasks.py": {
+    "mtime": 1778422342.3732128,
+    "hash": "db934e3ab36f1f04677600da3b7f73ac"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\tests\\test_noc_engine_uploads.py": {
+    "mtime": 1778422183.4020019,
+    "hash": "b77b6c6c5f4083109ca5ccde50f96149"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\tests\\test_noc_engine_watchdog.py": {
+    "mtime": 1778422109.3014548,
+    "hash": "32a86f3990d7d45be00bd1c85aa630af"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\tests\\test_ssh_tunnel_backpressure.py": {
+    "mtime": 1778422978.0486763,
+    "hash": "26e9d2676f7ed535ca35828f12f468ab"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\tests\\test_version_api.py": {
+    "mtime": 1778423167.1341672,
+    "hash": "56934192716fc085c0b52af09e6d15e7"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\tests\\test_ws_client.py": {
+    "mtime": 1778421401.4897962,
+    "hash": "34f39b86f0bb874efdc0df2f0497a4cc"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\tests\\__init__.py": {
+    "mtime": 1778421054.6010056,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\AGENTS.md": {
+    "mtime": 1777542788.3872387,
+    "hash": "693fc3dabd59bfebf9918faa79990ad9"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\CHANGELOG.md": {
+    "mtime": 1778423529.5965517,
+    "hash": "c03c13b5dfcbbc27f3c6f08bce303e44"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\README.md": {
+    "mtime": 1777542788.4005222,
+    "hash": "de6cca8499143c9ce899841ad494f0d2"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\requirements-dev.txt": {
+    "mtime": 1778421044.820501,
+    "hash": "d799a0beeb6b6658668a6e4b2832eea6"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\requirements.txt": {
+    "mtime": 1777542788.519111,
+    "hash": "b26581c9c787d61a239f69439ce092a7"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\docs\\superpowers\\plans\\2026-05-10-noc-engine-robustness.md": {
+    "mtime": 1778420898.3538165,
+    "hash": "921be771cd0841e7221079160f5b1738"
+  }
+}
