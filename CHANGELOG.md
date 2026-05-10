@@ -15,3 +15,4 @@ _TBD per task_
 - WS `ping_timeout` was `None`; a frozen server left the engine hung indefinitely. Now `20s`.
 - `WSClient.connect` now uses `open_timeout=15` so an unreachable server fails fast.
 - `WSClient.disconnect` is now hard-bounded at 6s and logs unexpected close errors instead of swallowing them.
+- `WSClient.send` now wraps the underlying drain with `asyncio.wait_for(send_timeout=10s)`. A stuck server can no longer freeze every concurrent loop.

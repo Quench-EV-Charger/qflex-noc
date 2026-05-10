@@ -35,11 +35,12 @@ class WSClient:
         await client.disconnect()
     """
 
-    def __init__(self, uri: str, ssl_context=None):
+    def __init__(self, uri: str, ssl_context=None, send_timeout: float = 10.0):
         self.uri = uri
         self._ssl = ssl_context
         self._ws = None
         self._connected = False
+        self.send_timeout = send_timeout
 
     # ------------------------------------------------------------------
     # Connection state
@@ -98,15 +99,16 @@ class WSClient:
 
     async def send(self, message: dict):
         """
-        Serialize and send a JSON message.
+        Serialize and send a JSON message, bounded by ``send_timeout``.
 
         Raises:
-            ConnectionError: If not connected.
-            ConnectionClosed: If connection dropped mid-send.
+            ConnectionError:      If not connected.
+            asyncio.TimeoutError: If the underlying drain blocks longer than send_timeout.
+            ConnectionClosed:     If the connection drops mid-send.
         """
         if not self.connected:
             raise ConnectionError("WebSocket not connected")
-        await self._ws.send(json.dumps(message))
+        await asyncio.wait_for(self._ws.send(json.dumps(message)), timeout=self.send_timeout)
 
     async def receive(self) -> dict:
         """

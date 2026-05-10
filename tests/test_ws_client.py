@@ -43,6 +43,28 @@ async def test_disconnect_is_bounded_when_close_hangs():
     assert client._connected is False
 
 
+async def test_send_raises_on_drain_stall():
+    """A send() that drains slower than send_timeout must raise asyncio.TimeoutError."""
+
+    class _StalledWS:
+        # No `state` attribute -> WSClient.connected falls through to `open` check.
+        open = True
+
+        async def send(self, _payload):
+            await asyncio.sleep(10)  # simulate TCP back-pressure
+
+        async def close(self):
+            pass
+
+    client = WSClient("ws://test/ws/X")
+    client._ws = _StalledWS()  # type: ignore[assignment]
+    client._connected = True
+    client.send_timeout = 0.5  # tighten for the test
+
+    with pytest.raises(asyncio.TimeoutError):
+        await client.send({"type": "heartbeat"})
+
+
 async def test_connect_passes_ping_timeout_20(free_port):
     """ping_timeout MUST be a finite value so the websockets library can detect a frozen peer."""
     captured = {}
