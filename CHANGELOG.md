@@ -4,6 +4,11 @@ All notable changes follow [Keep a Changelog](https://keepachangelog.com/en/1.1.
 
 ## [Unreleased]
 
+## [1.1.2] — 2026-05-10
+
+### Added
+- `scripts/zip_source.py` — dev utility that exports the project as a filtered folder (`<module>_opentest/`) and a timestamped zip (`<module>_dtd_DDMMYY_HHMMSS.zip`). Honors an exclusion list (caches, virtualenvs, graphify-out, tests, docs) and an extension allow-list (`.py .json .js .html .css`). Supports `--dry-run`, `--skip-folder`, `--skip-zip`, custom `--out-dir`, and `--include-ext`.
+
 ## [1.1.1] — 2026-05-10
 
 ### Fixed
