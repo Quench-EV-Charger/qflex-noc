@@ -112,7 +112,12 @@ class NocEngine:
         self._charger_id_cache_file = Path(charger_id_cache_file) if charger_id_cache_file else Path(__file__).parent / "charger_id_cache.json"
 
         self._running = False
-        
+
+        # Watchdog state — force reconnect if no inbound message in N seconds
+        self._last_inbound_at: float | None = None
+        self.inbound_idle_timeout: float = 60.0
+        self.reconnect_delay: float = 5.0
+
         # SSH Tunnel manager for remote SSH access
         self._ssh_manager = SSHTunnelManager()
 
@@ -460,6 +465,30 @@ class NocEngine:
             await session_sync.stop()
             logger.info("[NOC-Engine] 📝 Session sync stopped")
 
+    async def _watchdog_loop(self, ws: WSClient):
+        """Force a reconnect if no inbound WS message has arrived recently.
+
+        Returning from this coroutine wakes the asyncio.wait(FIRST_COMPLETED) in
+        run() and triggers the standard reconnect flow.
+        """
+        # Initialise on entry so a slow first message doesn't fire the watchdog.
+        self._last_inbound_at = asyncio.get_event_loop().time()
+        # Poll cadence: tied to the threshold but capped so disconnects are
+        # noticed within ~5s regardless of inbound_idle_timeout.
+        poll = min(max(self.inbound_idle_timeout / 4, 1.0), 5.0)
+        while True:
+            await asyncio.sleep(poll)
+            if not ws.connected:
+                return
+            now = asyncio.get_event_loop().time()
+            idle = now - (self._last_inbound_at or now)
+            if idle >= self.inbound_idle_timeout:
+                logger.warning(
+                    f"[NOC-Engine] 🐶 Watchdog: no inbound for {idle:.1f}s "
+                    f"(threshold={self.inbound_idle_timeout}s) — forcing reconnect"
+                )
+                return  # exit triggers FIRST_COMPLETED → reconnect
+
     async def _receive_loop(self, ws: WSClient):
         """
         Receive messages from NOC server and dispatch them.
@@ -471,6 +500,7 @@ class NocEngine:
         while True:
             try:
                 message = await ws.receive()
+                self._last_inbound_at = asyncio.get_event_loop().time()
                 msg_type = message.get("type", "UNKNOWN")
 
                 # Log EVERYTHING we receive at INFO level for debugging
@@ -921,7 +951,6 @@ class NocEngine:
         On disconnect or any error, cleans up the socket and retries after 5s.
         """
         self._running = True
-        RECONNECT_DELAY = 5  # Fixed 5-second retry — no backoff
 
         logger.info(f"[NOC-Engine] Starting → {self.ws_uri}")
         logger.info(f"[NOC-Engine] Charger IP   : {self.charger_ip}")
@@ -945,6 +974,7 @@ class NocEngine:
                     asyncio.create_task(self._session_sync_loop(ws),        name="session_sync"),
                     asyncio.create_task(self._charger_id_refresh_loop(ws),  name="charger_id_refresh"),
                     asyncio.create_task(self._noc_url_refresh_loop(ws),     name="noc_url_refresh"),
+                    asyncio.create_task(self._watchdog_loop(ws),            name="watchdog"),
                 ]
 
                 # Fire and forget version poll (it self-terminates after 5 polls)
@@ -988,8 +1018,8 @@ class NocEngine:
             if not self._running:
                 break
 
-            logger.info(f"[NOC-Engine] Reconnecting in {RECONNECT_DELAY}s ...")
-            await asyncio.sleep(RECONNECT_DELAY)
+            logger.info(f"[NOC-Engine] Reconnecting in {self.reconnect_delay}s ...")
+            await asyncio.sleep(self.reconnect_delay)
 
         logger.info("[NOC-Engine] Stopped.")
 

@@ -16,3 +16,6 @@ _TBD per task_
 - `WSClient.connect` now uses `open_timeout=15` so an unreachable server fails fast.
 - `WSClient.disconnect` is now hard-bounded at 6s and logs unexpected close errors instead of swallowing them.
 - `WSClient.send` now wraps the underlying drain with `asyncio.wait_for(send_timeout=10s)`. A stuck server can no longer freeze every concurrent loop.
+
+### Added
+- New inbound-message watchdog: the engine forces a reconnect if it hasn't received any WS message within `inbound_idle_timeout` (default 60s). Closes the gap left by one-way application heartbeats and `asyncio.wait(FIRST_COMPLETED)` blocking. Polling cadence is capped at 5s so disconnects are noticed quickly even with high thresholds.
