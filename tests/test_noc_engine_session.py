@@ -1,4 +1,6 @@
 """Engine should hold a single aiohttp.ClientSession reused by all collaborators."""
+import asyncio
+
 import aiohttp
 import pytest
 
@@ -24,6 +26,32 @@ async def test_engine_exposes_shared_http_session(tmp_path):
     assert not s1.closed
     await engine._close_http_session()
     assert engine.http_session is None
+
+
+async def test_send_auth_completes_when_firmware_endpoint_is_slow(tmp_path):
+    """If the firmware endpoint takes > firmware_fetch_timeout, auth still goes out promptly."""
+    engine = NocEngine(_cfg(), charger_id_cache_file=str(tmp_path / "c.json"))
+    engine.firmware_fetch_timeout = 0.2
+
+    sent: list[dict] = []
+
+    class _WS:
+        connected = True
+        async def send(self, m):
+            sent.append(m)
+
+    async def slow_fetch():
+        await asyncio.sleep(2)
+        return "9.9.9"
+
+    engine._fetch_firmware_version = slow_fetch  # type: ignore[assignment]
+
+    start = asyncio.get_event_loop().time()
+    await engine._send_auth(_WS())  # type: ignore[arg-type]
+    elapsed = asyncio.get_event_loop().time() - start
+
+    assert elapsed < 1.0, f"auth must not be blocked by slow firmware fetch (took {elapsed:.2f}s)"
+    assert any(m["type"] == "auth" for m in sent)
 
 
 async def test_close_then_ensure_creates_new_session(tmp_path):

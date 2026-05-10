@@ -116,6 +116,9 @@ class NocEngine:
         self.inbound_idle_timeout: float = 60.0
         self.reconnect_delay: float = 5.0
 
+        # Bound the firmware-version fetch during auth (was 5s aiohttp timeout, now best-effort)
+        self.firmware_fetch_timeout: float = 1.5
+
         # Chunked upload state (per-engine, with TTL sweep)
         self._chunked_uploads: dict = {}
         self.chunked_upload_ttl: float = 300.0  # seconds before an idle upload is dropped
@@ -221,7 +224,18 @@ class NocEngine:
         return None
 
     async def _send_auth(self, ws: WSClient):
-        fetched = await self._fetch_firmware_version()
+        try:
+            fetched = await asyncio.wait_for(
+                self._fetch_firmware_version(),
+                timeout=self.firmware_fetch_timeout,
+            )
+        except asyncio.TimeoutError:
+            fetched = None
+            logger.info(
+                f"[NOC-Engine] Firmware version fetch exceeded "
+                f"{self.firmware_fetch_timeout}s — using config value"
+            )
+
         if fetched:
             self.firmware_version = fetched
             logger.info(

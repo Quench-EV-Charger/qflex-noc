@@ -26,3 +26,4 @@ _TBD per task_
 - Fire-and-forget background tasks (command/proxy/upload/ssh handlers) are now tracked, cancelled on disconnect, and their exceptions logged.
 - Engine now holds a single shared `aiohttp.ClientSession` and passes it to telemetry, command executor, and session sync. Eliminates per-call session churn (FD/ephemeral-port pressure under load).
 - SSH tunnel reader now bounds each `ws_send_callback` call at 5s. WS back-pressure can no longer pin the tunnel forever; tunnels are closed cleanly instead.
+- `_send_auth` no longer blocks for the full 5s aiohttp timeout when the local OCPP firmware endpoint is slow; firmware fetch is bounded at 1.5s and is best-effort.
