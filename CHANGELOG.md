@@ -13,3 +13,5 @@ _TBD per task_
 
 ### Fixed
 - WS `ping_timeout` was `None`; a frozen server left the engine hung indefinitely. Now `20s`.
+- `WSClient.connect` now uses `open_timeout=15` so an unreachable server fails fast.
+- `WSClient.disconnect` is now hard-bounded at 6s and logs unexpected close errors instead of swallowing them.

@@ -11,6 +11,7 @@ Features:
   - reports connection state
 """
 
+import asyncio
 import json
 import logging
 import ssl
@@ -65,6 +66,7 @@ class WSClient:
     async def connect(self):
         """Open WebSocket connection to the NOC server."""
         kwargs: dict[str, Any] = {
+            "open_timeout": 15,        # Bound the TCP+TLS+WS handshake at 15s
             "ping_interval": 20,       # Keep-alive pings every 20s (keeps NAT/ELB alive)
             "ping_timeout": 20,        # Reconnect if server fails to pong within 20s
             "close_timeout": 5,
@@ -78,12 +80,14 @@ class WSClient:
         logger.info(f"[WS-Client] Connected to {self.uri}")
 
     async def disconnect(self):
-        """Close the WebSocket connection gracefully."""
+        """Close the WebSocket connection gracefully (bounded)."""
         if self._ws:
             try:
-                await self._ws.close()
-            except Exception:
-                pass
+                await asyncio.wait_for(self._ws.close(), timeout=6)
+            except asyncio.TimeoutError:
+                logger.warning(f"[WS-Client] close() exceeded 6s for {self.uri}")
+            except Exception as e:
+                logger.warning(f"[WS-Client] close() raised {type(e).__name__}: {e}")
         self._connected = False
         self._ws = None
         logger.info(f"[WS-Client] Disconnected from {self.uri}")
