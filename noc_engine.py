@@ -21,6 +21,7 @@ import json
 import logging
 import os
 import ssl
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -38,10 +39,6 @@ try:
 except ImportError:
     _SESSION_SYNC_AVAILABLE = False
     logger = logging.getLogger(__name__)
-
-# Store active chunked uploads for large file transfers
-# Key: upload_id, Value: {chunks: dict, total_chunks: int, file_name: str, target: str}
-_chunked_uploads: dict = {}
 
 logger = logging.getLogger(__name__)
 
@@ -117,6 +114,11 @@ class NocEngine:
         self._last_inbound_at: float | None = None
         self.inbound_idle_timeout: float = 60.0
         self.reconnect_delay: float = 5.0
+
+        # Chunked upload state (per-engine, with TTL sweep)
+        self._chunked_uploads: dict = {}
+        self.chunked_upload_ttl: float = 300.0  # seconds before an idle upload is dropped
+        self._sweeper_task: asyncio.Task | None = None
 
         # SSH Tunnel manager for remote SSH access
         self._ssh_manager = SSHTunnelManager()
@@ -793,14 +795,32 @@ class NocEngine:
             await ws.send(error_msg)
             logger.error(f"[NOC-Engine] 🔀 Proxy request failed: {request_id} - {e}")
 
+    async def _sweep_chunked_uploads_once(self):
+        """Drop any chunked-upload entry that hasn't completed within the TTL."""
+        now = time.monotonic()
+        stale = [
+            uid for uid, u in self._chunked_uploads.items()
+            if now - u.get("started_at", now) > self.chunked_upload_ttl
+        ]
+        for uid in stale:
+            entry = self._chunked_uploads.pop(uid, None)
+            if entry is not None:
+                logger.warning(
+                    f"[NOC-Engine] 🧹 Dropped stale chunked upload {uid} "
+                    f"(age={now - entry.get('started_at', now):.0f}s, "
+                    f"chunks={len(entry.get('chunks', {}))}/{entry.get('total_chunks')})"
+                )
+
+    async def _chunked_upload_sweeper_loop(self):
+        """Background sweeper — runs at TTL/4 intervals as long as the engine is running."""
+        while self._running:
+            await asyncio.sleep(max(self.chunked_upload_ttl / 4, 5))
+            await self._sweep_chunked_uploads_once()
+
     async def _handle_upload_chunk(self, ws: WSClient, message: dict):
         """Handle file upload chunk from NOC Server. Accumulates chunks and posts to port 8005."""
-        import aiohttp
         import base64
-        import uuid
-        
-        global _chunked_uploads
-        
+
         payload = message.get("payload", {})
         upload_id = payload.get("upload_id")
         chunk_index = payload.get("chunk_index")
@@ -809,21 +829,22 @@ class NocEngine:
         target = payload.get("target")
         chunk_data_b64 = payload.get("chunk_data", "")
         is_last = payload.get("is_last", False)
-        
+
         logger.info(f"[NOC-Engine] _handle_upload_chunk: upload_id={upload_id}, chunk={chunk_index}/{total_chunks}, target={target}, file={file_name}, is_last={is_last}")
-        
+
         # Initialize upload storage on first chunk
-        if upload_id not in _chunked_uploads:
-            _chunked_uploads[upload_id] = {
+        if upload_id not in self._chunked_uploads:
+            self._chunked_uploads[upload_id] = {
                 "chunks": {},
                 "total_chunks": total_chunks,
                 "file_name": file_name,
                 "target": target,
+                "started_at": time.monotonic(),
             }
             logger.info(f"[NOC-Engine] Started chunked upload: {upload_id}, {total_chunks} chunks")
-        
-        upload = _chunked_uploads[upload_id]
-        
+
+        upload = self._chunked_uploads[upload_id]
+
         # Store chunk
         try:
             chunk_bytes = base64.b64decode(chunk_data_b64)
@@ -837,26 +858,26 @@ class NocEngine:
                 "error": f"Invalid chunk data: {e}",
             })
             await ws.send(error_msg)
-            _chunked_uploads.pop(upload_id, None)
+            self._chunked_uploads.pop(upload_id, None)
             return
-        
+
         # If not last chunk, just acknowledge (NOC Server waits for all chunks)
         if not is_last:
             return
-        
+
         # Last chunk - verify all chunks received and post to port 8005
         try:
             if len(upload["chunks"]) != total_chunks:
                 missing = set(range(total_chunks)) - set(upload["chunks"].keys())
                 raise ValueError(f"Missing chunks: {missing}")
-            
+
             # Reassemble file
             file_data = b"".join(upload["chunks"][i] for i in range(total_chunks))
             logger.info(f"[NOC-Engine] Reassembled file {file_name} ({len(file_data)} bytes), target={upload['target']}, posting to port 8005")
-            
+
             # Post to port 8005 (dev-tools service)
             result = await self._post_file_to_devtools(upload["target"], upload["file_name"], file_data)
-            
+
             # Send response back to NOC Server
             response_payload = {
                 "upload_id": upload_id,
@@ -868,7 +889,7 @@ class NocEngine:
             response_msg = self._make_msg("chunked_upload_response", response_payload)
             await ws.send(response_msg)
             logger.info(f"[NOC-Engine] Chunked upload complete: {upload_id}, success={result['success']}")
-            
+
         except Exception as e:
             import traceback
             error_str = f"{type(e).__name__}: {str(e)}"
@@ -881,7 +902,7 @@ class NocEngine:
             })
             await ws.send(error_msg)
         finally:
-            _chunked_uploads.pop(upload_id, None)
+            self._chunked_uploads.pop(upload_id, None)
 
     async def _post_file_to_devtools(self, target: str, file_name: str, file_data: bytes) -> dict:
         """Post complete file to dev-tools service on port 8005."""
@@ -958,6 +979,12 @@ class NocEngine:
         for k, v in self.api_urls.items():
             logger.info(f"[NOC-Engine]   {k}: {v}")
 
+        # Background sweeper for orphaned chunked uploads (engine-lifetime)
+        if self._sweeper_task is None or self._sweeper_task.done():
+            self._sweeper_task = asyncio.create_task(
+                self._chunked_upload_sweeper_loop(), name="chunk_sweeper"
+            )
+
         while self._running:
             ws = WSClient(self.ws_uri, ssl_context=self._ssl_context())
             try:
@@ -1027,7 +1054,11 @@ class NocEngine:
     def stop(self):
         """Stop the NOC engine and cleanup resources."""
         self._running = False
-        
+
+        # Cancel the chunked-upload sweeper
+        if self._sweeper_task is not None and not self._sweeper_task.done():
+            self._sweeper_task.cancel()
+
         # Close all SSH tunnels
         if hasattr(self, '_ssh_manager'):
             # Use asyncio.run_coroutine_threadsafe if called from sync context
@@ -1040,5 +1071,5 @@ class NocEngine:
                     loop.run_until_complete(self._ssh_manager.close_all())
             except Exception as e:
                 logger.warning(f"[NOC-Engine] Error closing SSH tunnels: {e}")
-        
+
         logger.info("[NOC-Engine] Stop signal sent")
