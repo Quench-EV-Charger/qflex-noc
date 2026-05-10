@@ -91,6 +91,8 @@ class SSHTunnelManager:
         self._tunnels: Dict[str, LocalSSHTunnel] = {}
         self._lock = asyncio.Lock()
         self._reader_tasks: Dict[str, asyncio.Task] = {}  # Track reader tasks
+        # Each ws_send_callback call from the reader loop is bounded by this timeout.
+        self.ws_send_timeout: float = 5.0
         logger.info("[SSH-Tunnel] Manager initialized")
     
     async def open_tunnel(
@@ -318,11 +320,20 @@ class SSHTunnelManager:
                 }
                 
                 try:
-                    await ws_send_callback(message)
+                    await asyncio.wait_for(
+                        ws_send_callback(message),
+                        timeout=self.ws_send_timeout,
+                    )
                     logger.debug(
                         f"[SSH-Tunnel] Sent {len(data)} bytes from SSHD "
                         f"for tunnel {tunnel_id}"
                     )
+                except asyncio.TimeoutError:
+                    logger.warning(
+                        f"[SSH-Tunnel] ws_send_callback timed out after "
+                        f"{self.ws_send_timeout}s for {tunnel_id} — closing tunnel"
+                    )
+                    break
                 except Exception as e:
                     logger.error(f"[SSH-Tunnel] Failed to send to WebSocket: {e}")
                     break
