@@ -19,6 +19,7 @@
     "charging_controller": 8003,
     "allocation_engine": 8002,
     "error_generation": 8006,
+    "noc_engine_api": 8009,
     "_comment": "Change only if charger services run on non-standard ports"
   },
   "telemetry": {

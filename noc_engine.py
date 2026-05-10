@@ -32,6 +32,7 @@ from ws_client import WSClient, WebSocketException
 from telemetry_collector import collect as collect_telemetry
 from command_executor import execute as execute_command
 from ssh_tunnel import SSHTunnelManager
+from version_api import VersionAPIServer
 
 # Import session sync - will be initialized if available
 try:
@@ -134,6 +135,14 @@ class NocEngine:
         # SSH Tunnel manager for remote SSH access
         self._ssh_manager = SSHTunnelManager()
 
+        # Local HTTP API for version/health introspection
+        engine_version = self._read_engine_version()
+        self._version_api = VersionAPIServer(
+            version=engine_version,
+            host="127.0.0.1",
+            port=int(ports.get("noc_engine_api", 8009)),
+        )
+
     # ------------------------------------------------------------------
     # Helpers
     # ------------------------------------------------------------------
@@ -141,6 +150,14 @@ class NocEngine:
     @staticmethod
     def _now_iso() -> str:
         return datetime.now(timezone.utc).isoformat()
+
+    @staticmethod
+    def _read_engine_version() -> str:
+        """Read the engine's own package version from the VERSION file."""
+        try:
+            return Path(__file__).with_name("VERSION").read_text(encoding="utf-8").strip()
+        except Exception:
+            return "0.0.0+unknown"
 
     def _build_ws_uri(self) -> str:
         """Build the WebSocket URI from current noc_url (or host/port) + charger_id."""
@@ -1043,6 +1060,12 @@ class NocEngine:
         # Open the shared HTTP session (used by telemetry, executor, session_sync, etc.)
         await self._ensure_http_session()
 
+        # Start the local version API (best-effort; port may be busy)
+        try:
+            await self._version_api.start()
+        except OSError as e:
+            logger.warning(f"[NOC-Engine] Version API failed to start: {e}")
+
         # Background sweeper for orphaned chunked uploads (engine-lifetime)
         if self._sweeper_task is None or self._sweeper_task.done():
             self._sweeper_task = asyncio.create_task(
@@ -1119,6 +1142,10 @@ class NocEngine:
             logger.info(f"[NOC-Engine] Reconnecting in {self.reconnect_delay}s ...")
             await asyncio.sleep(self.reconnect_delay)
 
+        try:
+            await self._version_api.stop()
+        except Exception as e:
+            logger.warning(f"[NOC-Engine] Version API stop error: {e}")
         await self._close_http_session()
         logger.info("[NOC-Engine] Stopped.")
 

@@ -20,6 +20,8 @@ _TBD per task_
 ### Added
 - New inbound-message watchdog: the engine forces a reconnect if it hasn't received any WS message within `inbound_idle_timeout` (default 60s). Closes the gap left by one-way application heartbeats and `asyncio.wait(FIRST_COMPLETED)` blocking. Polling cadence is capped at 5s so disconnects are noticed quickly even with high thresholds.
 - Background sweeper for chunked-upload state with a 5-minute TTL.
+- Local HTTP API on port 8009: `GET /api/v1/noc_engine/version` and `/api/v1/noc_engine/health`.
+- `charger_ports.noc_engine_api` (default 8009) configurable in `config.json`.
 
 ### Changed
 - `_chunked_uploads` moved off the module global onto the `NocEngine` instance; orphaned upload state (server dropped before final chunk) is now garbage-collected instead of leaking forever.
