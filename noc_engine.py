@@ -120,6 +120,9 @@ class NocEngine:
         self.chunked_upload_ttl: float = 300.0  # seconds before an idle upload is dropped
         self._sweeper_task: asyncio.Task | None = None
 
+        # Tracked fire-and-forget background tasks (commands, proxy, ssh, uploads)
+        self._background_tasks: set[asyncio.Task] = set()
+
         # SSH Tunnel manager for remote SSH access
         self._ssh_manager = SSHTunnelManager()
 
@@ -467,6 +470,26 @@ class NocEngine:
             await session_sync.stop()
             logger.info("[NOC-Engine] 📝 Session sync stopped")
 
+    def _spawn_tracked(self, coro, name: str | None = None) -> asyncio.Task:
+        """Schedule a fire-and-forget coroutine so we can cancel it later
+        and log any exception instead of silently swallowing it."""
+        task = asyncio.create_task(coro, name=name)
+        self._background_tasks.add(task)
+
+        def _on_done(t: asyncio.Task):
+            self._background_tasks.discard(t)
+            if t.cancelled():
+                return
+            exc = t.exception()
+            if exc is not None:
+                logger.error(
+                    f"[NOC-Engine] Background task {t.get_name()!r} raised: "
+                    f"{type(exc).__name__}: {exc}"
+                )
+
+        task.add_done_callback(_on_done)
+        return task
+
     async def _watchdog_loop(self, ws: WSClient):
         """Force a reconnect if no inbound WS message has arrived recently.
 
@@ -513,14 +536,14 @@ class NocEngine:
                     payload = message.get("payload", {})
                     cmd_id = payload.get("command_id", "?")
                     logger.info(f"[NOC-Engine] ⚡ Dispatching command task for cmd={cmd_id}")
-                    asyncio.create_task(self._handle_command(ws, message))
+                    self._spawn_tracked(self._handle_command(ws, message), name=f"cmd-{cmd_id}")
 
                 elif msg_type == "proxy_request":
                     # Handle web tool proxy request (synchronous response)
                     payload = message.get("payload", {})
                     request_id = payload.get("request_id", "?")
                     logger.info(f"[NOC-Engine] 🔀 Proxy request {request_id}: {payload.get('method')} {payload.get('path')}")
-                    asyncio.create_task(self._handle_proxy_request(ws, message))
+                    self._spawn_tracked(self._handle_proxy_request(ws, message), name=f"proxy-{request_id}")
 
                 elif msg_type == "upload_chunk":
                     # Handle chunked file upload from NOC Server
@@ -529,28 +552,28 @@ class NocEngine:
                     chunk_index = payload.get("chunk_index", 0)
                     total_chunks = payload.get("total_chunks", 0)
                     logger.info(f"[NOC-Engine] 📦 Upload chunk {chunk_index + 1}/{total_chunks} for {upload_id}")
-                    asyncio.create_task(self._handle_upload_chunk(ws, message))
+                    self._spawn_tracked(self._handle_upload_chunk(ws, message), name=f"upload-{upload_id}")
 
                 elif msg_type == "ssh_tunnel_open":
                     # Handle SSH tunnel open request from NOC Server
                     payload = message.get("payload", {})
                     tunnel_id = payload.get("tunnel_id", "?")
                     logger.info(f"[NOC-Engine] 🔐 SSH tunnel open request: {tunnel_id}")
-                    asyncio.create_task(self._handle_ssh_tunnel_open(ws, message))
+                    self._spawn_tracked(self._handle_ssh_tunnel_open(ws, message), name=f"ssh-open-{tunnel_id}")
                 
                 elif msg_type == "ssh_data":
                     # Handle SSH data from client (via NOC Server)
                     payload = message.get("payload", {})
                     tunnel_id = payload.get("tunnel_id", "?")
                     logger.debug(f"[NOC-Engine] 🔐 SSH data for tunnel: {tunnel_id}")
-                    asyncio.create_task(self._handle_ssh_data(ws, message))
-                
+                    self._spawn_tracked(self._handle_ssh_data(ws, message), name=f"ssh-data-{tunnel_id}")
+
                 elif msg_type == "ssh_tunnel_close":
                     # Handle SSH tunnel close request
                     payload = message.get("payload", {})
                     tunnel_id = payload.get("tunnel_id", "?")
                     logger.info(f"[NOC-Engine] 🔐 SSH tunnel close request: {tunnel_id}")
-                    asyncio.create_task(self._handle_ssh_tunnel_close(ws, message))
+                    self._spawn_tracked(self._handle_ssh_tunnel_close(ws, message), name=f"ssh-close-{tunnel_id}")
 
                 elif msg_type == "ack":
                     logger.info(
@@ -1017,6 +1040,13 @@ class NocEngine:
                     task.cancel()
                 version_task.cancel()
                 await asyncio.gather(*pending, version_task, return_exceptions=True)
+
+                # Cancel and drain background tasks tied to the dead connection
+                for t in list(self._background_tasks):
+                    t.cancel()
+                if self._background_tasks:
+                    await asyncio.gather(*self._background_tasks, return_exceptions=True)
+                    self._background_tasks.clear()
 
                 logger.warning("[NOC-Engine] Connection closed — will reconnect")
 
