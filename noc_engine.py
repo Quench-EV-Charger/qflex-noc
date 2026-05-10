@@ -275,7 +275,7 @@ class NocEngine:
 
     async def _version_poll_loop(self, ws: WSClient):
         """
-        Poll :8003/api/v1/system/version five times at 10-second intervals
+        Poll :8003/api/v1/system/version five times at 20-second intervals
         immediately after connecting, then stop.
 
         Each result is sent to the NOC server as a 'version_info' message.
@@ -284,7 +284,7 @@ class NocEngine:
         import aiohttp
 
         POLLS      = 5
-        INTERVAL_S = 10
+        INTERVAL_S = 20
 
         logger.info(
             f"[NOC-Engine] 🔖 Starting version poll "
@@ -849,6 +849,9 @@ class NocEngine:
                 request_kwargs["headers"] = {"Content-Type": content_type}
                 logger.info(f"[NOC-Engine] Proxy text POST: target={target_url}, content_type={content_type}")
         
+        response_msg: dict | None = None
+        error: Exception | None = None
+        status_code: int | None = None
         try:
             session = await self._ensure_http_session()
             async with session.request(**request_kwargs) as resp:
@@ -857,24 +860,41 @@ class NocEngine:
                 except Exception:
                     text = await resp.text()
                     data = {"raw_response": text}
-
+                status_code = resp.status
                 response_msg = self._make_msg("proxy_response", {
                     "request_id": request_id,
                     "success": True,
                     "status_code": resp.status,
                     "data": data,
                 })
-                await ws.send(response_msg)
-                logger.info(f"[NOC-Engine] 🔀 Proxy response sent: {request_id} (HTTP {resp.status})")
-                    
         except Exception as e:
-            error_msg = self._make_msg("proxy_response", {
+            error = e
+            response_msg = self._make_msg("proxy_response", {
                 "request_id": request_id,
                 "success": False,
                 "error": str(e),
             })
-            await ws.send(error_msg)
-            logger.error(f"[NOC-Engine] 🔀 Proxy request failed: {request_id} - {e}")
+
+        # Drop the response if the WS closed while we were doing I/O — the server
+        # has no correlation slot for this request_id anymore, and ws.send would
+        # raise ConnectionError as an unhandled task exception.
+        if not ws.connected:
+            logger.warning(
+                f"[NOC-Engine] 🔀 Proxy response dropped (WS closed): {request_id}"
+            )
+            return
+        try:
+            await ws.send(response_msg)
+        except Exception as send_err:
+            logger.warning(
+                f"[NOC-Engine] 🔀 Proxy response send failed: {request_id} - {send_err}"
+            )
+            return
+
+        if error is not None:
+            logger.error(f"[NOC-Engine] 🔀 Proxy request failed: {request_id} - {error}")
+        else:
+            logger.info(f"[NOC-Engine] 🔀 Proxy response sent: {request_id} (HTTP {status_code})")
 
     async def _sweep_chunked_uploads_once(self):
         """Drop any chunked-upload entry that hasn't completed within the TTL."""

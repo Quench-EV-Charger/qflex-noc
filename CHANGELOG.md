@@ -4,6 +4,14 @@ All notable changes follow [Keep a Changelog](https://keepachangelog.com/en/1.1.
 
 ## [Unreleased]
 
+## [1.1.1] — 2026-05-10
+
+### Fixed
+- `_handle_proxy_request` no longer raises `ConnectionError: WebSocket not connected` as an unhandled task exception. When the WS closes mid-request, the response is dropped (logged as a warning) instead of attempting two doomed `ws.send` calls. The previous code re-sent into the same closed socket inside the except handler, producing `Task exception was never retrieved`.
+
+### Changed
+- Version poll cadence relaxed from 10s → 20s between the 5 startup polls of `:8003/api/v1/system/version`. Reduces local API load right after every reconnect.
+
 ## [1.1.0] — 2026-05-10
 
 ### Added

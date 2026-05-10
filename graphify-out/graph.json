@@ -26,9 +26,9 @@
       "file_type": "rationale",
       "source_file": "command_executor.py",
       "source_location": "L51",
-      "id": "qflex_noc_command_executor_rationale_51",
       "community": 10,
-      "norm_label": "execute a proxy command received from the noc server.      args:         comm"
+      "norm_label": "execute a proxy command received from the noc server.      args:         comm",
+      "id": "qflex_noc_command_executor_rationale_51"
     },
     {
       "label": "main.py",
@@ -134,72 +134,72 @@
       "file_type": "rationale",
       "source_file": "main.py",
       "source_location": "L72",
-      "id": "qflex_noc_main_rationale_72",
       "community": 6,
-      "norm_label": "read the runtime-discovered cache file. returns {} on any error."
+      "norm_label": "read the runtime-discovered cache file. returns {} on any error.",
+      "id": "qflex_noc_main_rationale_72"
     },
     {
       "label": "Merge `updates` into the cache file (preserves other fields).",
       "file_type": "rationale",
       "source_file": "main.py",
       "source_location": "L84",
-      "id": "qflex_noc_main_rationale_84",
       "community": 6,
-      "norm_label": "merge `updates` into the cache file (preserves other fields)."
+      "norm_label": "merge `updates` into the cache file (preserves other fields).",
+      "id": "qflex_noc_main_rationale_84"
     },
     {
       "label": "Load charger_id from persistent cache file.",
       "file_type": "rationale",
       "source_file": "main.py",
       "source_location": "L96",
-      "id": "qflex_noc_main_rationale_96",
       "community": 6,
-      "norm_label": "load charger_id from persistent cache file."
+      "norm_label": "load charger_id from persistent cache file.",
+      "id": "qflex_noc_main_rationale_96"
     },
     {
       "label": "Save charger ID components to persistent cache file.",
       "file_type": "rationale",
       "source_file": "main.py",
       "source_location": "L106",
-      "id": "qflex_noc_main_rationale_106",
       "community": 6,
-      "norm_label": "save charger id components to persistent cache file."
+      "norm_label": "save charger id components to persistent cache file.",
+      "id": "qflex_noc_main_rationale_106"
     },
     {
       "label": "Load NOC URL from persistent cache file.",
       "file_type": "rationale",
       "source_file": "main.py",
       "source_location": "L111",
-      "id": "qflex_noc_main_rationale_111",
       "community": 6,
-      "norm_label": "load noc url from persistent cache file."
+      "norm_label": "load noc url from persistent cache file.",
+      "id": "qflex_noc_main_rationale_111"
     },
     {
       "label": "Save NOC URL to persistent cache file.",
       "file_type": "rationale",
       "source_file": "main.py",
       "source_location": "L117",
-      "id": "qflex_noc_main_rationale_117",
       "community": 6,
-      "norm_label": "save noc url to persistent cache file."
+      "norm_label": "save noc url to persistent cache file.",
+      "id": "qflex_noc_main_rationale_117"
     },
     {
       "label": "Fetch NOC WebSocket URL from the local charging_controller API.      Endpoint:",
       "file_type": "rationale",
       "source_file": "main.py",
       "source_location": "L126",
-      "id": "qflex_noc_main_rationale_126",
       "community": 6,
-      "norm_label": "fetch noc websocket url from the local charging_controller api.      endpoint:"
+      "norm_label": "fetch noc websocket url from the local charging_controller api.      endpoint:",
+      "id": "qflex_noc_main_rationale_126"
     },
     {
       "label": "Resolve charger_id by polling local APIs once.      If BOTH APIs respond, the",
       "file_type": "rationale",
       "source_file": "main.py",
       "source_location": "L160",
-      "id": "qflex_noc_main_rationale_160",
       "community": 6,
-      "norm_label": "resolve charger_id by polling local apis once.      if both apis respond, the"
+      "norm_label": "resolve charger_id by polling local apis once.      if both apis respond, the",
+      "id": "qflex_noc_main_rationale_160"
     },
     {
       "label": "noc_engine.py",
@@ -270,7 +270,7 @@
       "source_file": "noc_engine.py",
       "source_location": "L187",
       "id": "qflex_noc_noc_engine_nocengine_ssl_context",
-      "community": 5,
+      "community": 4,
       "norm_label": "._ssl_context()"
     },
     {
@@ -279,7 +279,7 @@
       "source_file": "noc_engine.py",
       "source_location": "L207",
       "id": "qflex_noc_noc_engine_nocengine_make_msg",
-      "community": 0,
+      "community": 2,
       "norm_label": "._make_msg()"
     },
     {
@@ -288,7 +288,7 @@
       "source_file": "noc_engine.py",
       "source_location": "L219",
       "id": "qflex_noc_noc_engine_nocengine_fetch_firmware_version",
-      "community": 5,
+      "community": 2,
       "norm_label": "._fetch_firmware_version()"
     },
     {
@@ -297,7 +297,7 @@
       "source_file": "noc_engine.py",
       "source_location": "L243",
       "id": "qflex_noc_noc_engine_nocengine_send_auth",
-      "community": 5,
+      "community": 2,
       "norm_label": "._send_auth()"
     },
     {
@@ -306,7 +306,7 @@
       "source_file": "noc_engine.py",
       "source_location": "L276",
       "id": "qflex_noc_noc_engine_nocengine_version_poll_loop",
-      "community": 5,
+      "community": 2,
       "norm_label": "._version_poll_loop()"
     },
     {
@@ -315,7 +315,7 @@
       "source_file": "noc_engine.py",
       "source_location": "L338",
       "id": "qflex_noc_noc_engine_nocengine_heartbeat_loop",
-      "community": 0,
+      "community": 2,
       "norm_label": "._heartbeat_loop()"
     },
     {
@@ -324,7 +324,7 @@
       "source_file": "noc_engine.py",
       "source_location": "L351",
       "id": "qflex_noc_noc_engine_nocengine_telemetry_loop",
-      "community": 5,
+      "community": 2,
       "norm_label": "._telemetry_loop()"
     },
     {
@@ -351,7 +351,7 @@
       "source_file": "noc_engine.py",
       "source_location": "L484",
       "id": "qflex_noc_noc_engine_nocengine_session_sync_loop",
-      "community": 5,
+      "community": 0,
       "norm_label": "._session_sync_loop()"
     },
     {
@@ -360,7 +360,7 @@
       "source_file": "noc_engine.py",
       "source_location": "L511",
       "id": "qflex_noc_noc_engine_nocengine_ensure_http_session",
-      "community": 5,
+      "community": 2,
       "norm_label": "._ensure_http_session()"
     },
     {
@@ -369,7 +369,7 @@
       "source_file": "noc_engine.py",
       "source_location": "L518",
       "id": "qflex_noc_noc_engine_nocengine_close_http_session",
-      "community": 5,
+      "community": 4,
       "norm_label": "._close_http_session()"
     },
     {
@@ -378,7 +378,7 @@
       "source_file": "noc_engine.py",
       "source_location": "L527",
       "id": "qflex_noc_noc_engine_nocengine_spawn_tracked",
-      "community": 0,
+      "community": 2,
       "norm_label": "._spawn_tracked()"
     },
     {
@@ -387,7 +387,7 @@
       "source_file": "noc_engine.py",
       "source_location": "L547",
       "id": "qflex_noc_noc_engine_nocengine_watchdog_loop",
-      "community": 5,
+      "community": 4,
       "norm_label": "._watchdog_loop()"
     },
     {
@@ -396,7 +396,7 @@
       "source_file": "noc_engine.py",
       "source_location": "L571",
       "id": "qflex_noc_noc_engine_nocengine_receive_loop",
-      "community": 0,
+      "community": 2,
       "norm_label": "._receive_loop()"
     },
     {
@@ -405,7 +405,7 @@
       "source_file": "noc_engine.py",
       "source_location": "L647",
       "id": "qflex_noc_noc_engine_nocengine_handle_command",
-      "community": 0,
+      "community": 2,
       "norm_label": "._handle_command()"
     },
     {
@@ -414,7 +414,7 @@
       "source_file": "noc_engine.py",
       "source_location": "L676",
       "id": "qflex_noc_noc_engine_nocengine_handle_ssh_tunnel_open",
-      "community": 0,
+      "community": 2,
       "norm_label": "._handle_ssh_tunnel_open()"
     },
     {
@@ -423,7 +423,7 @@
       "source_file": "noc_engine.py",
       "source_location": "L741",
       "id": "qflex_noc_noc_engine_nocengine_handle_ssh_data",
-      "community": 0,
+      "community": 2,
       "norm_label": "._handle_ssh_data()"
     },
     {
@@ -432,7 +432,7 @@
       "source_file": "noc_engine.py",
       "source_location": "L776",
       "id": "qflex_noc_noc_engine_nocengine_handle_ssh_tunnel_close",
-      "community": 0,
+      "community": 2,
       "norm_label": "._handle_ssh_tunnel_close()"
     },
     {
@@ -441,14 +441,14 @@
       "source_file": "noc_engine.py",
       "source_location": "L812",
       "id": "qflex_noc_noc_engine_nocengine_handle_proxy_request",
-      "community": 0,
+      "community": 2,
       "norm_label": "._handle_proxy_request()"
     },
     {
       "label": "._sweep_chunked_uploads_once()",
       "file_type": "code",
       "source_file": "noc_engine.py",
-      "source_location": "L879",
+      "source_location": "L899",
       "id": "qflex_noc_noc_engine_nocengine_sweep_chunked_uploads_once",
       "community": 4,
       "norm_label": "._sweep_chunked_uploads_once()"
@@ -457,7 +457,7 @@
       "label": "._chunked_upload_sweeper_loop()",
       "file_type": "code",
       "source_file": "noc_engine.py",
-      "source_location": "L895",
+      "source_location": "L915",
       "id": "qflex_noc_noc_engine_nocengine_chunked_upload_sweeper_loop",
       "community": 4,
       "norm_label": "._chunked_upload_sweeper_loop()"
@@ -466,36 +466,36 @@
       "label": "._handle_upload_chunk()",
       "file_type": "code",
       "source_file": "noc_engine.py",
-      "source_location": "L901",
+      "source_location": "L921",
       "id": "qflex_noc_noc_engine_nocengine_handle_upload_chunk",
-      "community": 0,
+      "community": 2,
       "norm_label": "._handle_upload_chunk()"
     },
     {
       "label": "._post_file_to_devtools()",
       "file_type": "code",
       "source_file": "noc_engine.py",
-      "source_location": "L988",
+      "source_location": "L1008",
       "id": "qflex_noc_noc_engine_nocengine_post_file_to_devtools",
-      "community": 0,
+      "community": 2,
       "norm_label": "._post_file_to_devtools()"
     },
     {
       "label": ".run()",
       "file_type": "code",
       "source_file": "noc_engine.py",
-      "source_location": "L1047",
+      "source_location": "L1067",
       "id": "qflex_noc_noc_engine_nocengine_run",
-      "community": 5,
+      "community": 2,
       "norm_label": ".run()"
     },
     {
       "label": ".stop()",
       "file_type": "code",
       "source_file": "noc_engine.py",
-      "source_location": "L1153",
+      "source_location": "L1173",
       "id": "qflex_noc_noc_engine_nocengine_stop",
-      "community": 5,
+      "community": 0,
       "norm_label": ".stop()"
     },
     {
@@ -503,205 +503,205 @@
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L49",
-      "id": "qflex_noc_noc_engine_rationale_49",
-      "community": 4,
-      "norm_label": "core noc engine class.      args:         config: parsed config.json dict"
+      "community": 5,
+      "norm_label": "core noc engine class.      args:         config: parsed config.json dict",
+      "id": "qflex_noc_noc_engine_rationale_49"
     },
     {
       "label": "Read the engine's own package version from the VERSION file.",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L156",
-      "id": "qflex_noc_noc_engine_rationale_156",
-      "community": 0,
-      "norm_label": "read the engine's own package version from the version file."
+      "community": 5,
+      "norm_label": "read the engine's own package version from the version file.",
+      "id": "qflex_noc_noc_engine_rationale_156"
     },
     {
       "label": "Build the WebSocket URI from current noc_url (or host/port) + charger_id.",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L163",
-      "id": "qflex_noc_noc_engine_rationale_163",
       "community": 7,
-      "norm_label": "build the websocket uri from current noc_url (or host/port) + charger_id."
+      "norm_label": "build the websocket uri from current noc_url (or host/port) + charger_id.",
+      "id": "qflex_noc_noc_engine_rationale_163"
     },
     {
       "label": "Merge `updates` into the runtime cache file (preserves other fields).",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L170",
-      "id": "qflex_noc_noc_engine_rationale_170",
       "community": 7,
-      "norm_label": "merge `updates` into the runtime cache file (preserves other fields)."
+      "norm_label": "merge `updates` into the runtime cache file (preserves other fields).",
+      "id": "qflex_noc_noc_engine_rationale_170"
     },
     {
       "label": "Return an SSL context for WSS connections.",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L188",
-      "id": "qflex_noc_noc_engine_rationale_188",
-      "community": 5,
-      "norm_label": "return an ssl context for wss connections."
+      "community": 4,
+      "norm_label": "return an ssl context for wss connections.",
+      "id": "qflex_noc_noc_engine_rationale_188"
     },
     {
       "label": "Fetch firmware version from the charger's OCPP config endpoint.         Returns",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L220",
-      "id": "qflex_noc_noc_engine_rationale_220",
-      "community": 5,
-      "norm_label": "fetch firmware version from the charger's ocpp config endpoint.         returns"
+      "community": 2,
+      "norm_label": "fetch firmware version from the charger's ocpp config endpoint.         returns",
+      "id": "qflex_noc_noc_engine_rationale_220"
     },
     {
       "label": "Poll :8003/api/v1/system/version five times at 10-second intervals         imme",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L277",
-      "id": "qflex_noc_noc_engine_rationale_277",
-      "community": 5,
-      "norm_label": "poll :8003/api/v1/system/version five times at 10-second intervals         imme"
+      "community": 2,
+      "norm_label": "poll :8003/api/v1/system/version five times at 10-second intervals         imme",
+      "id": "qflex_noc_noc_engine_rationale_277"
     },
     {
       "label": "Send heartbeat every N seconds to keep the connection alive.",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L339",
-      "id": "qflex_noc_noc_engine_rationale_339",
-      "community": 0,
-      "norm_label": "send heartbeat every n seconds to keep the connection alive."
+      "community": 2,
+      "norm_label": "send heartbeat every n seconds to keep the connection alive.",
+      "id": "qflex_noc_noc_engine_rationale_339"
     },
     {
       "label": "Collect and push charger telemetry every N seconds.",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L352",
-      "id": "qflex_noc_noc_engine_rationale_352",
-      "community": 5,
-      "norm_label": "collect and push charger telemetry every n seconds."
+      "community": 2,
+      "norm_label": "collect and push charger telemetry every n seconds.",
+      "id": "qflex_noc_noc_engine_rationale_352"
     },
     {
       "label": "Poll local APIs every 10s to refresh charger ID and update cache.          On",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L369",
-      "id": "qflex_noc_noc_engine_rationale_369",
       "community": 7,
-      "norm_label": "poll local apis every 10s to refresh charger id and update cache.          on"
+      "norm_label": "poll local apis every 10s to refresh charger id and update cache.          on",
+      "id": "qflex_noc_noc_engine_rationale_369"
     },
     {
       "label": "Poll local API every 10s to refresh the NOC server URL and update cache.",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L438",
-      "id": "qflex_noc_noc_engine_rationale_438",
       "community": 7,
-      "norm_label": "poll local api every 10s to refresh the noc server url and update cache."
+      "norm_label": "poll local api every 10s to refresh the noc server url and update cache.",
+      "id": "qflex_noc_noc_engine_rationale_438"
     },
     {
       "label": "Collect and push session data every 30 seconds.",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L485",
-      "id": "qflex_noc_noc_engine_rationale_485",
-      "community": 5,
-      "norm_label": "collect and push session data every 30 seconds."
+      "community": 0,
+      "norm_label": "collect and push session data every 30 seconds.",
+      "id": "qflex_noc_noc_engine_rationale_485"
     },
     {
       "label": "Lazily create the shared aiohttp.ClientSession (re-creates if it was closed).",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L512",
-      "id": "qflex_noc_noc_engine_rationale_512",
-      "community": 5,
-      "norm_label": "lazily create the shared aiohttp.clientsession (re-creates if it was closed)."
+      "community": 2,
+      "norm_label": "lazily create the shared aiohttp.clientsession (re-creates if it was closed).",
+      "id": "qflex_noc_noc_engine_rationale_512"
     },
     {
       "label": "Close the shared aiohttp.ClientSession (idempotent).",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L519",
-      "id": "qflex_noc_noc_engine_rationale_519",
-      "community": 5,
-      "norm_label": "close the shared aiohttp.clientsession (idempotent)."
+      "community": 4,
+      "norm_label": "close the shared aiohttp.clientsession (idempotent).",
+      "id": "qflex_noc_noc_engine_rationale_519"
     },
     {
       "label": "Schedule a fire-and-forget coroutine so we can cancel it later         and log",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L528",
-      "id": "qflex_noc_noc_engine_rationale_528",
-      "community": 0,
-      "norm_label": "schedule a fire-and-forget coroutine so we can cancel it later         and log"
+      "community": 2,
+      "norm_label": "schedule a fire-and-forget coroutine so we can cancel it later         and log",
+      "id": "qflex_noc_noc_engine_rationale_528"
     },
     {
       "label": "Force a reconnect if no inbound WS message has arrived recently.          Retu",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L548",
-      "id": "qflex_noc_noc_engine_rationale_548",
-      "community": 5,
-      "norm_label": "force a reconnect if no inbound ws message has arrived recently.          retu"
+      "community": 4,
+      "norm_label": "force a reconnect if no inbound ws message has arrived recently.          retu",
+      "id": "qflex_noc_noc_engine_rationale_548"
     },
     {
       "label": "Receive messages from NOC server and dispatch them.         Handles:",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L572",
-      "id": "qflex_noc_noc_engine_rationale_572",
-      "community": 0,
-      "norm_label": "receive messages from noc server and dispatch them.         handles:"
+      "community": 2,
+      "norm_label": "receive messages from noc server and dispatch them.         handles:",
+      "id": "qflex_noc_noc_engine_rationale_572"
     },
     {
       "label": "Execute a proxy command, then push the result back to the server.",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L648",
-      "id": "qflex_noc_noc_engine_rationale_648",
-      "community": 0,
-      "norm_label": "execute a proxy command, then push the result back to the server."
+      "community": 2,
+      "norm_label": "execute a proxy command, then push the result back to the server.",
+      "id": "qflex_noc_noc_engine_rationale_648"
     },
     {
       "label": "Handle SSH tunnel open request from NOC Server.         Creates TCP connection",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L677",
-      "id": "qflex_noc_noc_engine_rationale_677",
-      "community": 0,
-      "norm_label": "handle ssh tunnel open request from noc server.         creates tcp connection"
+      "community": 2,
+      "norm_label": "handle ssh tunnel open request from noc server.         creates tcp connection",
+      "id": "qflex_noc_noc_engine_rationale_677"
     },
     {
       "label": "Handle SSH data from client (via NOC Server).         Forward to local SSHD.",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L742",
-      "id": "qflex_noc_noc_engine_rationale_742",
-      "community": 0,
-      "norm_label": "handle ssh data from client (via noc server).         forward to local sshd."
+      "community": 2,
+      "norm_label": "handle ssh data from client (via noc server).         forward to local sshd.",
+      "id": "qflex_noc_noc_engine_rationale_742"
     },
     {
       "label": "Handle SSH tunnel close request from NOC Server.         Clean up the tunnel an",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L777",
-      "id": "qflex_noc_noc_engine_rationale_777",
-      "community": 0,
-      "norm_label": "handle ssh tunnel close request from noc server.         clean up the tunnel an"
+      "community": 2,
+      "norm_label": "handle ssh tunnel close request from noc server.         clean up the tunnel an",
+      "id": "qflex_noc_noc_engine_rationale_777"
     },
     {
       "label": "Handle web tool proxy request and return response immediately.",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
       "source_location": "L813",
-      "id": "qflex_noc_noc_engine_rationale_813",
-      "community": 0,
-      "norm_label": "handle web tool proxy request and return response immediately."
+      "community": 2,
+      "norm_label": "handle web tool proxy request and return response immediately.",
+      "id": "qflex_noc_noc_engine_rationale_813"
     },
     {
       "label": "Drop any chunked-upload entry that hasn't completed within the TTL.",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
-      "source_location": "L880",
-      "id": "qflex_noc_noc_engine_rationale_880",
+      "source_location": "L900",
+      "id": "qflex_noc_noc_engine_rationale_900",
       "community": 4,
       "norm_label": "drop any chunked-upload entry that hasn't completed within the ttl."
     },
@@ -709,8 +709,8 @@
       "label": "Background sweeper \u2014 runs at TTL/4 intervals as long as the engine is running.",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
-      "source_location": "L896",
-      "id": "qflex_noc_noc_engine_rationale_896",
+      "source_location": "L916",
+      "id": "qflex_noc_noc_engine_rationale_916",
       "community": 4,
       "norm_label": "background sweeper \u2014 runs at ttl/4 intervals as long as the engine is running."
     },
@@ -718,36 +718,36 @@
       "label": "Handle file upload chunk from NOC Server. Accumulates chunks and posts to port 8",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
-      "source_location": "L902",
-      "id": "qflex_noc_noc_engine_rationale_902",
-      "community": 0,
+      "source_location": "L922",
+      "id": "qflex_noc_noc_engine_rationale_922",
+      "community": 2,
       "norm_label": "handle file upload chunk from noc server. accumulates chunks and posts to port 8"
     },
     {
       "label": "Post complete file to dev-tools service on port 8005.",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
-      "source_location": "L989",
-      "id": "qflex_noc_noc_engine_rationale_989",
-      "community": 0,
+      "source_location": "L1009",
+      "id": "qflex_noc_noc_engine_rationale_1009",
+      "community": 2,
       "norm_label": "post complete file to dev-tools service on port 8005."
     },
     {
       "label": "Main engine loop. Connects to NOC server and starts all sub-loops.         On d",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
-      "source_location": "L1048",
-      "id": "qflex_noc_noc_engine_rationale_1048",
-      "community": 5,
+      "source_location": "L1068",
+      "id": "qflex_noc_noc_engine_rationale_1068",
+      "community": 2,
       "norm_label": "main engine loop. connects to noc server and starts all sub-loops.         on d"
     },
     {
       "label": "Stop the NOC engine and cleanup resources.",
       "file_type": "rationale",
       "source_file": "noc_engine.py",
-      "source_location": "L1154",
-      "id": "qflex_noc_noc_engine_rationale_1154",
-      "community": 5,
+      "source_location": "L1174",
+      "id": "qflex_noc_noc_engine_rationale_1174",
+      "community": 0,
       "norm_label": "stop the noc engine and cleanup resources."
     },
     {
@@ -756,7 +756,7 @@
       "source_file": "session_sync.py",
       "source_location": "L1",
       "id": "session_sync_py",
-      "community": 1,
+      "community": 0,
       "norm_label": "session_sync.py"
     },
     {
@@ -765,7 +765,7 @@
       "source_file": "session_sync.py",
       "source_location": "L39",
       "id": "qflex_noc_session_sync_sessionsyncmanager",
-      "community": 1,
+      "community": 0,
       "norm_label": "sessionsyncmanager"
     },
     {
@@ -774,7 +774,7 @@
       "source_file": "session_sync.py",
       "source_location": "L46",
       "id": "qflex_noc_session_sync_sessionsyncmanager_init",
-      "community": 1,
+      "community": 0,
       "norm_label": ".__init__()"
     },
     {
@@ -783,7 +783,7 @@
       "source_file": "session_sync.py",
       "source_location": "L76",
       "id": "qflex_noc_session_sync_sessionsyncmanager_load_state",
-      "community": 1,
+      "community": 0,
       "norm_label": "._load_state()"
     },
     {
@@ -792,7 +792,7 @@
       "source_file": "session_sync.py",
       "source_location": "L92",
       "id": "qflex_noc_session_sync_sessionsyncmanager_save_state",
-      "community": 1,
+      "community": 0,
       "norm_label": "._save_state()"
     },
     {
@@ -801,7 +801,7 @@
       "source_file": "session_sync.py",
       "source_location": "L100",
       "id": "qflex_noc_session_sync_sessionsyncmanager_start",
-      "community": 1,
+      "community": 0,
       "norm_label": ".start()"
     },
     {
@@ -810,7 +810,7 @@
       "source_file": "session_sync.py",
       "source_location": "L109",
       "id": "qflex_noc_session_sync_sessionsyncmanager_stop",
-      "community": 1,
+      "community": 0,
       "norm_label": ".stop()"
     },
     {
@@ -819,7 +819,7 @@
       "source_file": "session_sync.py",
       "source_location": "L120",
       "id": "qflex_noc_session_sync_sessionsyncmanager_sync_loop",
-      "community": 1,
+      "community": 0,
       "norm_label": "._sync_loop()"
     },
     {
@@ -828,7 +828,7 @@
       "source_file": "session_sync.py",
       "source_location": "L130",
       "id": "qflex_noc_session_sync_sessionsyncmanager_sync_once",
-      "community": 1,
+      "community": 0,
       "norm_label": "._sync_once()"
     },
     {
@@ -837,7 +837,7 @@
       "source_file": "session_sync.py",
       "source_location": "L164",
       "id": "qflex_noc_session_sync_sessionsyncmanager_fetch_active_sessions",
-      "community": 1,
+      "community": 0,
       "norm_label": "._fetch_active_sessions()"
     },
     {
@@ -846,7 +846,7 @@
       "source_file": "session_sync.py",
       "source_location": "L195",
       "id": "qflex_noc_session_sync_sessionsyncmanager_detect_completed_sessions",
-      "community": 1,
+      "community": 0,
       "norm_label": "._detect_completed_sessions()"
     },
     {
@@ -855,7 +855,7 @@
       "source_file": "session_sync.py",
       "source_location": "L208",
       "id": "qflex_noc_session_sync_sessionsyncmanager_fetch_history",
-      "community": 1,
+      "community": 0,
       "norm_label": "._fetch_history()"
     },
     {
@@ -864,7 +864,7 @@
       "source_file": "session_sync.py",
       "source_location": "L244",
       "id": "qflex_noc_session_sync_sessionsyncmanager_calculate_hours_window",
-      "community": 1,
+      "community": 0,
       "norm_label": "._calculate_hours_window()"
     },
     {
@@ -873,7 +873,7 @@
       "source_file": "session_sync.py",
       "source_location": "L255",
       "id": "qflex_noc_session_sync_sessionsyncmanager_filter_new_sessions",
-      "community": 1,
+      "community": 0,
       "norm_label": "._filter_new_sessions()"
     },
     {
@@ -882,7 +882,7 @@
       "source_file": "session_sync.py",
       "source_location": "L277",
       "id": "qflex_noc_session_sync_sessionsyncmanager_send_to_noc",
-      "community": 1,
+      "community": 0,
       "norm_label": "._send_to_noc()"
     },
     {
@@ -891,7 +891,7 @@
       "source_file": "session_sync.py",
       "source_location": "L298",
       "id": "qflex_noc_session_sync_sessionsyncmanager_update_state",
-      "community": 1,
+      "community": 0,
       "norm_label": "._update_state()"
     },
     {
@@ -900,7 +900,7 @@
       "source_file": "session_sync.py",
       "source_location": "L318",
       "id": "qflex_noc_session_sync_main",
-      "community": 1,
+      "community": 0,
       "norm_label": "main()"
     },
     {
@@ -908,144 +908,144 @@
       "file_type": "rationale",
       "source_file": "session_sync.py",
       "source_location": "L40",
-      "id": "qflex_noc_session_sync_rationale_40",
-      "community": 1,
-      "norm_label": "manages session data synchronization from charger apis to noc server."
+      "community": 0,
+      "norm_label": "manages session data synchronization from charger apis to noc server.",
+      "id": "qflex_noc_session_sync_rationale_40"
     },
     {
       "label": "Args:             noc_ws_client: WebSocket client connected to NOC Server",
       "file_type": "rationale",
       "source_file": "session_sync.py",
       "source_location": "L54",
-      "id": "qflex_noc_session_sync_rationale_54",
-      "community": 1,
-      "norm_label": "args:             noc_ws_client: websocket client connected to noc server"
+      "community": 0,
+      "norm_label": "args:             noc_ws_client: websocket client connected to noc server",
+      "id": "qflex_noc_session_sync_rationale_54"
     },
     {
       "label": "Load sync state from local JSON file.",
       "file_type": "rationale",
       "source_file": "session_sync.py",
       "source_location": "L77",
-      "id": "qflex_noc_session_sync_rationale_77",
-      "community": 1,
-      "norm_label": "load sync state from local json file."
+      "community": 0,
+      "norm_label": "load sync state from local json file.",
+      "id": "qflex_noc_session_sync_rationale_77"
     },
     {
       "label": "Persist sync state to local JSON file.",
       "file_type": "rationale",
       "source_file": "session_sync.py",
       "source_location": "L93",
-      "id": "qflex_noc_session_sync_rationale_93",
-      "community": 1,
-      "norm_label": "persist sync state to local json file."
+      "community": 0,
+      "norm_label": "persist sync state to local json file.",
+      "id": "qflex_noc_session_sync_rationale_93"
     },
     {
       "label": "Start the session sync loop.",
       "file_type": "rationale",
       "source_file": "session_sync.py",
       "source_location": "L101",
-      "id": "qflex_noc_session_sync_rationale_101",
-      "community": 1,
-      "norm_label": "start the session sync loop."
+      "community": 0,
+      "norm_label": "start the session sync loop.",
+      "id": "qflex_noc_session_sync_rationale_101"
     },
     {
       "label": "Stop the session sync loop.",
       "file_type": "rationale",
       "source_file": "session_sync.py",
       "source_location": "L110",
-      "id": "qflex_noc_session_sync_rationale_110",
-      "community": 1,
-      "norm_label": "stop the session sync loop."
+      "community": 0,
+      "norm_label": "stop the session sync loop.",
+      "id": "qflex_noc_session_sync_rationale_110"
     },
     {
       "label": "Main sync loop - runs every 30 seconds.",
       "file_type": "rationale",
       "source_file": "session_sync.py",
       "source_location": "L121",
-      "id": "qflex_noc_session_sync_rationale_121",
-      "community": 1,
-      "norm_label": "main sync loop - runs every 30 seconds."
+      "community": 0,
+      "norm_label": "main sync loop - runs every 30 seconds.",
+      "id": "qflex_noc_session_sync_rationale_121"
     },
     {
       "label": "Perform one sync cycle.",
       "file_type": "rationale",
       "source_file": "session_sync.py",
       "source_location": "L131",
-      "id": "qflex_noc_session_sync_rationale_131",
-      "community": 1,
-      "norm_label": "perform one sync cycle."
+      "community": 0,
+      "norm_label": "perform one sync cycle.",
+      "id": "qflex_noc_session_sync_rationale_131"
     },
     {
       "label": "Fetch active sessions from local APIs for both guns.",
       "file_type": "rationale",
       "source_file": "session_sync.py",
       "source_location": "L165",
-      "id": "qflex_noc_session_sync_rationale_165",
-      "community": 1,
-      "norm_label": "fetch active sessions from local apis for both guns."
+      "community": 0,
+      "norm_label": "fetch active sessions from local apis for both guns.",
+      "id": "qflex_noc_session_sync_rationale_165"
     },
     {
       "label": "Detect sessions that were active but are now completed.",
       "file_type": "rationale",
       "source_file": "session_sync.py",
       "source_location": "L196",
-      "id": "qflex_noc_session_sync_rationale_196",
-      "community": 1,
-      "norm_label": "detect sessions that were active but are now completed."
+      "community": 0,
+      "norm_label": "detect sessions that were active but are now completed.",
+      "id": "qflex_noc_session_sync_rationale_196"
     },
     {
       "label": "Fetch session history from local API (incremental).",
       "file_type": "rationale",
       "source_file": "session_sync.py",
       "source_location": "L209",
-      "id": "qflex_noc_session_sync_rationale_209",
-      "community": 1,
-      "norm_label": "fetch session history from local api (incremental)."
+      "community": 0,
+      "norm_label": "fetch session history from local api (incremental).",
+      "id": "qflex_noc_session_sync_rationale_209"
     },
     {
       "label": "Calculate hours parameter based on last sync time.",
       "file_type": "rationale",
       "source_file": "session_sync.py",
       "source_location": "L245",
-      "id": "qflex_noc_session_sync_rationale_245",
-      "community": 1,
-      "norm_label": "calculate hours parameter based on last sync time."
+      "community": 0,
+      "norm_label": "calculate hours parameter based on last sync time.",
+      "id": "qflex_noc_session_sync_rationale_245"
     },
     {
       "label": "Filter out sessions we've already sent to NOC Server.",
       "file_type": "rationale",
       "source_file": "session_sync.py",
       "source_location": "L256",
-      "id": "qflex_noc_session_sync_rationale_256",
-      "community": 1,
-      "norm_label": "filter out sessions we've already sent to noc server."
+      "community": 0,
+      "norm_label": "filter out sessions we've already sent to noc server.",
+      "id": "qflex_noc_session_sync_rationale_256"
     },
     {
       "label": "Send session data to NOC Server via WebSocket.",
       "file_type": "rationale",
       "source_file": "session_sync.py",
       "source_location": "L278",
-      "id": "qflex_noc_session_sync_rationale_278",
-      "community": 1,
-      "norm_label": "send session data to noc server via websocket."
+      "community": 0,
+      "norm_label": "send session data to noc server via websocket.",
+      "id": "qflex_noc_session_sync_rationale_278"
     },
     {
       "label": "Update internal state after successful sync.",
       "file_type": "rationale",
       "source_file": "session_sync.py",
       "source_location": "L299",
-      "id": "qflex_noc_session_sync_rationale_299",
-      "community": 1,
-      "norm_label": "update internal state after successful sync."
+      "community": 0,
+      "norm_label": "update internal state after successful sync.",
+      "id": "qflex_noc_session_sync_rationale_299"
     },
     {
       "label": "Example usage for testing.",
       "file_type": "rationale",
       "source_file": "session_sync.py",
       "source_location": "L319",
-      "id": "qflex_noc_session_sync_rationale_319",
-      "community": 1,
-      "norm_label": "example usage for testing."
+      "community": 0,
+      "norm_label": "example usage for testing.",
+      "id": "qflex_noc_session_sync_rationale_319"
     },
     {
       "label": "ssh_tunnel.py",
@@ -1053,7 +1053,7 @@
       "source_file": "ssh_tunnel.py",
       "source_location": "L1",
       "id": "ssh_tunnel_py",
-      "community": 2,
+      "community": 1,
       "norm_label": "ssh_tunnel.py"
     },
     {
@@ -1062,7 +1062,7 @@
       "source_file": "ssh_tunnel.py",
       "source_location": "L27",
       "id": "qflex_noc_ssh_tunnel_localsshtunnel",
-      "community": 2,
+      "community": 1,
       "norm_label": "localsshtunnel"
     },
     {
@@ -1071,7 +1071,7 @@
       "source_file": "ssh_tunnel.py",
       "source_location": "L50",
       "id": "qflex_noc_ssh_tunnel_localsshtunnel_mark_closed",
-      "community": 2,
+      "community": 1,
       "norm_label": ".mark_closed()"
     },
     {
@@ -1080,7 +1080,7 @@
       "source_file": "ssh_tunnel.py",
       "source_location": "L55",
       "id": "qflex_noc_ssh_tunnel_localsshtunnel_wait_closed",
-      "community": 2,
+      "community": 1,
       "norm_label": ".wait_closed()"
     },
     {
@@ -1089,7 +1089,7 @@
       "source_file": "ssh_tunnel.py",
       "source_location": "L60",
       "id": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "community": 2,
+      "community": 1,
       "norm_label": "sshtunnelmanager"
     },
     {
@@ -1098,7 +1098,7 @@
       "source_file": "ssh_tunnel.py",
       "source_location": "L89",
       "id": "qflex_noc_ssh_tunnel_sshtunnelmanager_init",
-      "community": 2,
+      "community": 1,
       "norm_label": ".__init__()"
     },
     {
@@ -1107,7 +1107,7 @@
       "source_file": "ssh_tunnel.py",
       "source_location": "L98",
       "id": "qflex_noc_ssh_tunnel_sshtunnelmanager_open_tunnel",
-      "community": 2,
+      "community": 1,
       "norm_label": ".open_tunnel()"
     },
     {
@@ -1116,7 +1116,7 @@
       "source_file": "ssh_tunnel.py",
       "source_location": "L210",
       "id": "qflex_noc_ssh_tunnel_sshtunnelmanager_forward_to_ssh",
-      "community": 2,
+      "community": 1,
       "norm_label": ".forward_to_ssh()"
     },
     {
@@ -1125,7 +1125,7 @@
       "source_file": "ssh_tunnel.py",
       "source_location": "L258",
       "id": "qflex_noc_ssh_tunnel_sshtunnelmanager_ssh_reader_loop",
-      "community": 2,
+      "community": 1,
       "norm_label": "._ssh_reader_loop()"
     },
     {
@@ -1134,7 +1134,7 @@
       "source_file": "ssh_tunnel.py",
       "source_location": "L350",
       "id": "qflex_noc_ssh_tunnel_sshtunnelmanager_close_tunnel",
-      "community": 2,
+      "community": 1,
       "norm_label": ".close_tunnel()"
     },
     {
@@ -1143,7 +1143,7 @@
       "source_file": "ssh_tunnel.py",
       "source_location": "L418",
       "id": "qflex_noc_ssh_tunnel_sshtunnelmanager_get_tunnel_stats",
-      "community": 2,
+      "community": 1,
       "norm_label": "._get_tunnel_stats()"
     },
     {
@@ -1152,7 +1152,7 @@
       "source_file": "ssh_tunnel.py",
       "source_location": "L429",
       "id": "qflex_noc_ssh_tunnel_sshtunnelmanager_get_tunnel_count",
-      "community": 2,
+      "community": 1,
       "norm_label": ".get_tunnel_count()"
     },
     {
@@ -1161,7 +1161,7 @@
       "source_file": "ssh_tunnel.py",
       "source_location": "L433",
       "id": "qflex_noc_ssh_tunnel_sshtunnelmanager_get_tunnel_ids",
-      "community": 2,
+      "community": 1,
       "norm_label": ".get_tunnel_ids()"
     },
     {
@@ -1170,7 +1170,7 @@
       "source_file": "ssh_tunnel.py",
       "source_location": "L437",
       "id": "qflex_noc_ssh_tunnel_sshtunnelmanager_get_all_stats",
-      "community": 2,
+      "community": 1,
       "norm_label": ".get_all_stats()"
     },
     {
@@ -1179,7 +1179,7 @@
       "source_file": "ssh_tunnel.py",
       "source_location": "L441",
       "id": "qflex_noc_ssh_tunnel_sshtunnelmanager_close_all",
-      "community": 2,
+      "community": 1,
       "norm_label": ".close_all()"
     },
     {
@@ -1187,126 +1187,126 @@
       "file_type": "rationale",
       "source_file": "ssh_tunnel.py",
       "source_location": "L28",
-      "id": "qflex_noc_ssh_tunnel_rationale_28",
-      "community": 2,
-      "norm_label": "represents a single ssh tunnel from websocket to local sshd.          attribut"
+      "community": 1,
+      "norm_label": "represents a single ssh tunnel from websocket to local sshd.          attribut",
+      "id": "qflex_noc_ssh_tunnel_rationale_28"
     },
     {
       "label": "Mark tunnel as closed and signal waiting coroutines.",
       "file_type": "rationale",
       "source_file": "ssh_tunnel.py",
       "source_location": "L51",
-      "id": "qflex_noc_ssh_tunnel_rationale_51",
-      "community": 2,
-      "norm_label": "mark tunnel as closed and signal waiting coroutines."
+      "community": 1,
+      "norm_label": "mark tunnel as closed and signal waiting coroutines.",
+      "id": "qflex_noc_ssh_tunnel_rationale_51"
     },
     {
       "label": "Wait for tunnel to close.",
       "file_type": "rationale",
       "source_file": "ssh_tunnel.py",
       "source_location": "L56",
-      "id": "qflex_noc_ssh_tunnel_rationale_56",
-      "community": 2,
-      "norm_label": "wait for tunnel to close."
+      "community": 1,
+      "norm_label": "wait for tunnel to close.",
+      "id": "qflex_noc_ssh_tunnel_rationale_56"
     },
     {
       "label": "Manages multiple SSH tunnels for this charger.          Each tunnel connects W",
       "file_type": "rationale",
       "source_file": "ssh_tunnel.py",
       "source_location": "L61",
-      "id": "qflex_noc_ssh_tunnel_rationale_61",
-      "community": 2,
-      "norm_label": "manages multiple ssh tunnels for this charger.          each tunnel connects w"
+      "community": 1,
+      "norm_label": "manages multiple ssh tunnels for this charger.          each tunnel connects w",
+      "id": "qflex_noc_ssh_tunnel_rationale_61"
     },
     {
       "label": "Initialize the SSH tunnel manager.",
       "file_type": "rationale",
       "source_file": "ssh_tunnel.py",
       "source_location": "L90",
-      "id": "qflex_noc_ssh_tunnel_rationale_90",
-      "community": 2,
-      "norm_label": "initialize the ssh tunnel manager."
+      "community": 1,
+      "norm_label": "initialize the ssh tunnel manager.",
+      "id": "qflex_noc_ssh_tunnel_rationale_90"
     },
     {
       "label": "Create a new TCP connection to local SSHD.                  Args:",
       "file_type": "rationale",
       "source_file": "ssh_tunnel.py",
       "source_location": "L105",
-      "id": "qflex_noc_ssh_tunnel_rationale_105",
-      "community": 2,
-      "norm_label": "create a new tcp connection to local sshd.                  args:"
+      "community": 1,
+      "norm_label": "create a new tcp connection to local sshd.                  args:",
+      "id": "qflex_noc_ssh_tunnel_rationale_105"
     },
     {
       "label": "Decode Base64 data and write to SSHD connection.                  Args:",
       "file_type": "rationale",
       "source_file": "ssh_tunnel.py",
       "source_location": "L211",
-      "id": "qflex_noc_ssh_tunnel_rationale_211",
-      "community": 2,
-      "norm_label": "decode base64 data and write to sshd connection.                  args:"
+      "community": 1,
+      "norm_label": "decode base64 data and write to sshd connection.                  args:",
+      "id": "qflex_noc_ssh_tunnel_rationale_211"
     },
     {
       "label": "Background task: Read from SSHD, Base64 encode, send via WebSocket.",
       "file_type": "rationale",
       "source_file": "ssh_tunnel.py",
       "source_location": "L263",
-      "id": "qflex_noc_ssh_tunnel_rationale_263",
-      "community": 2,
-      "norm_label": "background task: read from sshd, base64 encode, send via websocket."
+      "community": 1,
+      "norm_label": "background task: read from sshd, base64 encode, send via websocket.",
+      "id": "qflex_noc_ssh_tunnel_rationale_263"
     },
     {
       "label": "Close tunnel and cleanup resources.          Args:             tunnel_id: Tun",
       "file_type": "rationale",
       "source_file": "ssh_tunnel.py",
       "source_location": "L351",
-      "id": "qflex_noc_ssh_tunnel_rationale_351",
-      "community": 2,
-      "norm_label": "close tunnel and cleanup resources.          args:             tunnel_id: tun"
+      "community": 1,
+      "norm_label": "close tunnel and cleanup resources.          args:             tunnel_id: tun",
+      "id": "qflex_noc_ssh_tunnel_rationale_351"
     },
     {
       "label": "Calculate tunnel statistics.",
       "file_type": "rationale",
       "source_file": "ssh_tunnel.py",
       "source_location": "L419",
-      "id": "qflex_noc_ssh_tunnel_rationale_419",
-      "community": 2,
-      "norm_label": "calculate tunnel statistics."
+      "community": 1,
+      "norm_label": "calculate tunnel statistics.",
+      "id": "qflex_noc_ssh_tunnel_rationale_419"
     },
     {
       "label": "Return number of active tunnels.",
       "file_type": "rationale",
       "source_file": "ssh_tunnel.py",
       "source_location": "L430",
-      "id": "qflex_noc_ssh_tunnel_rationale_430",
-      "community": 2,
-      "norm_label": "return number of active tunnels."
+      "community": 1,
+      "norm_label": "return number of active tunnels.",
+      "id": "qflex_noc_ssh_tunnel_rationale_430"
     },
     {
       "label": "Return list of active tunnel IDs.",
       "file_type": "rationale",
       "source_file": "ssh_tunnel.py",
       "source_location": "L434",
-      "id": "qflex_noc_ssh_tunnel_rationale_434",
-      "community": 2,
-      "norm_label": "return list of active tunnel ids."
+      "community": 1,
+      "norm_label": "return list of active tunnel ids.",
+      "id": "qflex_noc_ssh_tunnel_rationale_434"
     },
     {
       "label": "Return statistics for all active tunnels.",
       "file_type": "rationale",
       "source_file": "ssh_tunnel.py",
       "source_location": "L438",
-      "id": "qflex_noc_ssh_tunnel_rationale_438",
-      "community": 2,
-      "norm_label": "return statistics for all active tunnels."
+      "community": 1,
+      "norm_label": "return statistics for all active tunnels.",
+      "id": "qflex_noc_ssh_tunnel_rationale_438"
     },
     {
       "label": "Close all tunnels (used during shutdown).",
       "file_type": "rationale",
       "source_file": "ssh_tunnel.py",
       "source_location": "L442",
-      "id": "qflex_noc_ssh_tunnel_rationale_442",
-      "community": 2,
-      "norm_label": "close all tunnels (used during shutdown)."
+      "community": 1,
+      "norm_label": "close all tunnels (used during shutdown).",
+      "id": "qflex_noc_ssh_tunnel_rationale_442"
     },
     {
       "label": "start.ps1",
@@ -1349,18 +1349,18 @@
       "file_type": "rationale",
       "source_file": "telemetry_collector.py",
       "source_location": "L75",
-      "id": "qflex_noc_telemetry_collector_rationale_75",
       "community": 9,
-      "norm_label": "fetch a single json endpoint.      returns:         (key, data_or_none, healt"
+      "norm_label": "fetch a single json endpoint.      returns:         (key, data_or_none, healt",
+      "id": "qflex_noc_telemetry_collector_rationale_75"
     },
     {
       "label": "Collect telemetry from all configured local API sources.      Args:         a",
       "file_type": "rationale",
       "source_file": "telemetry_collector.py",
       "source_location": "L121",
-      "id": "qflex_noc_telemetry_collector_rationale_121",
       "community": 9,
-      "norm_label": "collect telemetry from all configured local api sources.      args:         a"
+      "norm_label": "collect telemetry from all configured local api sources.      args:         a",
+      "id": "qflex_noc_telemetry_collector_rationale_121"
     },
     {
       "label": "version_api.py",
@@ -1368,7 +1368,7 @@
       "source_file": "version_api.py",
       "source_location": "L1",
       "id": "version_api_py",
-      "community": 0,
+      "community": 4,
       "norm_label": "version_api.py"
     },
     {
@@ -1377,7 +1377,7 @@
       "source_file": "version_api.py",
       "source_location": "L21",
       "id": "qflex_noc_version_api_versionapiserver",
-      "community": 0,
+      "community": 4,
       "norm_label": "versionapiserver"
     },
     {
@@ -1386,7 +1386,7 @@
       "source_file": "version_api.py",
       "source_location": "L22",
       "id": "qflex_noc_version_api_versionapiserver_init",
-      "community": 0,
+      "community": 4,
       "norm_label": ".__init__()"
     },
     {
@@ -1395,7 +1395,7 @@
       "source_file": "version_api.py",
       "source_location": "L30",
       "id": "qflex_noc_version_api_versionapiserver_handle_version",
-      "community": 0,
+      "community": 4,
       "norm_label": "._handle_version()"
     },
     {
@@ -1404,7 +1404,7 @@
       "source_file": "version_api.py",
       "source_location": "L37",
       "id": "qflex_noc_version_api_versionapiserver_handle_health",
-      "community": 0,
+      "community": 4,
       "norm_label": "._handle_health()"
     },
     {
@@ -1413,7 +1413,7 @@
       "source_file": "version_api.py",
       "source_location": "L40",
       "id": "qflex_noc_version_api_versionapiserver_start",
-      "community": 0,
+      "community": 4,
       "norm_label": ".start()"
     },
     {
@@ -1422,7 +1422,7 @@
       "source_file": "version_api.py",
       "source_location": "L51",
       "id": "qflex_noc_version_api_versionapiserver_stop",
-      "community": 0,
+      "community": 4,
       "norm_label": ".stop()"
     },
     {
@@ -1431,7 +1431,7 @@
       "source_file": "ws_client.py",
       "source_location": "L1",
       "id": "ws_client_py",
-      "community": 4,
+      "community": 5,
       "norm_label": "ws_client.py"
     },
     {
@@ -1440,7 +1440,7 @@
       "source_file": "ws_client.py",
       "source_location": "L26",
       "id": "qflex_noc_ws_client_wsclient",
-      "community": 4,
+      "community": 5,
       "norm_label": "wsclient"
     },
     {
@@ -1449,7 +1449,7 @@
       "source_file": "ws_client.py",
       "source_location": "L38",
       "id": "qflex_noc_ws_client_wsclient_init",
-      "community": 4,
+      "community": 5,
       "norm_label": ".__init__()"
     },
     {
@@ -1458,7 +1458,7 @@
       "source_file": "ws_client.py",
       "source_location": "L50",
       "id": "qflex_noc_ws_client_connected",
-      "community": 4,
+      "community": 5,
       "norm_label": "connected()"
     },
     {
@@ -1467,7 +1467,7 @@
       "source_file": "ws_client.py",
       "source_location": "L67",
       "id": "qflex_noc_ws_client_wsclient_connect",
-      "community": 4,
+      "community": 5,
       "norm_label": ".connect()"
     },
     {
@@ -1476,7 +1476,7 @@
       "source_file": "ws_client.py",
       "source_location": "L83",
       "id": "qflex_noc_ws_client_wsclient_disconnect",
-      "community": 4,
+      "community": 5,
       "norm_label": ".disconnect()"
     },
     {
@@ -1485,7 +1485,7 @@
       "source_file": "ws_client.py",
       "source_location": "L100",
       "id": "qflex_noc_ws_client_wsclient_send",
-      "community": 4,
+      "community": 5,
       "norm_label": ".send()"
     },
     {
@@ -1494,7 +1494,7 @@
       "source_file": "ws_client.py",
       "source_location": "L113",
       "id": "qflex_noc_ws_client_wsclient_receive",
-      "community": 4,
+      "community": 5,
       "norm_label": ".receive()"
     },
     {
@@ -1502,45 +1502,45 @@
       "file_type": "rationale",
       "source_file": "ws_client.py",
       "source_location": "L27",
-      "id": "qflex_noc_ws_client_rationale_27",
-      "community": 4,
-      "norm_label": "thin websocket wrapper used by nocengine.      usage:         client = wsclie"
+      "community": 5,
+      "norm_label": "thin websocket wrapper used by nocengine.      usage:         client = wsclie",
+      "id": "qflex_noc_ws_client_rationale_27"
     },
     {
       "label": "Open WebSocket connection to the NOC server.",
       "file_type": "rationale",
       "source_file": "ws_client.py",
       "source_location": "L68",
-      "id": "qflex_noc_ws_client_rationale_68",
-      "community": 4,
-      "norm_label": "open websocket connection to the noc server."
+      "community": 5,
+      "norm_label": "open websocket connection to the noc server.",
+      "id": "qflex_noc_ws_client_rationale_68"
     },
     {
       "label": "Close the WebSocket connection gracefully (bounded).",
       "file_type": "rationale",
       "source_file": "ws_client.py",
       "source_location": "L84",
-      "id": "qflex_noc_ws_client_rationale_84",
-      "community": 4,
-      "norm_label": "close the websocket connection gracefully (bounded)."
+      "community": 5,
+      "norm_label": "close the websocket connection gracefully (bounded).",
+      "id": "qflex_noc_ws_client_rationale_84"
     },
     {
       "label": "Serialize and send a JSON message, bounded by ``send_timeout``.          Raise",
       "file_type": "rationale",
       "source_file": "ws_client.py",
       "source_location": "L101",
-      "id": "qflex_noc_ws_client_rationale_101",
-      "community": 4,
-      "norm_label": "serialize and send a json message, bounded by ``send_timeout``.          raise"
+      "community": 5,
+      "norm_label": "serialize and send a json message, bounded by ``send_timeout``.          raise",
+      "id": "qflex_noc_ws_client_rationale_101"
     },
     {
       "label": "Receive the next JSON message.          Raises:             ConnectionError:",
       "file_type": "rationale",
       "source_file": "ws_client.py",
       "source_location": "L114",
-      "id": "qflex_noc_ws_client_rationale_114",
-      "community": 4,
-      "norm_label": "receive the next json message.          raises:             connectionerror:"
+      "community": 5,
+      "norm_label": "receive the next json message.          raises:             connectionerror:",
+      "id": "qflex_noc_ws_client_rationale_114"
     },
     {
       "label": "__init__.py",
@@ -1556,9 +1556,9 @@
       "file_type": "rationale",
       "source_file": "__init__.py",
       "source_location": "L1",
-      "id": "qflex_noc_init_rationale_1",
       "community": 11,
-      "norm_label": "nocengine \u2014 remote charger management module ==================================="
+      "norm_label": "nocengine \u2014 remote charger management module ===================================",
+      "id": "qflex_noc_init_rationale_1"
     },
     {
       "label": "conftest.py",
@@ -1601,27 +1601,27 @@
       "file_type": "rationale",
       "source_file": "tests\\conftest.py",
       "source_location": "L1",
-      "id": "tests_conftest_rationale_1",
       "community": 8,
-      "norm_label": "shared pytest fixtures: free-port allocator, controllable ws servers."
+      "norm_label": "shared pytest fixtures: free-port allocator, controllable ws servers.",
+      "id": "tests_conftest_rationale_1"
     },
     {
       "label": "A WS server that echoes every message back.",
       "file_type": "rationale",
       "source_file": "tests\\conftest.py",
       "source_location": "L31",
-      "id": "tests_conftest_rationale_31",
       "community": 8,
-      "norm_label": "a ws server that echoes every message back."
+      "norm_label": "a ws server that echoes every message back.",
+      "id": "tests_conftest_rationale_31"
     },
     {
       "label": "A WS server that accepts the connection but never reads/writes \u2014 simulates a fro",
       "file_type": "rationale",
       "source_file": "tests\\conftest.py",
       "source_location": "L52",
-      "id": "tests_conftest_rationale_52",
       "community": 8,
-      "norm_label": "a ws server that accepts the connection but never reads/writes \u2014 simulates a fro"
+      "norm_label": "a ws server that accepts the connection but never reads/writes \u2014 simulates a fro",
+      "id": "tests_conftest_rationale_52"
     },
     {
       "label": "test_noc_engine_session.py",
@@ -1673,27 +1673,27 @@
       "file_type": "rationale",
       "source_file": "tests\\test_noc_engine_session.py",
       "source_location": "L1",
-      "id": "tests_test_noc_engine_session_rationale_1",
       "community": 3,
-      "norm_label": "engine should hold a single aiohttp.clientsession reused by all collaborators."
+      "norm_label": "engine should hold a single aiohttp.clientsession reused by all collaborators.",
+      "id": "tests_test_noc_engine_session_rationale_1"
     },
     {
       "label": "If the firmware endpoint takes > firmware_fetch_timeout, auth still goes out pro",
       "file_type": "rationale",
       "source_file": "tests\\test_noc_engine_session.py",
       "source_location": "L32",
-      "id": "tests_test_noc_engine_session_rationale_32",
       "community": 3,
-      "norm_label": "if the firmware endpoint takes > firmware_fetch_timeout, auth still goes out pro"
+      "norm_label": "if the firmware endpoint takes > firmware_fetch_timeout, auth still goes out pro",
+      "id": "tests_test_noc_engine_session_rationale_32"
     },
     {
       "label": "After explicit close, ensure_http_session must create a new live session.",
       "file_type": "rationale",
       "source_file": "tests\\test_noc_engine_session.py",
       "source_location": "L58",
-      "id": "tests_test_noc_engine_session_rationale_58",
       "community": 3,
-      "norm_label": "after explicit close, ensure_http_session must create a new live session."
+      "norm_label": "after explicit close, ensure_http_session must create a new live session.",
+      "id": "tests_test_noc_engine_session_rationale_58"
     },
     {
       "label": "test_noc_engine_tasks.py",
@@ -1736,9 +1736,9 @@
       "file_type": "rationale",
       "source_file": "tests\\test_noc_engine_tasks.py",
       "source_location": "L1",
-      "id": "tests_test_noc_engine_tasks_rationale_1",
       "community": 3,
-      "norm_label": "background tasks dispatched from receive_loop must be tracked and cancellable."
+      "norm_label": "background tasks dispatched from receive_loop must be tracked and cancellable.",
+      "id": "tests_test_noc_engine_tasks_rationale_1"
     },
     {
       "label": "test_noc_engine_uploads.py",
@@ -1781,9 +1781,9 @@
       "file_type": "rationale",
       "source_file": "tests\\test_noc_engine_uploads.py",
       "source_location": "L1",
-      "id": "tests_test_noc_engine_uploads_rationale_1",
       "community": 3,
-      "norm_label": "chunked upload state must not accumulate orphaned entries forever."
+      "norm_label": "chunked upload state must not accumulate orphaned entries forever.",
+      "id": "tests_test_noc_engine_uploads_rationale_1"
     },
     {
       "label": "test_noc_engine_watchdog.py",
@@ -1844,45 +1844,45 @@
       "file_type": "rationale",
       "source_file": "tests\\test_noc_engine_watchdog.py",
       "source_location": "L1",
-      "id": "tests_test_noc_engine_watchdog_rationale_1",
       "community": 3,
-      "norm_label": "watchdog forces reconnect when nothing has been received recently."
+      "norm_label": "watchdog forces reconnect when nothing has been received recently.",
+      "id": "tests_test_noc_engine_watchdog_rationale_1"
     },
     {
       "label": "Minimal stand-in: always reports 'connected'. The watchdog never sends/receives.",
       "file_type": "rationale",
       "source_file": "tests\\test_noc_engine_watchdog.py",
       "source_location": "L20",
-      "id": "tests_test_noc_engine_watchdog_rationale_20",
       "community": 3,
-      "norm_label": "minimal stand-in: always reports 'connected'. the watchdog never sends/receives."
+      "norm_label": "minimal stand-in: always reports 'connected'. the watchdog never sends/receives.",
+      "id": "tests_test_noc_engine_watchdog_rationale_20"
     },
     {
       "label": "If `_last_inbound_at` is never refreshed within the threshold, the watchdog retu",
       "file_type": "rationale",
       "source_file": "tests\\test_noc_engine_watchdog.py",
       "source_location": "L25",
-      "id": "tests_test_noc_engine_watchdog_rationale_25",
       "community": 3,
-      "norm_label": "if `_last_inbound_at` is never refreshed within the threshold, the watchdog retu"
+      "norm_label": "if `_last_inbound_at` is never refreshed within the threshold, the watchdog retu",
+      "id": "tests_test_noc_engine_watchdog_rationale_25"
     },
     {
       "label": "While `_last_inbound_at` is refreshed, the watchdog must not return.",
       "file_type": "rationale",
       "source_file": "tests\\test_noc_engine_watchdog.py",
       "source_location": "L41",
-      "id": "tests_test_noc_engine_watchdog_rationale_41",
       "community": 3,
-      "norm_label": "while `_last_inbound_at` is refreshed, the watchdog must not return."
+      "norm_label": "while `_last_inbound_at` is refreshed, the watchdog must not return.",
+      "id": "tests_test_noc_engine_watchdog_rationale_41"
     },
     {
       "label": "If the WS reports disconnected, the watchdog returns within one polling slice.",
       "file_type": "rationale",
       "source_file": "tests\\test_noc_engine_watchdog.py",
       "source_location": "L67",
-      "id": "tests_test_noc_engine_watchdog_rationale_67",
       "community": 3,
-      "norm_label": "if the ws reports disconnected, the watchdog returns within one polling slice."
+      "norm_label": "if the ws reports disconnected, the watchdog returns within one polling slice.",
+      "id": "tests_test_noc_engine_watchdog_rationale_67"
     },
     {
       "label": "test_ssh_tunnel_backpressure.py",
@@ -1890,7 +1890,7 @@
       "source_file": "tests\\test_ssh_tunnel_backpressure.py",
       "source_location": "L1",
       "id": "tests_test_ssh_tunnel_backpressure_py",
-      "community": 2,
+      "community": 1,
       "norm_label": "test_ssh_tunnel_backpressure.py"
     },
     {
@@ -1899,7 +1899,7 @@
       "source_file": "tests\\test_ssh_tunnel_backpressure.py",
       "source_location": "L9",
       "id": "tests_test_ssh_tunnel_backpressure_test_reader_closes_tunnel_when_ws_send_stalls",
-      "community": 2,
+      "community": 1,
       "norm_label": "test_reader_closes_tunnel_when_ws_send_stalls()"
     },
     {
@@ -1907,18 +1907,18 @@
       "file_type": "rationale",
       "source_file": "tests\\test_ssh_tunnel_backpressure.py",
       "source_location": "L1",
-      "id": "tests_test_ssh_tunnel_backpressure_rationale_1",
-      "community": 2,
-      "norm_label": "ssh tunnel reader must close the tunnel if ws send keeps timing out."
+      "community": 1,
+      "norm_label": "ssh tunnel reader must close the tunnel if ws send keeps timing out.",
+      "id": "tests_test_ssh_tunnel_backpressure_rationale_1"
     },
     {
       "label": "If ws_send_callback stalls past the per-call timeout, the reader must give up.",
       "file_type": "rationale",
       "source_file": "tests\\test_ssh_tunnel_backpressure.py",
       "source_location": "L10",
-      "id": "tests_test_ssh_tunnel_backpressure_rationale_10",
-      "community": 2,
-      "norm_label": "if ws_send_callback stalls past the per-call timeout, the reader must give up."
+      "community": 1,
+      "norm_label": "if ws_send_callback stalls past the per-call timeout, the reader must give up.",
+      "id": "tests_test_ssh_tunnel_backpressure_rationale_10"
     },
     {
       "label": "test_version_api.py",
@@ -1926,7 +1926,7 @@
       "source_file": "tests\\test_version_api.py",
       "source_location": "L1",
       "id": "tests_test_version_api_py",
-      "community": 0,
+      "community": 4,
       "norm_label": "test_version_api.py"
     },
     {
@@ -1935,7 +1935,7 @@
       "source_file": "tests\\test_version_api.py",
       "source_location": "L8",
       "id": "tests_test_version_api_test_version_endpoint_returns_version",
-      "community": 0,
+      "community": 4,
       "norm_label": "test_version_endpoint_returns_version()"
     },
     {
@@ -1944,7 +1944,7 @@
       "source_file": "tests\\test_version_api.py",
       "source_location": "L24",
       "id": "tests_test_version_api_test_version_endpoint_health",
-      "community": 0,
+      "community": 4,
       "norm_label": "test_version_endpoint_health()"
     },
     {
@@ -1952,9 +1952,9 @@
       "file_type": "rationale",
       "source_file": "tests\\test_version_api.py",
       "source_location": "L1",
-      "id": "tests_test_version_api_rationale_1",
-      "community": 0,
-      "norm_label": "get /api/v1/noc_engine/version returns the engine version + uptime."
+      "community": 4,
+      "norm_label": "get /api/v1/noc_engine/version returns the engine version + uptime.",
+      "id": "tests_test_version_api_rationale_1"
     },
     {
       "label": "test_ws_client.py",
@@ -1962,7 +1962,7 @@
       "source_file": "tests\\test_ws_client.py",
       "source_location": "L1",
       "id": "tests_test_ws_client_py",
-      "community": 4,
+      "community": 5,
       "norm_label": "test_ws_client.py"
     },
     {
@@ -1971,7 +1971,7 @@
       "source_file": "tests\\test_ws_client.py",
       "source_location": "L10",
       "id": "tests_test_ws_client_test_connect_passes_open_timeout",
-      "community": 4,
+      "community": 5,
       "norm_label": "test_connect_passes_open_timeout()"
     },
     {
@@ -1980,7 +1980,7 @@
       "source_file": "tests\\test_ws_client.py",
       "source_location": "L25",
       "id": "tests_test_ws_client_test_disconnect_is_bounded_when_close_hangs",
-      "community": 4,
+      "community": 5,
       "norm_label": "test_disconnect_is_bounded_when_close_hangs()"
     },
     {
@@ -1989,7 +1989,7 @@
       "source_file": "tests\\test_ws_client.py",
       "source_location": "L46",
       "id": "tests_test_ws_client_test_send_raises_on_drain_stall",
-      "community": 4,
+      "community": 5,
       "norm_label": "test_send_raises_on_drain_stall()"
     },
     {
@@ -1998,7 +1998,7 @@
       "source_file": "tests\\test_ws_client.py",
       "source_location": "L68",
       "id": "tests_test_ws_client_test_connect_passes_ping_timeout_20",
-      "community": 4,
+      "community": 5,
       "norm_label": "test_connect_passes_ping_timeout_20()"
     },
     {
@@ -2006,27 +2006,27 @@
       "file_type": "rationale",
       "source_file": "tests\\test_ws_client.py",
       "source_location": "L26",
-      "id": "tests_test_ws_client_rationale_26",
-      "community": 4,
-      "norm_label": "if the underlying close() hangs, disconnect must still return within ~6s."
+      "community": 5,
+      "norm_label": "if the underlying close() hangs, disconnect must still return within ~6s.",
+      "id": "tests_test_ws_client_rationale_26"
     },
     {
       "label": "A send() that drains slower than send_timeout must raise asyncio.TimeoutError.",
       "file_type": "rationale",
       "source_file": "tests\\test_ws_client.py",
       "source_location": "L47",
-      "id": "tests_test_ws_client_rationale_47",
-      "community": 4,
-      "norm_label": "a send() that drains slower than send_timeout must raise asyncio.timeouterror."
+      "community": 5,
+      "norm_label": "a send() that drains slower than send_timeout must raise asyncio.timeouterror.",
+      "id": "tests_test_ws_client_rationale_47"
     },
     {
       "label": "ping_timeout MUST be a finite value so the websockets library can detect a froze",
       "file_type": "rationale",
       "source_file": "tests\\test_ws_client.py",
       "source_location": "L69",
-      "id": "tests_test_ws_client_rationale_69",
-      "community": 4,
-      "norm_label": "ping_timeout must be a finite value so the websockets library can detect a froze"
+      "community": 5,
+      "norm_label": "ping_timeout must be a finite value so the websockets library can detect a froze",
+      "id": "tests_test_ws_client_rationale_69"
     },
     {
       "label": "__init__.py",
@@ -2036,6 +2036,60 @@
       "id": "tests_init_py",
       "community": 13,
       "norm_label": "__init__.py"
+    },
+    {
+      "label": "Drop any chunked-upload entry that hasn't completed within the TTL.",
+      "file_type": "rationale",
+      "source_file": "noc_engine.py",
+      "source_location": "L880",
+      "community": 1,
+      "norm_label": "drop any chunked-upload entry that hasn't completed within the ttl.",
+      "id": "qflex_noc_noc_engine_rationale_880"
+    },
+    {
+      "label": "Background sweeper \u2014 runs at TTL/4 intervals as long as the engine is running.",
+      "file_type": "rationale",
+      "source_file": "noc_engine.py",
+      "source_location": "L896",
+      "community": 4,
+      "norm_label": "background sweeper \u2014 runs at ttl/4 intervals as long as the engine is running.",
+      "id": "qflex_noc_noc_engine_rationale_896"
+    },
+    {
+      "label": "Handle file upload chunk from NOC Server. Accumulates chunks and posts to port 8",
+      "file_type": "rationale",
+      "source_file": "noc_engine.py",
+      "source_location": "L902",
+      "community": 4,
+      "norm_label": "handle file upload chunk from noc server. accumulates chunks and posts to port 8",
+      "id": "qflex_noc_noc_engine_rationale_902"
+    },
+    {
+      "label": "Post complete file to dev-tools service on port 8005.",
+      "file_type": "rationale",
+      "source_file": "noc_engine.py",
+      "source_location": "L989",
+      "community": 1,
+      "norm_label": "post complete file to dev-tools service on port 8005.",
+      "id": "qflex_noc_noc_engine_rationale_989"
+    },
+    {
+      "label": "Main engine loop. Connects to NOC server and starts all sub-loops.         On d",
+      "file_type": "rationale",
+      "source_file": "noc_engine.py",
+      "source_location": "L1048",
+      "community": 1,
+      "norm_label": "main engine loop. connects to noc server and starts all sub-loops.         on d",
+      "id": "qflex_noc_noc_engine_rationale_1048"
+    },
+    {
+      "label": "Stop the NOC engine and cleanup resources.",
+      "file_type": "rationale",
+      "source_file": "noc_engine.py",
+      "source_location": "L1154",
+      "community": 4,
+      "norm_label": "stop the noc engine and cleanup resources.",
+      "id": "qflex_noc_noc_engine_rationale_1154"
     }
   ],
   "links": [
@@ -2431,9 +2485,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_main_rationale_72",
       "_tgt": "qflex_noc_noc_engine_nocengine",
+      "confidence_score": 0.5,
       "source": "qflex_noc_main_rationale_72",
-      "target": "qflex_noc_noc_engine_nocengine",
-      "confidence_score": 0.5
+      "target": "qflex_noc_noc_engine_nocengine"
     },
     {
       "relation": "uses",
@@ -2443,9 +2497,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_main_rationale_84",
       "_tgt": "qflex_noc_noc_engine_nocengine",
+      "confidence_score": 0.5,
       "source": "qflex_noc_main_rationale_84",
-      "target": "qflex_noc_noc_engine_nocengine",
-      "confidence_score": 0.5
+      "target": "qflex_noc_noc_engine_nocengine"
     },
     {
       "relation": "uses",
@@ -2455,9 +2509,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_main_rationale_96",
       "_tgt": "qflex_noc_noc_engine_nocengine",
+      "confidence_score": 0.5,
       "source": "qflex_noc_main_rationale_96",
-      "target": "qflex_noc_noc_engine_nocengine",
-      "confidence_score": 0.5
+      "target": "qflex_noc_noc_engine_nocengine"
     },
     {
       "relation": "uses",
@@ -2467,9 +2521,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_main_rationale_106",
       "_tgt": "qflex_noc_noc_engine_nocengine",
+      "confidence_score": 0.5,
       "source": "qflex_noc_main_rationale_106",
-      "target": "qflex_noc_noc_engine_nocengine",
-      "confidence_score": 0.5
+      "target": "qflex_noc_noc_engine_nocengine"
     },
     {
       "relation": "uses",
@@ -2479,9 +2533,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_main_rationale_111",
       "_tgt": "qflex_noc_noc_engine_nocengine",
+      "confidence_score": 0.5,
       "source": "qflex_noc_main_rationale_111",
-      "target": "qflex_noc_noc_engine_nocengine",
-      "confidence_score": 0.5
+      "target": "qflex_noc_noc_engine_nocengine"
     },
     {
       "relation": "uses",
@@ -2491,9 +2545,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_main_rationale_117",
       "_tgt": "qflex_noc_noc_engine_nocengine",
+      "confidence_score": 0.5,
       "source": "qflex_noc_main_rationale_117",
-      "target": "qflex_noc_noc_engine_nocengine",
-      "confidence_score": 0.5
+      "target": "qflex_noc_noc_engine_nocengine"
     },
     {
       "relation": "uses",
@@ -2503,9 +2557,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_main_rationale_126",
       "_tgt": "qflex_noc_noc_engine_nocengine",
+      "confidence_score": 0.5,
       "source": "qflex_noc_main_rationale_126",
-      "target": "qflex_noc_noc_engine_nocengine",
-      "confidence_score": 0.5
+      "target": "qflex_noc_noc_engine_nocengine"
     },
     {
       "relation": "uses",
@@ -2515,9 +2569,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_main_rationale_160",
       "_tgt": "qflex_noc_noc_engine_nocengine",
+      "confidence_score": 0.5,
       "source": "qflex_noc_main_rationale_160",
-      "target": "qflex_noc_noc_engine_nocengine",
-      "confidence_score": 0.5
+      "target": "qflex_noc_noc_engine_nocengine"
     },
     {
       "relation": "contains",
@@ -2835,7 +2889,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L879",
+      "source_location": "L899",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine",
       "_tgt": "qflex_noc_noc_engine_nocengine_sweep_chunked_uploads_once",
@@ -2847,7 +2901,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L895",
+      "source_location": "L915",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine",
       "_tgt": "qflex_noc_noc_engine_nocengine_chunked_upload_sweeper_loop",
@@ -2859,7 +2913,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L901",
+      "source_location": "L921",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine",
       "_tgt": "qflex_noc_noc_engine_nocengine_handle_upload_chunk",
@@ -2871,7 +2925,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L988",
+      "source_location": "L1008",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine",
       "_tgt": "qflex_noc_noc_engine_nocengine_post_file_to_devtools",
@@ -2883,7 +2937,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L1047",
+      "source_location": "L1067",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine",
       "_tgt": "qflex_noc_noc_engine_nocengine_run",
@@ -2895,7 +2949,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L1153",
+      "source_location": "L1173",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine",
       "_tgt": "qflex_noc_noc_engine_nocengine_stop",
@@ -2923,9 +2977,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_nocengine",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_nocengine",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -2935,9 +2989,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_nocengine",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_nocengine",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -2947,9 +3001,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_nocengine",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_nocengine",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -2959,9 +3013,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_nocengine",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_nocengine",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -2969,11 +3023,11 @@
       "source_file": "tests\\test_noc_engine_session.py",
       "source_location": "L7",
       "weight": 0.8,
-      "_src": "tests_test_noc_engine_session_rationale_1",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_session_rationale_1",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_nocengine",
-      "target": "tests_test_noc_engine_session_rationale_1",
-      "confidence_score": 0.5
+      "target": "tests_test_noc_engine_session_rationale_1"
     },
     {
       "relation": "uses",
@@ -2981,11 +3035,11 @@
       "source_file": "tests\\test_noc_engine_session.py",
       "source_location": "L7",
       "weight": 0.8,
-      "_src": "tests_test_noc_engine_session_rationale_32",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_session_rationale_32",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_nocengine",
-      "target": "tests_test_noc_engine_session_rationale_32",
-      "confidence_score": 0.5
+      "target": "tests_test_noc_engine_session_rationale_32"
     },
     {
       "relation": "uses",
@@ -2993,11 +3047,11 @@
       "source_file": "tests\\test_noc_engine_session.py",
       "source_location": "L7",
       "weight": 0.8,
-      "_src": "tests_test_noc_engine_session_rationale_58",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_session_rationale_58",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_nocengine",
-      "target": "tests_test_noc_engine_session_rationale_58",
-      "confidence_score": 0.5
+      "target": "tests_test_noc_engine_session_rationale_58"
     },
     {
       "relation": "uses",
@@ -3005,11 +3059,11 @@
       "source_file": "tests\\test_noc_engine_tasks.py",
       "source_location": "L7",
       "weight": 0.8,
-      "_src": "tests_test_noc_engine_tasks_rationale_1",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_tasks_rationale_1",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_nocengine",
-      "target": "tests_test_noc_engine_tasks_rationale_1",
-      "confidence_score": 0.5
+      "target": "tests_test_noc_engine_tasks_rationale_1"
     },
     {
       "relation": "uses",
@@ -3017,11 +3071,11 @@
       "source_file": "tests\\test_noc_engine_uploads.py",
       "source_location": "L6",
       "weight": 0.8,
-      "_src": "tests_test_noc_engine_uploads_rationale_1",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_uploads_rationale_1",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_nocengine",
-      "target": "tests_test_noc_engine_uploads_rationale_1",
-      "confidence_score": 0.5
+      "target": "tests_test_noc_engine_uploads_rationale_1"
     },
     {
       "relation": "uses",
@@ -3029,11 +3083,11 @@
       "source_file": "tests\\test_noc_engine_watchdog.py",
       "source_location": "L6",
       "weight": 0.8,
-      "_src": "tests_test_noc_engine_watchdog_fakews",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_watchdog_fakews",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_nocengine",
-      "target": "tests_test_noc_engine_watchdog_fakews",
-      "confidence_score": 0.5
+      "target": "tests_test_noc_engine_watchdog_fakews"
     },
     {
       "relation": "uses",
@@ -3041,11 +3095,11 @@
       "source_file": "tests\\test_noc_engine_watchdog.py",
       "source_location": "L6",
       "weight": 0.8,
-      "_src": "tests_test_noc_engine_watchdog_rationale_1",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_watchdog_rationale_1",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_nocengine",
-      "target": "tests_test_noc_engine_watchdog_rationale_1",
-      "confidence_score": 0.5
+      "target": "tests_test_noc_engine_watchdog_rationale_1"
     },
     {
       "relation": "uses",
@@ -3053,11 +3107,11 @@
       "source_file": "tests\\test_noc_engine_watchdog.py",
       "source_location": "L6",
       "weight": 0.8,
-      "_src": "tests_test_noc_engine_watchdog_rationale_20",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_watchdog_rationale_20",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_nocengine",
-      "target": "tests_test_noc_engine_watchdog_rationale_20",
-      "confidence_score": 0.5
+      "target": "tests_test_noc_engine_watchdog_rationale_20"
     },
     {
       "relation": "uses",
@@ -3065,11 +3119,11 @@
       "source_file": "tests\\test_noc_engine_watchdog.py",
       "source_location": "L6",
       "weight": 0.8,
-      "_src": "tests_test_noc_engine_watchdog_rationale_25",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_watchdog_rationale_25",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_nocengine",
-      "target": "tests_test_noc_engine_watchdog_rationale_25",
-      "confidence_score": 0.5
+      "target": "tests_test_noc_engine_watchdog_rationale_25"
     },
     {
       "relation": "uses",
@@ -3077,11 +3131,11 @@
       "source_file": "tests\\test_noc_engine_watchdog.py",
       "source_location": "L6",
       "weight": 0.8,
-      "_src": "tests_test_noc_engine_watchdog_rationale_41",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_watchdog_rationale_41",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_nocengine",
-      "target": "tests_test_noc_engine_watchdog_rationale_41",
-      "confidence_score": 0.5
+      "target": "tests_test_noc_engine_watchdog_rationale_41"
     },
     {
       "relation": "uses",
@@ -3089,11 +3143,11 @@
       "source_file": "tests\\test_noc_engine_watchdog.py",
       "source_location": "L6",
       "weight": 0.8,
-      "_src": "tests_test_noc_engine_watchdog_rationale_67",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_watchdog_rationale_67",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_nocengine",
-      "target": "tests_test_noc_engine_watchdog_rationale_67",
-      "confidence_score": 0.5
+      "target": "tests_test_noc_engine_watchdog_rationale_67"
     },
     {
       "relation": "calls",
@@ -3102,8 +3156,8 @@
       "source_file": "tests\\test_noc_engine_session.py",
       "source_location": "L21",
       "weight": 1.0,
-      "_src": "tests_test_noc_engine_session_test_engine_exposes_shared_http_session",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_session_test_engine_exposes_shared_http_session",
       "source": "qflex_noc_noc_engine_nocengine",
       "target": "tests_test_noc_engine_session_test_engine_exposes_shared_http_session"
     },
@@ -3114,8 +3168,8 @@
       "source_file": "tests\\test_noc_engine_session.py",
       "source_location": "L33",
       "weight": 1.0,
-      "_src": "tests_test_noc_engine_session_test_send_auth_completes_when_firmware_endpoint_is_slow",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_session_test_send_auth_completes_when_firmware_endpoint_is_slow",
       "source": "qflex_noc_noc_engine_nocengine",
       "target": "tests_test_noc_engine_session_test_send_auth_completes_when_firmware_endpoint_is_slow"
     },
@@ -3126,8 +3180,8 @@
       "source_file": "tests\\test_noc_engine_session.py",
       "source_location": "L59",
       "weight": 1.0,
-      "_src": "tests_test_noc_engine_session_test_close_then_ensure_creates_new_session",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_session_test_close_then_ensure_creates_new_session",
       "source": "qflex_noc_noc_engine_nocengine",
       "target": "tests_test_noc_engine_session_test_close_then_ensure_creates_new_session"
     },
@@ -3138,8 +3192,8 @@
       "source_file": "tests\\test_noc_engine_tasks.py",
       "source_location": "L21",
       "weight": 1.0,
-      "_src": "tests_test_noc_engine_tasks_test_spawn_tracks_task_and_logs_exceptions",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_tasks_test_spawn_tracks_task_and_logs_exceptions",
       "source": "qflex_noc_noc_engine_nocengine",
       "target": "tests_test_noc_engine_tasks_test_spawn_tracks_task_and_logs_exceptions"
     },
@@ -3150,8 +3204,8 @@
       "source_file": "tests\\test_noc_engine_tasks.py",
       "source_location": "L44",
       "weight": 1.0,
-      "_src": "tests_test_noc_engine_tasks_test_spawn_tracked_normal_completion_removes_task",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_tasks_test_spawn_tracked_normal_completion_removes_task",
       "source": "qflex_noc_noc_engine_nocengine",
       "target": "tests_test_noc_engine_tasks_test_spawn_tracked_normal_completion_removes_task"
     },
@@ -3162,8 +3216,8 @@
       "source_file": "tests\\test_noc_engine_uploads.py",
       "source_location": "L20",
       "weight": 1.0,
-      "_src": "tests_test_noc_engine_uploads_test_orphan_upload_is_garbage_collected",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_uploads_test_orphan_upload_is_garbage_collected",
       "source": "qflex_noc_noc_engine_nocengine",
       "target": "tests_test_noc_engine_uploads_test_orphan_upload_is_garbage_collected"
     },
@@ -3174,8 +3228,8 @@
       "source_file": "tests\\test_noc_engine_uploads.py",
       "source_location": "L36",
       "weight": 1.0,
-      "_src": "tests_test_noc_engine_uploads_test_fresh_upload_is_kept",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_uploads_test_fresh_upload_is_kept",
       "source": "qflex_noc_noc_engine_nocengine",
       "target": "tests_test_noc_engine_uploads_test_fresh_upload_is_kept"
     },
@@ -3186,8 +3240,8 @@
       "source_file": "tests\\test_noc_engine_watchdog.py",
       "source_location": "L26",
       "weight": 1.0,
-      "_src": "tests_test_noc_engine_watchdog_test_watchdog_returns_when_inbound_idle_exceeds_threshold",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_watchdog_test_watchdog_returns_when_inbound_idle_exceeds_threshold",
       "source": "qflex_noc_noc_engine_nocengine",
       "target": "tests_test_noc_engine_watchdog_test_watchdog_returns_when_inbound_idle_exceeds_threshold"
     },
@@ -3198,8 +3252,8 @@
       "source_file": "tests\\test_noc_engine_watchdog.py",
       "source_location": "L42",
       "weight": 1.0,
-      "_src": "tests_test_noc_engine_watchdog_test_watchdog_does_not_fire_when_inbound_kept_fresh",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_watchdog_test_watchdog_does_not_fire_when_inbound_kept_fresh",
       "source": "qflex_noc_noc_engine_nocengine",
       "target": "tests_test_noc_engine_watchdog_test_watchdog_does_not_fire_when_inbound_kept_fresh"
     },
@@ -3210,8 +3264,8 @@
       "source_file": "tests\\test_noc_engine_watchdog.py",
       "source_location": "L68",
       "weight": 1.0,
-      "_src": "tests_test_noc_engine_watchdog_test_watchdog_returns_when_disconnected",
-      "_tgt": "qflex_noc_noc_engine_nocengine",
+      "_src": "qflex_noc_noc_engine_nocengine",
+      "_tgt": "tests_test_noc_engine_watchdog_test_watchdog_returns_when_disconnected",
       "source": "qflex_noc_noc_engine_nocengine",
       "target": "tests_test_noc_engine_watchdog_test_watchdog_returns_when_disconnected"
     },
@@ -3363,7 +3417,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L1076",
+      "source_location": "L1096",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine_run",
       "_tgt": "qflex_noc_noc_engine_nocengine_ssl_context",
@@ -3483,7 +3537,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L861",
+      "source_location": "L864",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine_handle_proxy_request",
       "_tgt": "qflex_noc_noc_engine_nocengine_make_msg",
@@ -3495,7 +3549,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L936",
+      "source_location": "L956",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine_handle_upload_chunk",
       "_tgt": "qflex_noc_noc_engine_nocengine_make_msg",
@@ -3543,7 +3597,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L1081",
+      "source_location": "L1101",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine_run",
       "_tgt": "qflex_noc_noc_engine_nocengine_send_auth",
@@ -3567,7 +3621,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L1095",
+      "source_location": "L1115",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine_run",
       "_tgt": "qflex_noc_noc_engine_nocengine_version_poll_loop",
@@ -3591,7 +3645,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L1087",
+      "source_location": "L1107",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine_run",
       "_tgt": "qflex_noc_noc_engine_nocengine_heartbeat_loop",
@@ -3627,7 +3681,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L1086",
+      "source_location": "L1106",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine_run",
       "_tgt": "qflex_noc_noc_engine_nocengine_telemetry_loop",
@@ -3663,7 +3717,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L1089",
+      "source_location": "L1109",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine_run",
       "_tgt": "qflex_noc_noc_engine_nocengine_charger_id_refresh_loop",
@@ -3699,7 +3753,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L1090",
+      "source_location": "L1110",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine_run",
       "_tgt": "qflex_noc_noc_engine_nocengine_noc_url_refresh_loop",
@@ -3747,7 +3801,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L1088",
+      "source_location": "L1108",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine_run",
       "_tgt": "qflex_noc_noc_engine_nocengine_session_sync_loop",
@@ -3795,7 +3849,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L853",
+      "source_location": "L856",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine_handle_proxy_request",
       "_tgt": "qflex_noc_noc_engine_nocengine_ensure_http_session",
@@ -3807,7 +3861,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L998",
+      "source_location": "L1018",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine_post_file_to_devtools",
       "_tgt": "qflex_noc_noc_engine_nocengine_ensure_http_session",
@@ -3819,7 +3873,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L1061",
+      "source_location": "L1081",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine_run",
       "_tgt": "qflex_noc_noc_engine_nocengine_ensure_http_session",
@@ -3843,7 +3897,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L1149",
+      "source_location": "L1169",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine_run",
       "_tgt": "qflex_noc_noc_engine_nocengine_close_http_session",
@@ -3891,7 +3945,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L1091",
+      "source_location": "L1111",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine_run",
       "_tgt": "qflex_noc_noc_engine_nocengine_watchdog_loop",
@@ -3987,7 +4041,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L1085",
+      "source_location": "L1105",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine_run",
       "_tgt": "qflex_noc_noc_engine_nocengine_receive_loop",
@@ -4071,7 +4125,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L899",
+      "source_location": "L919",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine_chunked_upload_sweeper_loop",
       "_tgt": "qflex_noc_noc_engine_nocengine_sweep_chunked_uploads_once",
@@ -4083,19 +4137,19 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L880",
+      "source_location": "L900",
       "weight": 1.0,
-      "_src": "qflex_noc_noc_engine_rationale_880",
+      "_src": "qflex_noc_noc_engine_rationale_900",
       "_tgt": "qflex_noc_noc_engine_nocengine_sweep_chunked_uploads_once",
       "source": "qflex_noc_noc_engine_nocengine_sweep_chunked_uploads_once",
-      "target": "qflex_noc_noc_engine_rationale_880",
+      "target": "qflex_noc_noc_engine_rationale_900",
       "confidence_score": 1.0
     },
     {
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L1072",
+      "source_location": "L1092",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine_run",
       "_tgt": "qflex_noc_noc_engine_nocengine_chunked_upload_sweeper_loop",
@@ -4107,19 +4161,19 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L896",
+      "source_location": "L916",
       "weight": 1.0,
-      "_src": "qflex_noc_noc_engine_rationale_896",
+      "_src": "qflex_noc_noc_engine_rationale_916",
       "_tgt": "qflex_noc_noc_engine_nocengine_chunked_upload_sweeper_loop",
       "source": "qflex_noc_noc_engine_nocengine_chunked_upload_sweeper_loop",
-      "target": "qflex_noc_noc_engine_rationale_896",
+      "target": "qflex_noc_noc_engine_rationale_916",
       "confidence_score": 1.0
     },
     {
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L960",
+      "source_location": "L980",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine_handle_upload_chunk",
       "_tgt": "qflex_noc_noc_engine_nocengine_post_file_to_devtools",
@@ -4131,31 +4185,31 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L902",
+      "source_location": "L922",
       "weight": 1.0,
-      "_src": "qflex_noc_noc_engine_rationale_902",
+      "_src": "qflex_noc_noc_engine_rationale_922",
       "_tgt": "qflex_noc_noc_engine_nocengine_handle_upload_chunk",
       "source": "qflex_noc_noc_engine_nocengine_handle_upload_chunk",
-      "target": "qflex_noc_noc_engine_rationale_902",
+      "target": "qflex_noc_noc_engine_rationale_922",
       "confidence_score": 1.0
     },
     {
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L989",
+      "source_location": "L1009",
       "weight": 1.0,
-      "_src": "qflex_noc_noc_engine_rationale_989",
+      "_src": "qflex_noc_noc_engine_rationale_1009",
       "_tgt": "qflex_noc_noc_engine_nocengine_post_file_to_devtools",
       "source": "qflex_noc_noc_engine_nocengine_post_file_to_devtools",
-      "target": "qflex_noc_noc_engine_rationale_989",
+      "target": "qflex_noc_noc_engine_rationale_1009",
       "confidence_score": 1.0
     },
     {
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L1146",
+      "source_location": "L1166",
       "weight": 1.0,
       "_src": "qflex_noc_noc_engine_nocengine_run",
       "_tgt": "qflex_noc_noc_engine_nocengine_stop",
@@ -4167,12 +4221,12 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L1048",
+      "source_location": "L1068",
       "weight": 1.0,
-      "_src": "qflex_noc_noc_engine_rationale_1048",
+      "_src": "qflex_noc_noc_engine_rationale_1068",
       "_tgt": "qflex_noc_noc_engine_nocengine_run",
       "source": "qflex_noc_noc_engine_nocengine_run",
-      "target": "qflex_noc_noc_engine_rationale_1048",
+      "target": "qflex_noc_noc_engine_rationale_1068",
       "confidence_score": 1.0
     },
     {
@@ -4191,12 +4245,12 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "noc_engine.py",
-      "source_location": "L1154",
+      "source_location": "L1174",
       "weight": 1.0,
-      "_src": "qflex_noc_noc_engine_rationale_1154",
+      "_src": "qflex_noc_noc_engine_rationale_1174",
       "_tgt": "qflex_noc_noc_engine_nocengine_stop",
       "source": "qflex_noc_noc_engine_nocengine_stop",
-      "target": "qflex_noc_noc_engine_rationale_1154",
+      "target": "qflex_noc_noc_engine_rationale_1174",
       "confidence_score": 1.0
     },
     {
@@ -4207,9 +4261,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_49",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_49",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -4219,9 +4273,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_49",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_49",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -4231,9 +4285,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_49",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_49",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -4243,9 +4297,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_49",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_49",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -4255,9 +4309,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_156",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_156",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -4267,9 +4321,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_156",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_156",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -4279,9 +4333,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_156",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_156",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -4291,9 +4345,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_156",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_156",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -4303,9 +4357,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_163",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_163",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -4315,9 +4369,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_163",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_163",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -4327,9 +4381,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_163",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_163",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -4339,9 +4393,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_163",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_163",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -4351,9 +4405,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_170",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_170",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -4363,9 +4417,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_170",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_170",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -4375,9 +4429,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_170",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_170",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -4387,9 +4441,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_170",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_170",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -4399,9 +4453,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_188",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_188",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -4411,9 +4465,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_188",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_188",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -4423,9 +4477,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_188",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_188",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -4435,9 +4489,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_188",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_188",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -4447,9 +4501,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_220",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_220",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -4459,9 +4513,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_220",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_220",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -4471,9 +4525,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_220",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_220",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -4483,9 +4537,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_220",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_220",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -4495,9 +4549,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_277",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_277",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -4507,9 +4561,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_277",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_277",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -4519,9 +4573,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_277",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_277",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -4531,9 +4585,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_277",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_277",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -4543,9 +4597,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_339",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_339",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -4555,9 +4609,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_339",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_339",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -4567,9 +4621,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_339",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_339",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -4579,9 +4633,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_339",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_339",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -4591,9 +4645,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_352",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_352",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -4603,9 +4657,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_352",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_352",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -4615,9 +4669,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_352",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_352",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -4627,9 +4681,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_352",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_352",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -4639,9 +4693,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_369",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_369",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -4651,9 +4705,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_369",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_369",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -4663,9 +4717,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_369",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_369",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -4675,9 +4729,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_369",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_369",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -4687,9 +4741,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_438",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_438",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -4699,9 +4753,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_438",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_438",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -4711,9 +4765,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_438",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_438",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -4723,9 +4777,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_438",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_438",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -4735,9 +4789,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_485",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_485",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -4747,9 +4801,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_485",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_485",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -4759,9 +4813,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_485",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_485",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -4771,9 +4825,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_485",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_485",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -4783,9 +4837,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_512",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_512",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -4795,9 +4849,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_512",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_512",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -4807,9 +4861,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_512",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_512",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -4819,9 +4873,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_512",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_512",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -4831,9 +4885,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_519",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_519",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -4843,9 +4897,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_519",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_519",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -4855,9 +4909,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_519",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_519",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -4867,9 +4921,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_519",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_519",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -4879,9 +4933,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_528",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_528",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -4891,9 +4945,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_528",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_528",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -4903,9 +4957,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_528",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_528",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -4915,9 +4969,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_528",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_528",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -4927,9 +4981,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_548",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_548",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -4939,9 +4993,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_548",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_548",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -4951,9 +5005,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_548",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_548",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -4963,9 +5017,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_548",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_548",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -4975,9 +5029,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_572",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_572",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -4987,9 +5041,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_572",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_572",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -4999,9 +5053,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_572",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_572",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -5011,9 +5065,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_572",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_572",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -5023,9 +5077,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_648",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_648",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -5035,9 +5089,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_648",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_648",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -5047,9 +5101,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_648",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_648",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -5059,9 +5113,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_648",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_648",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -5071,9 +5125,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_677",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_677",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -5083,9 +5137,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_677",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_677",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -5095,9 +5149,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_677",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_677",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -5107,9 +5161,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_677",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_677",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -5119,9 +5173,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_742",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_742",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -5131,9 +5185,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_742",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_742",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -5143,9 +5197,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_742",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_742",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -5155,9 +5209,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_742",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_742",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -5167,9 +5221,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_777",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_777",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -5179,9 +5233,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_777",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_777",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -5191,9 +5245,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_777",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_777",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -5203,9 +5257,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_777",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_777",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -5215,9 +5269,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_813",
       "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_813",
-      "target": "qflex_noc_ws_client_wsclient",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ws_client_wsclient"
     },
     {
       "relation": "uses",
@@ -5227,9 +5281,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_813",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_813",
-      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_ssh_tunnel_sshtunnelmanager"
     },
     {
       "relation": "uses",
@@ -5239,9 +5293,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_813",
       "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_813",
-      "target": "qflex_noc_version_api_versionapiserver",
-      "confidence_score": 0.5
+      "target": "qflex_noc_version_api_versionapiserver"
     },
     {
       "relation": "uses",
@@ -5251,9 +5305,9 @@
       "weight": 0.8,
       "_src": "qflex_noc_noc_engine_rationale_813",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
       "source": "qflex_noc_noc_engine_rationale_813",
-      "target": "qflex_noc_session_sync_sessionsyncmanager",
-      "confidence_score": 0.5
+      "target": "qflex_noc_session_sync_sessionsyncmanager"
     },
     {
       "relation": "uses",
@@ -5261,9 +5315,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L31",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_880",
+      "_src": "qflex_noc_noc_engine_rationale_900",
       "_tgt": "qflex_noc_ws_client_wsclient",
-      "source": "qflex_noc_noc_engine_rationale_880",
+      "source": "qflex_noc_noc_engine_rationale_900",
       "target": "qflex_noc_ws_client_wsclient",
       "confidence_score": 0.5
     },
@@ -5273,9 +5327,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L34",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_880",
+      "_src": "qflex_noc_noc_engine_rationale_900",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "source": "qflex_noc_noc_engine_rationale_880",
+      "source": "qflex_noc_noc_engine_rationale_900",
       "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
       "confidence_score": 0.5
     },
@@ -5285,9 +5339,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L35",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_880",
+      "_src": "qflex_noc_noc_engine_rationale_900",
       "_tgt": "qflex_noc_version_api_versionapiserver",
-      "source": "qflex_noc_noc_engine_rationale_880",
+      "source": "qflex_noc_noc_engine_rationale_900",
       "target": "qflex_noc_version_api_versionapiserver",
       "confidence_score": 0.5
     },
@@ -5297,9 +5351,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L39",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_880",
+      "_src": "qflex_noc_noc_engine_rationale_900",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
-      "source": "qflex_noc_noc_engine_rationale_880",
+      "source": "qflex_noc_noc_engine_rationale_900",
       "target": "qflex_noc_session_sync_sessionsyncmanager",
       "confidence_score": 0.5
     },
@@ -5309,9 +5363,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L31",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_896",
+      "_src": "qflex_noc_noc_engine_rationale_916",
       "_tgt": "qflex_noc_ws_client_wsclient",
-      "source": "qflex_noc_noc_engine_rationale_896",
+      "source": "qflex_noc_noc_engine_rationale_916",
       "target": "qflex_noc_ws_client_wsclient",
       "confidence_score": 0.5
     },
@@ -5321,9 +5375,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L34",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_896",
+      "_src": "qflex_noc_noc_engine_rationale_916",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "source": "qflex_noc_noc_engine_rationale_896",
+      "source": "qflex_noc_noc_engine_rationale_916",
       "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
       "confidence_score": 0.5
     },
@@ -5333,9 +5387,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L35",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_896",
+      "_src": "qflex_noc_noc_engine_rationale_916",
       "_tgt": "qflex_noc_version_api_versionapiserver",
-      "source": "qflex_noc_noc_engine_rationale_896",
+      "source": "qflex_noc_noc_engine_rationale_916",
       "target": "qflex_noc_version_api_versionapiserver",
       "confidence_score": 0.5
     },
@@ -5345,9 +5399,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L39",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_896",
+      "_src": "qflex_noc_noc_engine_rationale_916",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
-      "source": "qflex_noc_noc_engine_rationale_896",
+      "source": "qflex_noc_noc_engine_rationale_916",
       "target": "qflex_noc_session_sync_sessionsyncmanager",
       "confidence_score": 0.5
     },
@@ -5357,9 +5411,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L31",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_902",
+      "_src": "qflex_noc_noc_engine_rationale_922",
       "_tgt": "qflex_noc_ws_client_wsclient",
-      "source": "qflex_noc_noc_engine_rationale_902",
+      "source": "qflex_noc_noc_engine_rationale_922",
       "target": "qflex_noc_ws_client_wsclient",
       "confidence_score": 0.5
     },
@@ -5369,9 +5423,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L34",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_902",
+      "_src": "qflex_noc_noc_engine_rationale_922",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "source": "qflex_noc_noc_engine_rationale_902",
+      "source": "qflex_noc_noc_engine_rationale_922",
       "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
       "confidence_score": 0.5
     },
@@ -5381,9 +5435,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L35",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_902",
+      "_src": "qflex_noc_noc_engine_rationale_922",
       "_tgt": "qflex_noc_version_api_versionapiserver",
-      "source": "qflex_noc_noc_engine_rationale_902",
+      "source": "qflex_noc_noc_engine_rationale_922",
       "target": "qflex_noc_version_api_versionapiserver",
       "confidence_score": 0.5
     },
@@ -5393,9 +5447,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L39",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_902",
+      "_src": "qflex_noc_noc_engine_rationale_922",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
-      "source": "qflex_noc_noc_engine_rationale_902",
+      "source": "qflex_noc_noc_engine_rationale_922",
       "target": "qflex_noc_session_sync_sessionsyncmanager",
       "confidence_score": 0.5
     },
@@ -5405,9 +5459,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L31",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_989",
+      "_src": "qflex_noc_noc_engine_rationale_1009",
       "_tgt": "qflex_noc_ws_client_wsclient",
-      "source": "qflex_noc_noc_engine_rationale_989",
+      "source": "qflex_noc_noc_engine_rationale_1009",
       "target": "qflex_noc_ws_client_wsclient",
       "confidence_score": 0.5
     },
@@ -5417,9 +5471,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L34",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_989",
+      "_src": "qflex_noc_noc_engine_rationale_1009",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "source": "qflex_noc_noc_engine_rationale_989",
+      "source": "qflex_noc_noc_engine_rationale_1009",
       "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
       "confidence_score": 0.5
     },
@@ -5429,9 +5483,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L35",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_989",
+      "_src": "qflex_noc_noc_engine_rationale_1009",
       "_tgt": "qflex_noc_version_api_versionapiserver",
-      "source": "qflex_noc_noc_engine_rationale_989",
+      "source": "qflex_noc_noc_engine_rationale_1009",
       "target": "qflex_noc_version_api_versionapiserver",
       "confidence_score": 0.5
     },
@@ -5441,9 +5495,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L39",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_989",
+      "_src": "qflex_noc_noc_engine_rationale_1009",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
-      "source": "qflex_noc_noc_engine_rationale_989",
+      "source": "qflex_noc_noc_engine_rationale_1009",
       "target": "qflex_noc_session_sync_sessionsyncmanager",
       "confidence_score": 0.5
     },
@@ -5453,9 +5507,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L31",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_1048",
+      "_src": "qflex_noc_noc_engine_rationale_1068",
       "_tgt": "qflex_noc_ws_client_wsclient",
-      "source": "qflex_noc_noc_engine_rationale_1048",
+      "source": "qflex_noc_noc_engine_rationale_1068",
       "target": "qflex_noc_ws_client_wsclient",
       "confidence_score": 0.5
     },
@@ -5465,9 +5519,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L34",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_1048",
+      "_src": "qflex_noc_noc_engine_rationale_1068",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "source": "qflex_noc_noc_engine_rationale_1048",
+      "source": "qflex_noc_noc_engine_rationale_1068",
       "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
       "confidence_score": 0.5
     },
@@ -5477,9 +5531,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L35",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_1048",
+      "_src": "qflex_noc_noc_engine_rationale_1068",
       "_tgt": "qflex_noc_version_api_versionapiserver",
-      "source": "qflex_noc_noc_engine_rationale_1048",
+      "source": "qflex_noc_noc_engine_rationale_1068",
       "target": "qflex_noc_version_api_versionapiserver",
       "confidence_score": 0.5
     },
@@ -5489,9 +5543,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L39",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_1048",
+      "_src": "qflex_noc_noc_engine_rationale_1068",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
-      "source": "qflex_noc_noc_engine_rationale_1048",
+      "source": "qflex_noc_noc_engine_rationale_1068",
       "target": "qflex_noc_session_sync_sessionsyncmanager",
       "confidence_score": 0.5
     },
@@ -5501,9 +5555,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L31",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_1154",
+      "_src": "qflex_noc_noc_engine_rationale_1174",
       "_tgt": "qflex_noc_ws_client_wsclient",
-      "source": "qflex_noc_noc_engine_rationale_1154",
+      "source": "qflex_noc_noc_engine_rationale_1174",
       "target": "qflex_noc_ws_client_wsclient",
       "confidence_score": 0.5
     },
@@ -5513,9 +5567,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L34",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_1154",
+      "_src": "qflex_noc_noc_engine_rationale_1174",
       "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "source": "qflex_noc_noc_engine_rationale_1154",
+      "source": "qflex_noc_noc_engine_rationale_1174",
       "target": "qflex_noc_ssh_tunnel_sshtunnelmanager",
       "confidence_score": 0.5
     },
@@ -5525,9 +5579,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L35",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_1154",
+      "_src": "qflex_noc_noc_engine_rationale_1174",
       "_tgt": "qflex_noc_version_api_versionapiserver",
-      "source": "qflex_noc_noc_engine_rationale_1154",
+      "source": "qflex_noc_noc_engine_rationale_1174",
       "target": "qflex_noc_version_api_versionapiserver",
       "confidence_score": 0.5
     },
@@ -5537,9 +5591,9 @@
       "source_file": "noc_engine.py",
       "source_location": "L39",
       "weight": 0.8,
-      "_src": "qflex_noc_noc_engine_rationale_1154",
+      "_src": "qflex_noc_noc_engine_rationale_1174",
       "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
-      "source": "qflex_noc_noc_engine_rationale_1154",
+      "source": "qflex_noc_noc_engine_rationale_1174",
       "target": "qflex_noc_session_sync_sessionsyncmanager",
       "confidence_score": 0.5
     },
@@ -5758,6 +5812,78 @@
       "source": "qflex_noc_session_sync_sessionsyncmanager",
       "target": "qflex_noc_session_sync_rationale_40",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L39",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_880",
+      "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_session_sync_sessionsyncmanager",
+      "target": "qflex_noc_noc_engine_rationale_880"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L39",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_896",
+      "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_session_sync_sessionsyncmanager",
+      "target": "qflex_noc_noc_engine_rationale_896"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L39",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_902",
+      "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_session_sync_sessionsyncmanager",
+      "target": "qflex_noc_noc_engine_rationale_902"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L39",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_989",
+      "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_session_sync_sessionsyncmanager",
+      "target": "qflex_noc_noc_engine_rationale_989"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L39",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_1048",
+      "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_session_sync_sessionsyncmanager",
+      "target": "qflex_noc_noc_engine_rationale_1048"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L39",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_1154",
+      "_tgt": "qflex_noc_session_sync_sessionsyncmanager",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_session_sync_sessionsyncmanager",
+      "target": "qflex_noc_noc_engine_rationale_1154"
     },
     {
       "relation": "calls",
@@ -6173,11 +6299,11 @@
       "source_file": "tests\\test_ssh_tunnel_backpressure.py",
       "source_location": "L6",
       "weight": 0.8,
-      "_src": "tests_test_ssh_tunnel_backpressure_rationale_1",
-      "_tgt": "qflex_noc_ssh_tunnel_localsshtunnel",
+      "_src": "qflex_noc_ssh_tunnel_localsshtunnel",
+      "_tgt": "tests_test_ssh_tunnel_backpressure_rationale_1",
+      "confidence_score": 0.5,
       "source": "qflex_noc_ssh_tunnel_localsshtunnel",
-      "target": "tests_test_ssh_tunnel_backpressure_rationale_1",
-      "confidence_score": 0.5
+      "target": "tests_test_ssh_tunnel_backpressure_rationale_1"
     },
     {
       "relation": "uses",
@@ -6185,11 +6311,11 @@
       "source_file": "tests\\test_ssh_tunnel_backpressure.py",
       "source_location": "L6",
       "weight": 0.8,
-      "_src": "tests_test_ssh_tunnel_backpressure_rationale_10",
-      "_tgt": "qflex_noc_ssh_tunnel_localsshtunnel",
+      "_src": "qflex_noc_ssh_tunnel_localsshtunnel",
+      "_tgt": "tests_test_ssh_tunnel_backpressure_rationale_10",
+      "confidence_score": 0.5,
       "source": "qflex_noc_ssh_tunnel_localsshtunnel",
-      "target": "tests_test_ssh_tunnel_backpressure_rationale_10",
-      "confidence_score": 0.5
+      "target": "tests_test_ssh_tunnel_backpressure_rationale_10"
     },
     {
       "relation": "calls",
@@ -6198,8 +6324,8 @@
       "source_file": "tests\\test_ssh_tunnel_backpressure.py",
       "source_location": "L38",
       "weight": 1.0,
-      "_src": "tests_test_ssh_tunnel_backpressure_test_reader_closes_tunnel_when_ws_send_stalls",
-      "_tgt": "qflex_noc_ssh_tunnel_localsshtunnel",
+      "_src": "qflex_noc_ssh_tunnel_localsshtunnel",
+      "_tgt": "tests_test_ssh_tunnel_backpressure_test_reader_closes_tunnel_when_ws_send_stalls",
       "source": "qflex_noc_ssh_tunnel_localsshtunnel",
       "target": "tests_test_ssh_tunnel_backpressure_test_reader_closes_tunnel_when_ws_send_stalls"
     },
@@ -6389,11 +6515,11 @@
       "source_file": "tests\\test_ssh_tunnel_backpressure.py",
       "source_location": "L6",
       "weight": 0.8,
-      "_src": "tests_test_ssh_tunnel_backpressure_rationale_1",
-      "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "_src": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "_tgt": "tests_test_ssh_tunnel_backpressure_rationale_1",
+      "confidence_score": 0.5,
       "source": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "target": "tests_test_ssh_tunnel_backpressure_rationale_1",
-      "confidence_score": 0.5
+      "target": "tests_test_ssh_tunnel_backpressure_rationale_1"
     },
     {
       "relation": "uses",
@@ -6401,11 +6527,11 @@
       "source_file": "tests\\test_ssh_tunnel_backpressure.py",
       "source_location": "L6",
       "weight": 0.8,
-      "_src": "tests_test_ssh_tunnel_backpressure_rationale_10",
-      "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "_src": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "_tgt": "tests_test_ssh_tunnel_backpressure_rationale_10",
+      "confidence_score": 0.5,
       "source": "qflex_noc_ssh_tunnel_sshtunnelmanager",
-      "target": "tests_test_ssh_tunnel_backpressure_rationale_10",
-      "confidence_score": 0.5
+      "target": "tests_test_ssh_tunnel_backpressure_rationale_10"
     },
     {
       "relation": "calls",
@@ -6414,10 +6540,82 @@
       "source_file": "tests\\test_ssh_tunnel_backpressure.py",
       "source_location": "L11",
       "weight": 1.0,
-      "_src": "tests_test_ssh_tunnel_backpressure_test_reader_closes_tunnel_when_ws_send_stalls",
-      "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "_src": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "_tgt": "tests_test_ssh_tunnel_backpressure_test_reader_closes_tunnel_when_ws_send_stalls",
       "source": "qflex_noc_ssh_tunnel_sshtunnelmanager",
       "target": "tests_test_ssh_tunnel_backpressure_test_reader_closes_tunnel_when_ws_send_stalls"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L34",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_880",
+      "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "target": "qflex_noc_noc_engine_rationale_880"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L34",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_896",
+      "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "target": "qflex_noc_noc_engine_rationale_896"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L34",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_902",
+      "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "target": "qflex_noc_noc_engine_rationale_902"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L34",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_989",
+      "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "target": "qflex_noc_noc_engine_rationale_989"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L34",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_1048",
+      "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "target": "qflex_noc_noc_engine_rationale_1048"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L34",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_1154",
+      "_tgt": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_ssh_tunnel_sshtunnelmanager",
+      "target": "qflex_noc_noc_engine_rationale_1154"
     },
     {
       "relation": "rationale_for",
@@ -6749,11 +6947,11 @@
       "source_file": "tests\\test_version_api.py",
       "source_location": "L5",
       "weight": 0.8,
-      "_src": "tests_test_version_api_rationale_1",
-      "_tgt": "qflex_noc_version_api_versionapiserver",
+      "_src": "qflex_noc_version_api_versionapiserver",
+      "_tgt": "tests_test_version_api_rationale_1",
+      "confidence_score": 0.5,
       "source": "qflex_noc_version_api_versionapiserver",
-      "target": "tests_test_version_api_rationale_1",
-      "confidence_score": 0.5
+      "target": "tests_test_version_api_rationale_1"
     },
     {
       "relation": "calls",
@@ -6762,8 +6960,8 @@
       "source_file": "tests\\test_version_api.py",
       "source_location": "L9",
       "weight": 1.0,
-      "_src": "tests_test_version_api_test_version_endpoint_returns_version",
-      "_tgt": "qflex_noc_version_api_versionapiserver",
+      "_src": "qflex_noc_version_api_versionapiserver",
+      "_tgt": "tests_test_version_api_test_version_endpoint_returns_version",
       "source": "qflex_noc_version_api_versionapiserver",
       "target": "tests_test_version_api_test_version_endpoint_returns_version"
     },
@@ -6774,10 +6972,82 @@
       "source_file": "tests\\test_version_api.py",
       "source_location": "L25",
       "weight": 1.0,
-      "_src": "tests_test_version_api_test_version_endpoint_health",
-      "_tgt": "qflex_noc_version_api_versionapiserver",
+      "_src": "qflex_noc_version_api_versionapiserver",
+      "_tgt": "tests_test_version_api_test_version_endpoint_health",
       "source": "qflex_noc_version_api_versionapiserver",
       "target": "tests_test_version_api_test_version_endpoint_health"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L35",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_880",
+      "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_version_api_versionapiserver",
+      "target": "qflex_noc_noc_engine_rationale_880"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L35",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_896",
+      "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_version_api_versionapiserver",
+      "target": "qflex_noc_noc_engine_rationale_896"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L35",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_902",
+      "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_version_api_versionapiserver",
+      "target": "qflex_noc_noc_engine_rationale_902"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L35",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_989",
+      "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_version_api_versionapiserver",
+      "target": "qflex_noc_noc_engine_rationale_989"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L35",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_1048",
+      "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_version_api_versionapiserver",
+      "target": "qflex_noc_noc_engine_rationale_1048"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L35",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_1154",
+      "_tgt": "qflex_noc_version_api_versionapiserver",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_version_api_versionapiserver",
+      "target": "qflex_noc_noc_engine_rationale_1154"
     },
     {
       "relation": "contains",
@@ -6881,11 +7151,11 @@
       "source_file": "tests\\test_ws_client.py",
       "source_location": "L7",
       "weight": 0.8,
-      "_src": "tests_test_ws_client_rationale_26",
-      "_tgt": "qflex_noc_ws_client_wsclient",
+      "_src": "qflex_noc_ws_client_wsclient",
+      "_tgt": "tests_test_ws_client_rationale_26",
+      "confidence_score": 0.5,
       "source": "qflex_noc_ws_client_wsclient",
-      "target": "tests_test_ws_client_rationale_26",
-      "confidence_score": 0.5
+      "target": "tests_test_ws_client_rationale_26"
     },
     {
       "relation": "uses",
@@ -6893,11 +7163,11 @@
       "source_file": "tests\\test_ws_client.py",
       "source_location": "L7",
       "weight": 0.8,
-      "_src": "tests_test_ws_client_rationale_47",
-      "_tgt": "qflex_noc_ws_client_wsclient",
+      "_src": "qflex_noc_ws_client_wsclient",
+      "_tgt": "tests_test_ws_client_rationale_47",
+      "confidence_score": 0.5,
       "source": "qflex_noc_ws_client_wsclient",
-      "target": "tests_test_ws_client_rationale_47",
-      "confidence_score": 0.5
+      "target": "tests_test_ws_client_rationale_47"
     },
     {
       "relation": "uses",
@@ -6905,11 +7175,11 @@
       "source_file": "tests\\test_ws_client.py",
       "source_location": "L7",
       "weight": 0.8,
-      "_src": "tests_test_ws_client_rationale_69",
-      "_tgt": "qflex_noc_ws_client_wsclient",
+      "_src": "qflex_noc_ws_client_wsclient",
+      "_tgt": "tests_test_ws_client_rationale_69",
+      "confidence_score": 0.5,
       "source": "qflex_noc_ws_client_wsclient",
-      "target": "tests_test_ws_client_rationale_69",
-      "confidence_score": 0.5
+      "target": "tests_test_ws_client_rationale_69"
     },
     {
       "relation": "calls",
@@ -6918,8 +7188,8 @@
       "source_file": "tests\\test_ws_client.py",
       "source_location": "L19",
       "weight": 1.0,
-      "_src": "tests_test_ws_client_test_connect_passes_open_timeout",
-      "_tgt": "qflex_noc_ws_client_wsclient",
+      "_src": "qflex_noc_ws_client_wsclient",
+      "_tgt": "tests_test_ws_client_test_connect_passes_open_timeout",
       "source": "qflex_noc_ws_client_wsclient",
       "target": "tests_test_ws_client_test_connect_passes_open_timeout"
     },
@@ -6930,8 +7200,8 @@
       "source_file": "tests\\test_ws_client.py",
       "source_location": "L33",
       "weight": 1.0,
-      "_src": "tests_test_ws_client_test_disconnect_is_bounded_when_close_hangs",
-      "_tgt": "qflex_noc_ws_client_wsclient",
+      "_src": "qflex_noc_ws_client_wsclient",
+      "_tgt": "tests_test_ws_client_test_disconnect_is_bounded_when_close_hangs",
       "source": "qflex_noc_ws_client_wsclient",
       "target": "tests_test_ws_client_test_disconnect_is_bounded_when_close_hangs"
     },
@@ -6942,8 +7212,8 @@
       "source_file": "tests\\test_ws_client.py",
       "source_location": "L59",
       "weight": 1.0,
-      "_src": "tests_test_ws_client_test_send_raises_on_drain_stall",
-      "_tgt": "qflex_noc_ws_client_wsclient",
+      "_src": "qflex_noc_ws_client_wsclient",
+      "_tgt": "tests_test_ws_client_test_send_raises_on_drain_stall",
       "source": "qflex_noc_ws_client_wsclient",
       "target": "tests_test_ws_client_test_send_raises_on_drain_stall"
     },
@@ -6954,10 +7224,82 @@
       "source_file": "tests\\test_ws_client.py",
       "source_location": "L79",
       "weight": 1.0,
-      "_src": "tests_test_ws_client_test_connect_passes_ping_timeout_20",
-      "_tgt": "qflex_noc_ws_client_wsclient",
+      "_src": "qflex_noc_ws_client_wsclient",
+      "_tgt": "tests_test_ws_client_test_connect_passes_ping_timeout_20",
       "source": "qflex_noc_ws_client_wsclient",
       "target": "tests_test_ws_client_test_connect_passes_ping_timeout_20"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L31",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_880",
+      "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_ws_client_wsclient",
+      "target": "qflex_noc_noc_engine_rationale_880"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L31",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_896",
+      "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_ws_client_wsclient",
+      "target": "qflex_noc_noc_engine_rationale_896"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L31",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_902",
+      "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_ws_client_wsclient",
+      "target": "qflex_noc_noc_engine_rationale_902"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L31",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_989",
+      "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_ws_client_wsclient",
+      "target": "qflex_noc_noc_engine_rationale_989"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L31",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_1048",
+      "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_ws_client_wsclient",
+      "target": "qflex_noc_noc_engine_rationale_1048"
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "noc_engine.py",
+      "source_location": "L31",
+      "weight": 0.8,
+      "_src": "qflex_noc_noc_engine_rationale_1154",
+      "_tgt": "qflex_noc_ws_client_wsclient",
+      "confidence_score": 0.5,
+      "source": "qflex_noc_ws_client_wsclient",
+      "target": "qflex_noc_noc_engine_rationale_1154"
     },
     {
       "relation": "rationale_for",
