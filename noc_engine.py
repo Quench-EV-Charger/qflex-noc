@@ -17,6 +17,7 @@ Architecture (asyncio tasks running concurrently on one connection):
 """
 
 import asyncio
+import hashlib
 import json
 import logging
 import os
@@ -41,6 +42,10 @@ try:
 except ImportError:
     _SESSION_SYNC_AVAILABLE = False
     logger = logging.getLogger(__name__)
+
+# Store active chunked uploads for large file transfers
+# Key: upload_id, Value: {chunks: dict, total_chunks: int, file_name: str, target: str, expected_hash: str}
+_chunked_uploads: dict = {}
 
 logger = logging.getLogger(__name__)
 
@@ -940,12 +945,17 @@ class NocEngine:
                 "total_chunks": total_chunks,
                 "file_name": file_name,
                 "target": target,
-                "started_at": time.monotonic(),
+                "expected_hash": "",
             }
             logger.info(f"[NOC-Engine] Started chunked upload: {upload_id}, {total_chunks} chunks")
-
-        upload = self._chunked_uploads[upload_id]
-
+        
+        upload = _chunked_uploads[upload_id]
+        
+        # Capture file_hash from any chunk (later chunks override if non-empty)
+        file_hash = payload.get("file_hash", "")
+        if file_hash:
+            upload["expected_hash"] = file_hash
+        
         # Store chunk
         try:
             chunk_bytes = base64.b64decode(chunk_data_b64)
@@ -974,8 +984,36 @@ class NocEngine:
 
             # Reassemble file
             file_data = b"".join(upload["chunks"][i] for i in range(total_chunks))
-            logger.info(f"[NOC-Engine] Reassembled file {file_name} ({len(file_data)} bytes), target={upload['target']}, posting to port 8005")
-
+            file_size = len(file_data)
+            logger.info(f"[Upload] Reassembly complete: {upload_id}, size={file_size} bytes")
+            
+            # Verify SHA-256 hash if provided
+            expected_hash = upload.get("expected_hash", "")
+            actual_hash = ""
+            if expected_hash:
+                actual_hash = hashlib.sha256(file_data).hexdigest()
+                logger.info(f"[Upload] Expected hash: {expected_hash}")
+                logger.info(f"[Upload] Actual hash:   {actual_hash}")
+                
+                if actual_hash != expected_hash:
+                    logger.error(f"[Upload] HASH MISMATCH for {upload_id} — refusing extraction")
+                    error_msg = self._make_msg("chunked_upload_response", {
+                        "upload_id": upload_id,
+                        "success": False,
+                        "error": (
+                            f"File hash mismatch — upload corrupted. "
+                            f"Expected {expected_hash} but got {actual_hash}. "
+                            f"Please retry the upload when the connection is stable."
+                        ),
+                    })
+                    await ws.send(error_msg)
+                    _chunked_uploads.pop(upload_id, None)
+                    return
+                else:
+                    logger.info(f"[Upload] Hash verified for {upload_id} — proceeding with extraction")
+            
+            logger.info(f"[NOC-Engine] Reassembled file {file_name} ({file_size} bytes), target={upload['target']}, posting to port 8005")
+            
             # Post to port 8005 (dev-tools service)
             result = await self._post_file_to_devtools(upload["target"], upload["file_name"], file_data)
 
