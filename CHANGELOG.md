@@ -4,6 +4,11 @@ All notable changes follow [Keep a Changelog](https://keepachangelog.com/en/1.1.
 
 ## [Unreleased]
 
+## [1.1.3] — 2026-05-13
+
+### Added
+- Chunked upload now verifies a SHA-256 hash of the fully-reassembled payload before persisting. The client sends `sha256` alongside the final chunk; on mismatch the upload is rejected with a `hash_mismatch` error and the in-memory chunk state is discarded. Closes the gap where a silently corrupted multi-chunk transfer (truncated chunk, dropped middle frame) could be accepted as valid.
+
 ## [1.1.2] — 2026-05-10
 
 ### Added
