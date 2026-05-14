@@ -835,8 +835,10 @@ class NocEngine:
         request_kwargs = {
             "method": method,
             "url": target_url,
-            "timeout": aiohttp.ClientTimeout(total=60)  # Longer timeout for uploads
+            "headers": {"Accept": "application/json"},
+            "timeout": aiohttp.ClientTimeout(total=30),
         }
+        logger.info(f"[NOC-Engine] Proxy {method} {target_url}")
         
         # Add body and headers for POST/PUT requests
         if body and method in ["POST", "PUT"]:
@@ -844,14 +846,14 @@ class NocEngine:
                 # Decode base64 binary data
                 decoded_body = base64.b64decode(body)
                 request_kwargs["data"] = decoded_body
-                request_kwargs["headers"] = {"Content-Type": content_type}
+                request_kwargs["headers"] = {"Accept": "application/json", "Content-Type": content_type}
                 logger.info(f"[NOC-Engine] Proxy binary POST: target={target_url}, content_type={content_type}, body_size={len(decoded_body)}")
                 # Log first 200 bytes of body for debugging boundary issues
                 logger.info(f"[NOC-Engine] Body preview: {decoded_body[:200]}")
             else:
                 # Text data
                 request_kwargs["data"] = body.encode('utf-8')
-                request_kwargs["headers"] = {"Content-Type": content_type}
+                request_kwargs["headers"] = {"Accept": "application/json", "Content-Type": content_type}
                 logger.info(f"[NOC-Engine] Proxy text POST: target={target_url}, content_type={content_type}")
         
         response_msg: dict | None = None
@@ -946,10 +948,11 @@ class NocEngine:
                 "file_name": file_name,
                 "target": target,
                 "expected_hash": "",
+                "started_at": time.monotonic(),
             }
             logger.info(f"[NOC-Engine] Started chunked upload: {upload_id}, {total_chunks} chunks")
         
-        upload = _chunked_uploads[upload_id]
+        upload = self._chunked_uploads[upload_id]
         
         # Capture file_hash from any chunk (later chunks override if non-empty)
         file_hash = payload.get("file_hash", "")
@@ -1007,7 +1010,7 @@ class NocEngine:
                         ),
                     })
                     await ws.send(error_msg)
-                    _chunked_uploads.pop(upload_id, None)
+                    self._chunked_uploads.pop(upload_id, None)
                     return
                 else:
                     logger.info(f"[Upload] Hash verified for {upload_id} — proceeding with extraction")
@@ -1146,7 +1149,6 @@ class NocEngine:
                     asyncio.create_task(self._session_sync_loop(ws),        name="session_sync"),
                     asyncio.create_task(self._charger_id_refresh_loop(ws),  name="charger_id_refresh"),
                     asyncio.create_task(self._noc_url_refresh_loop(ws),     name="noc_url_refresh"),
-                    asyncio.create_task(self._watchdog_loop(ws),            name="watchdog"),
                 ]
 
                 # Fire and forget version poll (it self-terminates after 5 polls)
