@@ -15,6 +15,7 @@ import asyncio
 import json
 import logging
 import ssl
+import time
 from typing import Any
 
 import websockets
@@ -41,6 +42,9 @@ class WSClient:
         self._ws = None
         self._connected = False
         self.send_timeout = send_timeout
+        # Monotonic timestamp of the last observed WS-level activity
+        # (send, receive, or pong).  Used by the engine watchdog.
+        self._last_activity_at: float = time.monotonic()
 
     # ------------------------------------------------------------------
     # Connection state
@@ -60,6 +64,15 @@ class WSClient:
         # Legacy WebSocketClientProtocol uses .open
         return getattr(self._ws, "open", False)
 
+    @property
+    def last_activity_at(self) -> float:
+        """Monotonic timestamp of the most recent WS activity (send/recv/pong)."""
+        return self._last_activity_at
+
+    def _touch_activity(self) -> None:
+        """Record that WS-level activity just occurred."""
+        self._last_activity_at = time.monotonic()
+
     # ------------------------------------------------------------------
     # Lifecycle
     # ------------------------------------------------------------------
@@ -78,6 +91,20 @@ class WSClient:
 
         self._ws = await websockets.connect(self.uri, **kwargs)
         self._connected = True
+        self._touch_activity()  # mark connection as fresh activity
+
+        # Register a pong callback so the watchdog sees server liveness
+        # even when no application messages are flowing.
+        if hasattr(self._ws, "pong_waiter"):
+            # websockets < 13 (legacy protocol)
+            pass  # pong handled internally; we touch on send/recv instead
+        # For all versions we can monkey-patch the internal pong handler
+        # via the public callback API if available.
+        try:
+            # websockets >= 13 exposes a pong_handler callback
+            self._ws.pong_handler = self._on_pong  # type: ignore[attr-defined]
+        except AttributeError:
+            pass
         logger.info(f"[WS-Client] Connected to {self.uri}")
 
     async def disconnect(self):
@@ -97,6 +124,11 @@ class WSClient:
     # I/O
     # ------------------------------------------------------------------
 
+    def _on_pong(self, data: bytes = b"") -> None:
+        """Called when a pong frame arrives from the server."""
+        self._touch_activity()
+        logger.debug("[WS-Client] 🏓 Pong received")
+
     async def send(self, message: dict):
         """
         Serialize and send a JSON message, bounded by ``send_timeout``.
@@ -109,6 +141,7 @@ class WSClient:
         if not self.connected:
             raise ConnectionError("WebSocket not connected")
         await asyncio.wait_for(self._ws.send(json.dumps(message)), timeout=self.send_timeout)
+        self._touch_activity()
 
     async def receive(self) -> dict:
         """
@@ -121,4 +154,5 @@ class WSClient:
         if not self.connected:
             raise ConnectionError("WebSocket not connected")
         raw = await self._ws.recv()
+        self._touch_activity()
         return json.loads(raw)

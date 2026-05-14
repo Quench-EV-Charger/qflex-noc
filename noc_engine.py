@@ -117,9 +117,9 @@ class NocEngine:
 
         self._running = False
 
-        # Watchdog state — force reconnect if no inbound message in N seconds
-        self._last_inbound_at: float | None = None
-        self.inbound_idle_timeout: float = 60.0
+        # Watchdog — force reconnect if NO WS activity (inbound, outbound,
+        # or ping/pong) for this many seconds.
+        self.activity_idle_timeout: float = 120.0
         self.reconnect_delay: float = 5.0
 
         # Bound the firmware-version fetch during auth (was 5s aiohttp timeout, now best-effort)
@@ -550,26 +550,26 @@ class NocEngine:
         return task
 
     async def _watchdog_loop(self, ws: WSClient):
-        """Force a reconnect if no inbound WS message has arrived recently.
+        """Force a reconnect if no WS activity at all for ``activity_idle_timeout`` seconds.
+
+        Activity is any of: inbound message, outbound message, or ping/pong.
+        The WSClient tracks this via ``last_activity_at`` (monotonic).
 
         Returning from this coroutine wakes the asyncio.wait(FIRST_COMPLETED) in
         run() and triggers the standard reconnect flow.
         """
-        # Initialise on entry so a slow first message doesn't fire the watchdog.
-        self._last_inbound_at = asyncio.get_event_loop().time()
-        # Poll cadence: tied to the threshold but capped so disconnects are
-        # noticed within ~5s regardless of inbound_idle_timeout.
-        poll = min(max(self.inbound_idle_timeout / 4, 1.0), 5.0)
+        import time as _time
+        # Poll cadence: check frequently but cap at 5 s so stalls are caught quickly.
+        poll = min(max(self.activity_idle_timeout / 4, 1.0), 5.0)
         while True:
             await asyncio.sleep(poll)
             if not ws.connected:
                 return
-            now = asyncio.get_event_loop().time()
-            idle = now - (self._last_inbound_at or now)
-            if idle >= self.inbound_idle_timeout:
+            idle = _time.monotonic() - ws.last_activity_at
+            if idle >= self.activity_idle_timeout:
                 logger.warning(
-                    f"[NOC-Engine] 🐶 Watchdog: no inbound for {idle:.1f}s "
-                    f"(threshold={self.inbound_idle_timeout}s) — forcing reconnect"
+                    f"[NOC-Engine] \U0001f436 Watchdog: no WS activity for {idle:.1f}s "
+                    f"(threshold={self.activity_idle_timeout}s) — forcing reconnect"
                 )
                 return  # exit triggers FIRST_COMPLETED → reconnect
 
@@ -584,7 +584,6 @@ class NocEngine:
         while True:
             try:
                 message = await ws.receive()
-                self._last_inbound_at = asyncio.get_event_loop().time()
                 msg_type = message.get("type", "UNKNOWN")
 
                 # Log EVERYTHING we receive at INFO level for debugging
@@ -1149,6 +1148,7 @@ class NocEngine:
                     asyncio.create_task(self._session_sync_loop(ws),        name="session_sync"),
                     asyncio.create_task(self._charger_id_refresh_loop(ws),  name="charger_id_refresh"),
                     asyncio.create_task(self._noc_url_refresh_loop(ws),     name="noc_url_refresh"),
+                    asyncio.create_task(self._watchdog_loop(ws),            name="watchdog"),
                 ]
 
                 # Fire and forget version poll (it self-terminates after 5 polls)

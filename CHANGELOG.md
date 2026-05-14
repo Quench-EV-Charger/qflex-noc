@@ -4,6 +4,14 @@ All notable changes follow [Keep a Changelog](https://keepachangelog.com/en/1.1.
 
 ## [Unreleased]
 
+## [1.1.4] — 2026-05-14
+
+### Changed
+- Watchdog rewritten to monitor **all** WS activity (inbound messages, outbound messages, and ping/pong) instead of only inbound messages. Idle threshold raised from 60s to 120s. Activity tracking moved into `WSClient` via `last_activity_at` (monotonic), which is updated on every `send()`, `receive()`, and pong callback. The watchdog now only forces a reconnect when the connection is truly dead in both directions.
+
+### Fixed
+- Restored the watchdog task in `run()` — it was accidentally removed in `d374292`.
+
 ## [1.1.3] — 2026-05-13
 
 ### Added
