@@ -186,8 +186,10 @@ class SessionSyncManager:
                                 self._last_active_sessions[gun_id] = None
                         else:
                             logger.warning(f"[SessionSync] Active API error for gun {gun_id}: {resp.status}")
-                except Exception as e:
-                    logger.error(f"[SessionSync] Failed to fetch active session gun {gun_id}: {e}")
+                except Exception:
+                    logger.exception(
+                        f"[SessionSync] Failed to fetch active session gun {gun_id}"
+                    )
         finally:
             if own_session and session is not None:
                 await session.close()
@@ -242,8 +244,8 @@ class SessionSyncManager:
                         return sessions
                 else:
                     logger.warning(f"[SessionSync] History API error: {resp.status}")
-        except Exception as e:
-            logger.error(f"[SessionSync] Failed to fetch history: {e}")
+        except Exception:
+            logger.exception("[SessionSync] Failed to fetch history")
         finally:
             if own_session and session is not None:
                 await session.close()
