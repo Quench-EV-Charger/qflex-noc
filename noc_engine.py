@@ -601,8 +601,11 @@ class NocEngine:
                 message = await ws.receive()
                 msg_type = message.get("type", "UNKNOWN")
 
-                # Log EVERYTHING we receive at INFO level for debugging
-                logger.info(f"[NOC-Engine] 📥 INCOMING WS MESSAGE | type={msg_type} | keys={list(message.keys())}")
+                # Per-message DEBUG (lifecycle trace); the 60s summary below
+                # is the canonical INFO-level signal.
+                logger.debug(
+                    f"[NOC-Engine] 📥 WS msg type={msg_type} keys={list(message.keys())}"
+                )
 
                 if msg_type == "command":
                     # Dispatch to a separate task so we don't block receive loop
@@ -612,10 +615,15 @@ class NocEngine:
                     self._spawn_tracked(self._handle_command(ws, message), name=f"cmd-{cmd_id}")
 
                 elif msg_type == "proxy_request":
-                    # Handle web tool proxy request (synchronous response)
+                    # Aggregate via 60s windowed summary; keep per-message DEBUG
+                    # for forensic troubleshooting.
                     payload = message.get("payload", {})
                     request_id = payload.get("request_id", "?")
-                    logger.info(f"[NOC-Engine] 🔀 Proxy request {request_id}: {payload.get('method')} {payload.get('path')}")
+                    logger.debug(
+                        f"[NOC-Engine] 🔀 Proxy request {request_id}: "
+                        f"{payload.get('method')} {payload.get('path')}"
+                    )
+                    self._proxy_request_summary.increment()
                     self._spawn_tracked(self._handle_proxy_request(ws, message), name=f"proxy-{request_id}")
 
                 elif msg_type == "upload_chunk":

@@ -41,3 +41,20 @@ class TestTelemetrySummary:
         assert hasattr(engine, "_telemetry_summary")
         # Default window: 3600s.
         assert engine._telemetry_summary._window == 3600.0
+
+
+class TestIncomingWSMessageSummary:
+    def test_no_unconditional_incoming_ws_info(self):
+        import inspect
+        import noc_engine
+        src = inspect.getsource(noc_engine.NocEngine._receive_loop)
+        # Old line — should be gone entirely.
+        assert "📥 INCOMING WS MESSAGE" not in src or "logger.debug" in src, (
+            "INCOMING WS MESSAGE must be DEBUG-only, not INFO"
+        )
+
+    def test_proxy_request_routes_through_summary(self):
+        import inspect
+        import noc_engine
+        src = inspect.getsource(noc_engine.NocEngine._receive_loop)
+        assert "_proxy_request_summary.increment()" in src
