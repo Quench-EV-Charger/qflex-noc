@@ -54,12 +54,17 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Silence third-party libraries (websockets.client alone produced 469 536
+# DEBUG lines / day before this — see CHANGELOG 1.1.5).
+sys.path.insert(0, str(Path(__file__).parent))  # ensure log_helpers is importable
+from log_helpers import _configure_library_loggers  # noqa: E402
+_configure_library_loggers()
+
 # ---------------------------------------------------------------------------
 # Import engine (after sys.path is set up)
 # ---------------------------------------------------------------------------
 
-sys.path.insert(0, str(Path(__file__).parent))
-from noc_engine import NocEngine
+from noc_engine import NocEngine  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Charger ID cache  (stored alongside config.json)
