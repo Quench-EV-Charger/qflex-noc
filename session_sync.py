@@ -33,6 +33,8 @@ from typing import Optional
 
 import aiohttp
 
+from log_helpers import log_on_change
+
 logger = logging.getLogger(__name__)
 
 
@@ -94,8 +96,8 @@ class SessionSyncManager:
         try:
             with open(self.STATE_FILE, "w") as f:
                 json.dump(self._state, f, indent=2)
-        except Exception as e:
-            logger.error(f"[SessionSync] Failed to save state: {e}")
+        except Exception:
+            logger.exception("[SessionSync] Failed to save state")
     
     async def start(self):
         """Start the session sync loop."""
@@ -122,8 +124,8 @@ class SessionSyncManager:
         while self._running:
             try:
                 await self._sync_once()
-            except Exception as e:
-                logger.error(f"[SessionSync] Sync error: {e}")
+            except Exception:
+                logger.exception("[SessionSync] Sync error")
             
             await asyncio.sleep(self.poll_interval)
     
@@ -184,8 +186,10 @@ class SessionSyncManager:
                                 self._last_active_sessions[gun_id] = None
                         else:
                             logger.warning(f"[SessionSync] Active API error for gun {gun_id}: {resp.status}")
-                except Exception as e:
-                    logger.error(f"[SessionSync] Failed to fetch active session gun {gun_id}: {e}")
+                except Exception:
+                    logger.exception(
+                        f"[SessionSync] Failed to fetch active session gun {gun_id}"
+                    )
         finally:
             if own_session and session is not None:
                 await session.close()
@@ -229,12 +233,19 @@ class SessionSyncManager:
                     data = await resp.json()
                     if data.get("success"):
                         sessions = data.get("sessions", [])
-                        logger.debug(f"[SessionSync] Fetched {len(sessions)} history sessions")
+                        # Only emit when count is non-zero OR on a 0↔N transition.
+                        log_on_change(
+                            logger,
+                            "session_sync:history_count",
+                            len(sessions),
+                            f"[SessionSync] Fetched {len(sessions)} history sessions",
+                            level=logging.DEBUG,
+                        )
                         return sessions
                 else:
                     logger.warning(f"[SessionSync] History API error: {resp.status}")
-        except Exception as e:
-            logger.error(f"[SessionSync] Failed to fetch history: {e}")
+        except Exception:
+            logger.exception("[SessionSync] Failed to fetch history")
         finally:
             if own_session and session is not None:
                 await session.close()
@@ -291,9 +302,11 @@ class SessionSyncManager:
                 # Generic send with json dumps
                 await self.ws_client.send(json.dumps(message))
             
-            logger.debug(f"[SessionSync] Sent session_sync to NOC Server")
-        except Exception as e:
-            logger.error(f"[SessionSync] Failed to send to NOC: {e}")
+            # TRACE: per-tick send success is not actionable; the next failure
+            # branch will log with `logger.exception`.
+            logger.log(5, "[SessionSync] Sent session_sync to NOC Server")
+        except Exception:
+            logger.exception("[SessionSync] Failed to send to NOC")
     
     def _update_state(self, active_sessions: list[dict], history_sessions: list[dict]):
         """Update internal state after successful sync."""

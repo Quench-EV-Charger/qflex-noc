@@ -140,6 +140,23 @@ class NocEngine:
         # SSH Tunnel manager for remote SSH access
         self._ssh_manager = SSHTunnelManager()
 
+        # Periodic summaries for high-frequency events. Constructed once;
+        # safe to use across reconnects (state is per-process, not per-WS).
+        from log_helpers import PeriodicSummary, RateLimitedLogger
+        self._telemetry_summary = PeriodicSummary(
+            logger, key="Telemetry", window_seconds=3600.0,
+        )
+        self._proxy_request_summary = PeriodicSummary(
+            logger, key="proxy_request", window_seconds=60.0,
+        )
+
+        # Rate-limit per-endpoint refresh failures. Attempts 1, 10, 100, 1000
+        # each log a stack-frame; subsequent silent until .ok() emits a single
+        # "recovered" INFO when the endpoint comes back.
+        self._rl_ocpp_serial = RateLimitedLogger(logger, key="charger_id_refresh/ocpp")
+        self._rl_hw_serial   = RateLimitedLogger(logger, key="charger_id_refresh/hw")
+        self._rl_noc_url     = RateLimitedLogger(logger, key="noc_url_refresh")
+
         # Local HTTP API for version/health introspection
         engine_version = self._read_engine_version()
         self._version_api = VersionAPIServer(
@@ -348,13 +365,17 @@ class NocEngine:
                 break
             try:
                 await ws.send(self._make_msg("heartbeat", {}))
-                logger.debug("[NOC-Engine] ♥ Heartbeat sent")
+                logger.log(5, "[NOC-Engine] ♥ Heartbeat sent")  # below DEBUG (10)
             except Exception as e:
                 logger.warning(f"[NOC-Engine] Heartbeat failed: {e}")
                 break
 
     async def _telemetry_loop(self, ws: WSClient):
-        """Collect and push charger telemetry every N seconds."""
+        """Collect and push charger telemetry every N seconds.
+
+        Per-tick INFO line was dropped — see ``_telemetry_summary`` for a 1h
+        windowed summary and immediate OK↔FAIL flip lines.
+        """
         while True:
             await asyncio.sleep(self.telemetry_interval)
             if not ws.connected:
@@ -365,8 +386,9 @@ class NocEngine:
                     session=await self._ensure_http_session(),
                 )
                 await ws.send(self._make_msg("telemetry", payload))
-                logger.info("[NOC-Engine] 📡 Telemetry sent")
+                self._telemetry_summary.success()
             except Exception as e:
+                self._telemetry_summary.failure(str(e))
                 logger.warning(f"[NOC-Engine] Telemetry push failed: {e}")
                 break
 
@@ -402,9 +424,10 @@ class NocEngine:
                             serial = data.get("value", "").replace("\x00", "").strip()
                             if data.get("success") and serial:
                                 ocpp_serial = serial
-                except Exception as e:
-                    logger.debug(
-                        f"[NOC-Engine] Charger ID refresh: OCPP fetch failed: {e}"
+                                self._rl_ocpp_serial.ok()
+                except Exception:
+                    self._rl_ocpp_serial.exception(
+                        "OCPP serial fetch failed (URL: %s)", self._ocpp_serial_url,
                     )
 
                 try:
@@ -417,12 +440,15 @@ class NocEngine:
                             serial = str(data.get("serial_number", "")).replace("\x00", "").strip()
                             if data.get("success") and serial:
                                 hw_serial = serial
-                except Exception as e:
-                    logger.debug(
-                        f"[NOC-Engine] Charger ID refresh: HW fetch failed: {e}"
+                                self._rl_hw_serial.ok()
+                except Exception:
+                    self._rl_hw_serial.exception(
+                        "HW serial fetch failed (URL: %s)", self._hw_serial_url,
                     )
-            except Exception as e:
-                logger.debug(f"[NOC-Engine] Charger ID refresh error: {e}")
+            except Exception:
+                # Outer error: e.g. _ensure_http_session() blew up. Bucket under OCPP
+                # since that's the first endpoint we'd have hit.
+                self._rl_ocpp_serial.exception("Charger ID refresh outer error")
 
             if not (ocpp_serial and hw_serial):
                 continue
@@ -432,6 +458,7 @@ class NocEngine:
 
             new_charger_id = f"{ocpp_serial}-{hw_serial}"
             if new_charger_id != self.charger_id:
+                # KEEP — fires only on actual change (≈ zero/day in steady state).
                 logger.info(
                     f"[NOC-Engine] Charger ID changed: {self.charger_id} → {new_charger_id} — reconnecting"
                 )
@@ -467,8 +494,12 @@ class NocEngine:
                         url = str(data.get("value", "")).strip()
                         if data.get("success") and url:
                             new_url = url
-            except Exception as e:
-                logger.debug(f"[NOC-Engine] NOC URL refresh error: {e}")
+                            self._rl_noc_url.ok()
+            except Exception:
+                self._rl_noc_url.exception(
+                    "NOC URL refresh failed (URL: %s)", self._noc_url_url,
+                )
+                continue
 
             if not new_url:
                 continue
@@ -477,6 +508,7 @@ class NocEngine:
             self._save_cache({"noc_url": new_url})
 
             if new_url != self.noc_url:
+                # KEEP — fires only on actual change (≈ zero/day in steady state).
                 logger.info(
                     f"[NOC-Engine] NOC URL changed: {self.noc_url} → {new_url} — reconnecting"
                 )
@@ -586,8 +618,11 @@ class NocEngine:
                 message = await ws.receive()
                 msg_type = message.get("type", "UNKNOWN")
 
-                # Log EVERYTHING we receive at INFO level for debugging
-                logger.info(f"[NOC-Engine] 📥 INCOMING WS MESSAGE | type={msg_type} | keys={list(message.keys())}")
+                # Per-message DEBUG (lifecycle trace); the 60s summary below
+                # is the canonical INFO-level signal.
+                logger.debug(
+                    f"[NOC-Engine] 📥 WS msg type={msg_type} keys={list(message.keys())}"
+                )
 
                 if msg_type == "command":
                     # Dispatch to a separate task so we don't block receive loop
@@ -597,10 +632,15 @@ class NocEngine:
                     self._spawn_tracked(self._handle_command(ws, message), name=f"cmd-{cmd_id}")
 
                 elif msg_type == "proxy_request":
-                    # Handle web tool proxy request (synchronous response)
+                    # Aggregate via 60s windowed summary; keep per-message DEBUG
+                    # for forensic troubleshooting.
                     payload = message.get("payload", {})
                     request_id = payload.get("request_id", "?")
-                    logger.info(f"[NOC-Engine] 🔀 Proxy request {request_id}: {payload.get('method')} {payload.get('path')}")
+                    logger.debug(
+                        f"[NOC-Engine] 🔀 Proxy request {request_id}: "
+                        f"{payload.get('method')} {payload.get('path')}"
+                    )
+                    self._proxy_request_summary.increment()
                     self._spawn_tracked(self._handle_proxy_request(ws, message), name=f"proxy-{request_id}")
 
                 elif msg_type == "upload_chunk":
@@ -670,8 +710,8 @@ class NocEngine:
                 f"[NOC-Engine] ✔ Command result sent: "
                 f"cmd={cmd_id} status={result.get('status_code')}"
             )
-        except Exception as e:
-            logger.error(f"[NOC-Engine] Failed to send command result for cmd={cmd_id}: {e}")
+        except Exception:
+            logger.exception(f"[NOC-Engine] Failed to send command result for cmd={cmd_id}")
 
     # ------------------------------------------------------------------
     # SSH Tunnel Handlers
@@ -736,8 +776,8 @@ class NocEngine:
                 f"[NOC-Engine] 🔐 SSH tunnel {tunnel_id} ack sent: "
                 f"status={'ready' if success else 'failed'}"
             )
-        except Exception as e:
-            logger.error(f"[NOC-Engine] 🔐 Failed to send SSH tunnel ack: {e}")
+        except Exception:
+            logger.exception("[NOC-Engine] 🔐 Failed to send SSH tunnel ack")
             # Clean up tunnel if we can't communicate
             if success:
                 await self._ssh_manager.close_tunnel(tunnel_id, reason="comm_error")
@@ -774,8 +814,8 @@ class NocEngine:
             })
             try:
                 await ws.send(closed_msg)
-            except Exception as e:
-                logger.error(f"[NOC-Engine] 🔐 Failed to send tunnel closed: {e}")
+            except Exception:
+                logger.exception("[NOC-Engine] 🔐 Failed to send tunnel closed")
 
     async def _handle_ssh_tunnel_close(self, ws: WSClient, message: dict):
         """
@@ -810,8 +850,8 @@ class NocEngine:
         try:
             await ws.send(closed_msg)
             logger.info(f"[NOC-Engine] 🔐 SSH tunnel {tunnel_id} closed notification sent")
-        except Exception as e:
-            logger.error(f"[NOC-Engine] 🔐 Failed to send tunnel closed: {e}")
+        except Exception:
+            logger.exception("[NOC-Engine] 🔐 Failed to send tunnel closed")
 
     async def _handle_proxy_request(self, ws: WSClient, message: dict):
         """Handle web tool proxy request and return response immediately."""
@@ -964,7 +1004,7 @@ class NocEngine:
             upload["chunks"][chunk_index] = chunk_bytes
             logger.info(f"[NOC-Engine] Stored chunk {chunk_index + 1}/{total_chunks} for {upload_id}")
         except Exception as e:
-            logger.error(f"[NOC-Engine] Failed to decode chunk {chunk_index}: {e}")
+            logger.exception(f"[NOC-Engine] Failed to decode chunk {chunk_index}")
             error_msg = self._make_msg("chunked_upload_response", {
                 "upload_id": upload_id,
                 "success": False,
@@ -1095,9 +1135,7 @@ class NocEngine:
             logger.error(f"[NOC-Engine] Timeout posting to port 8005: {te}")
             return {"success": False, "error": f"Timeout connecting to port 8005: {te}"}
         except Exception as e:
-            logger.error(f"[NOC-Engine] Exception posting to port 8005: {type(e).__name__}: {e}")
-            import traceback
-            logger.error(f"[NOC-Engine] Traceback: {traceback.format_exc()}")
+            logger.exception("[NOC-Engine] Exception posting to port 8005")
             return {"success": False, "error": f"{type(e).__name__}: {str(e) or 'Unknown error'}"}
 
     # ------------------------------------------------------------------
