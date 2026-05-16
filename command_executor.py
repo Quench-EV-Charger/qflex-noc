@@ -123,9 +123,9 @@ async def execute(
             "execution_time_ms": elapsed_ms,
         }
 
-    except aiohttp.ClientConnectorError as e:
+    except aiohttp.ClientConnectorError:
         elapsed_ms = int((time.monotonic() - start) * 1000)
-        logger.error(f"[Executor] cmd={command_id} connection error: {e}")
+        logger.exception(f"[Executor] cmd={command_id} connection error")
         return {
             "command_id": command_id,
             "status_code": 503,

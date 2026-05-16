@@ -197,14 +197,12 @@ class SSHTunnelManager:
             logger.error(f"[SSH-Tunnel] Check: netstat -tlnp | grep {target_port}")
             return False
         except OSError as e:
-            logger.error(f"[SSH-Tunnel] OS error opening tunnel {tunnel_id}: {e}")
+            logger.exception(f"[SSH-Tunnel] OS error opening tunnel {tunnel_id}")
             logger.error(f"[SSH-Tunnel] Error code: {e.errno if hasattr(e, 'errno') else 'N/A'}")
             logger.error(f"[SSH-Tunnel] Target: {target_host}:{target_port}")
             return False
-        except Exception as e:
-            logger.error(f"[SSH-Tunnel] Failed to open tunnel {tunnel_id}: {type(e).__name__}: {e}")
-            import traceback
-            logger.error(f"[SSH-Tunnel] Traceback: {traceback.format_exc()}")
+        except Exception:
+            logger.exception(f"[SSH-Tunnel] Failed to open tunnel {tunnel_id}")
             return False
     
     async def forward_to_ssh(self, tunnel_id: str, data_b64: str) -> bool:
@@ -250,8 +248,8 @@ class SSHTunnelManager:
             )
             return True
             
-        except Exception as e:
-            logger.error(f"[SSH-Tunnel] Failed to forward to SSHD: {e}")
+        except Exception:
+            logger.exception("[SSH-Tunnel] Failed to forward to SSHD")
             await self.close_tunnel(tunnel_id, reason="write_error")
             return False
     
@@ -334,15 +332,15 @@ class SSHTunnelManager:
                         f"{self.ws_send_timeout}s for {tunnel_id} — closing tunnel"
                     )
                     break
-                except Exception as e:
-                    logger.error(f"[SSH-Tunnel] Failed to send to WebSocket: {e}")
+                except Exception:
+                    logger.exception("[SSH-Tunnel] Failed to send to WebSocket")
                     break
-                    
+
         except asyncio.CancelledError:
             logger.info(f"[SSH-Tunnel] Reader loop cancelled for {tunnel_id}")
             raise
-        except Exception as e:
-            logger.error(f"[SSH-Tunnel] Reader loop error for {tunnel_id}: {e}")
+        except Exception:
+            logger.exception(f"[SSH-Tunnel] Reader loop error for {tunnel_id}")
         finally:
             # Clean up tunnel
             await self.close_tunnel(tunnel_id, reason="connection_lost")

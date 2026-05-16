@@ -96,8 +96,8 @@ class SessionSyncManager:
         try:
             with open(self.STATE_FILE, "w") as f:
                 json.dump(self._state, f, indent=2)
-        except Exception as e:
-            logger.error(f"[SessionSync] Failed to save state: {e}")
+        except Exception:
+            logger.exception("[SessionSync] Failed to save state")
     
     async def start(self):
         """Start the session sync loop."""
@@ -124,8 +124,8 @@ class SessionSyncManager:
         while self._running:
             try:
                 await self._sync_once()
-            except Exception as e:
-                logger.error(f"[SessionSync] Sync error: {e}")
+            except Exception:
+                logger.exception("[SessionSync] Sync error")
             
             await asyncio.sleep(self.poll_interval)
     
@@ -305,8 +305,8 @@ class SessionSyncManager:
             # TRACE: per-tick send success is not actionable; the next failure
             # branch will log with `logger.exception`.
             logger.log(5, "[SessionSync] Sent session_sync to NOC Server")
-        except Exception as e:
-            logger.error(f"[SessionSync] Failed to send to NOC: {e}")
+        except Exception:
+            logger.exception("[SessionSync] Failed to send to NOC")
     
     def _update_state(self, active_sessions: list[dict], history_sessions: list[dict]):
         """Update internal state after successful sync."""

@@ -708,8 +708,8 @@ class NocEngine:
                 f"[NOC-Engine] ✔ Command result sent: "
                 f"cmd={cmd_id} status={result.get('status_code')}"
             )
-        except Exception as e:
-            logger.error(f"[NOC-Engine] Failed to send command result for cmd={cmd_id}: {e}")
+        except Exception:
+            logger.exception(f"[NOC-Engine] Failed to send command result for cmd={cmd_id}")
 
     # ------------------------------------------------------------------
     # SSH Tunnel Handlers
@@ -774,8 +774,8 @@ class NocEngine:
                 f"[NOC-Engine] 🔐 SSH tunnel {tunnel_id} ack sent: "
                 f"status={'ready' if success else 'failed'}"
             )
-        except Exception as e:
-            logger.error(f"[NOC-Engine] 🔐 Failed to send SSH tunnel ack: {e}")
+        except Exception:
+            logger.exception("[NOC-Engine] 🔐 Failed to send SSH tunnel ack")
             # Clean up tunnel if we can't communicate
             if success:
                 await self._ssh_manager.close_tunnel(tunnel_id, reason="comm_error")
@@ -812,8 +812,8 @@ class NocEngine:
             })
             try:
                 await ws.send(closed_msg)
-            except Exception as e:
-                logger.error(f"[NOC-Engine] 🔐 Failed to send tunnel closed: {e}")
+            except Exception:
+                logger.exception("[NOC-Engine] 🔐 Failed to send tunnel closed")
 
     async def _handle_ssh_tunnel_close(self, ws: WSClient, message: dict):
         """
@@ -848,8 +848,8 @@ class NocEngine:
         try:
             await ws.send(closed_msg)
             logger.info(f"[NOC-Engine] 🔐 SSH tunnel {tunnel_id} closed notification sent")
-        except Exception as e:
-            logger.error(f"[NOC-Engine] 🔐 Failed to send tunnel closed: {e}")
+        except Exception:
+            logger.exception("[NOC-Engine] 🔐 Failed to send tunnel closed")
 
     async def _handle_proxy_request(self, ws: WSClient, message: dict):
         """Handle web tool proxy request and return response immediately."""
@@ -1002,7 +1002,7 @@ class NocEngine:
             upload["chunks"][chunk_index] = chunk_bytes
             logger.info(f"[NOC-Engine] Stored chunk {chunk_index + 1}/{total_chunks} for {upload_id}")
         except Exception as e:
-            logger.error(f"[NOC-Engine] Failed to decode chunk {chunk_index}: {e}")
+            logger.exception(f"[NOC-Engine] Failed to decode chunk {chunk_index}")
             error_msg = self._make_msg("chunked_upload_response", {
                 "upload_id": upload_id,
                 "success": False,
@@ -1133,9 +1133,7 @@ class NocEngine:
             logger.error(f"[NOC-Engine] Timeout posting to port 8005: {te}")
             return {"success": False, "error": f"Timeout connecting to port 8005: {te}"}
         except Exception as e:
-            logger.error(f"[NOC-Engine] Exception posting to port 8005: {type(e).__name__}: {e}")
-            import traceback
-            logger.error(f"[NOC-Engine] Traceback: {traceback.format_exc()}")
+            logger.exception("[NOC-Engine] Exception posting to port 8005")
             return {"success": False, "error": f"{type(e).__name__}: {str(e) or 'Unknown error'}"}
 
     # ------------------------------------------------------------------
