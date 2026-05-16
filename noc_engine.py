@@ -348,7 +348,7 @@ class NocEngine:
                 break
             try:
                 await ws.send(self._make_msg("heartbeat", {}))
-                logger.debug("[NOC-Engine] ♥ Heartbeat sent")
+                logger.log(5, "[NOC-Engine] ♥ Heartbeat sent")  # below DEBUG (10)
             except Exception as e:
                 logger.warning(f"[NOC-Engine] Heartbeat failed: {e}")
                 break
