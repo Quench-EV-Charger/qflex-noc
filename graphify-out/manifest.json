@@ -1,39 +1,43 @@
 {
   "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\command_executor.py": {
-    "mtime": 1778422758.4742658,
-    "hash": "333a80bab58d60f2f889dbc558b709ea"
+    "mtime": 1778910327.862441,
+    "hash": "8a87288de53cc4c6006123df56d497e1"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\log_helpers.py": {
+    "mtime": 1778909152.8026445,
+    "hash": "aca24535067f6ab20179d74fccaaa7f9"
   },
   "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\main.py": {
-    "mtime": 1777895860.88535,
-    "hash": "e9838b9501de2b6c36f4cb187b523e3e"
+    "mtime": 1778910599.021803,
+    "hash": "aa2f1fe4749bb41b3329f5f8bc7d3e0a"
   },
   "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\noc_engine.py": {
-    "mtime": 1778663603.8056717,
-    "hash": "ff48398b7e9150bf21d3e1a50cdc99f5"
+    "mtime": 1778910620.6164582,
+    "hash": "3e0f32ce3f2570cf7f0e550b37f161b0"
   },
   "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\session_sync.py": {
-    "mtime": 1778422840.255819,
-    "hash": "b8b6cb65fc2618ae715d2b97c5ded560"
+    "mtime": 1778910415.5409563,
+    "hash": "5156f0536649c5067ac8f3497f3b9220"
   },
   "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\ssh_tunnel.py": {
-    "mtime": 1778423017.7961662,
-    "hash": "657fb275732e6f4903e827d173f7794d"
+    "mtime": 1778910455.599673,
+    "hash": "cc263d21015411e9bde38750712e4eb0"
   },
   "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\start.ps1": {
     "mtime": 1777542788.5626945,
     "hash": "f198e7ae672392cb7597b2eb7095d2ea"
   },
   "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\telemetry_collector.py": {
-    "mtime": 1778422777.837595,
-    "hash": "c29a09023fd6a0cfed6cc5ad672ab414"
+    "mtime": 1778909862.4742901,
+    "hash": "1ce44d4b109a855911deb8b2a9e57255"
   },
   "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\version_api.py": {
     "mtime": 1778423189.3531246,
     "hash": "f5e8d0101c8400e1bc704a395057b8fd"
   },
   "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\ws_client.py": {
-    "mtime": 1778421437.156537,
-    "hash": "2f7f67e37d033c7dc9dccd4f9b109bf9"
+    "mtime": 1778755690.1970096,
+    "hash": "0d41d56549ca48d4d2f4f917da8e6161"
   },
   "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\__init__.py": {
     "mtime": 1778421096.1466796,
@@ -46,6 +50,14 @@
   "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\tests\\conftest.py": {
     "mtime": 1778421078.3696475,
     "hash": "e8ed69f761284efa4e979115adc69515"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\tests\\test_logging_noise_reduction.py": {
+    "mtime": 1778910176.019087,
+    "hash": "b2e3e71a7918b8345a9d236847808b2f"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\tests\\test_log_helpers.py": {
+    "mtime": 1778909093.0199842,
+    "hash": "0341d8cbc21ef2c85584a9c13fdb52d5"
   },
   "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\tests\\test_noc_engine_session.py": {
     "mtime": 1778423076.8159106,
@@ -84,8 +96,8 @@
     "hash": "693fc3dabd59bfebf9918faa79990ad9"
   },
   "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\CHANGELOG.md": {
-    "mtime": 1778663813.0411644,
-    "hash": "ca53046203715613521012b97b913fc5"
+    "mtime": 1778910722.756613,
+    "hash": "2aac929329c1542a14bf0d973e9404c9"
   },
   "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\README.md": {
     "mtime": 1777542788.4005222,
@@ -102,5 +114,9 @@
   "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\docs\\superpowers\\plans\\2026-05-10-noc-engine-robustness.md": {
     "mtime": 1778420898.3538165,
     "hash": "921be771cd0841e7221079160f5b1738"
+  },
+  "D:\\curserai_workspace\\QFlexController\\Qflex-Dispenser\\qflex-noc\\docs\\superpowers\\plans\\2026-05-16-logging-noise-reduction.md": {
+    "mtime": 1778904801.6177516,
+    "hash": "ad8bf378770c45db84c58c19e4df2873"
   }
 }

@@ -4,6 +4,28 @@ All notable changes follow [Keep a Changelog](https://keepachangelog.com/en/1.1.
 
 ## [Unreleased]
 
+## [1.1.5] — 2026-05-16
+
+### Changed
+
+#### Logging noise reduction — `noc_engine.log` 95 MB/day → <10 MB/day
+
+- **Why.** A 24h capture (`qflex_logs_full_20260515_114015/noc-engine/noc_engine.log`, 856 113 lines, 95 MB — the biggest log of the four QFlex modules) showed **86% was DEBUG noise** (732 905 DEBUG lines). The single worst contributor was the `websockets.client` library at 469 536 lines/day (≈55% of the file) — TEXT-frame dumps and keepalive ping/pong traces with no application-level signal. Application code added another ~250 K lines of per-tick INFO/DEBUG: heartbeat-sent (89 503), telemetry-sent (21 931 INFO), incoming-WS (21 932 INFO), per-endpoint telemetry OK (~128 K DEBUG), session-sync send-success (11 885 DEBUG), zero-history fetch (10 116 DEBUG), and refresh-loop connection errors (~7 000 DEBUG with no stack frame). Meanwhile genuine errors were tiny (45 ERROR / 62 WARNING in 856 K lines) — they were getting buried.
+- **New helpers (`log_helpers.py`).** Three primitives plus a library-config call:
+  - `log_on_change(logger, key, value, msg, threshold=None)` — emits only when a tracked value changes.
+  - `RateLimitedLogger(logger, key, schedule=(1, 10, 100, 1000))` — backoff schedule + a single "recovered" INFO line on `.ok()`.
+  - `PeriodicSummary(logger, key, window_seconds)` — buffers per-window counts and emits one INFO/window; also tracks OK/FAIL status and emits an immediate flip line on a transition.
+  - `_configure_library_loggers()` — sets `websockets`, `websockets.client`, `websockets.server`, `websockets.protocol`, `httpx`, `asyncio` to `WARNING`. Called once from `main.py` at startup. **Removes ~470 000 lines/day on its own.**
+- **Per-site changes:**
+  - `main.py` — calls `_configure_library_loggers()` immediately after `logging.basicConfig(...)`. Once-per-process startup INFO lines (`✅ OCPP serial`, `✅ HW serial`, `✅ Charger ID`, `✅ NOC URL`, startup banner) are explicitly KEPT with inline `# KEEP` comments to deter future cleanups.
+  - `noc_engine.py` — `_heartbeat_loop` log demoted below DEBUG (level 5) so even DEBUG mode skips it (-89 503 lines/day). `_telemetry_loop` per-tick INFO replaced by a 1-hour `PeriodicSummary` with immediate OK↔FAIL flip lines (-21 931 INFO/day). `_receive_loop` unconditional `📥 INCOMING WS MESSAGE` INFO demoted to DEBUG (-21 932 INFO/day); the `proxy_request` branch now also feeds a 60s `PeriodicSummary`. `_charger_id_refresh_loop` (OCPP + HW fetches) and `_noc_url_refresh_loop` now use per-endpoint `RateLimitedLogger.exception(...)` — first failure captures the stack frame; recovery is announced via `.ok()`.
+  - `telemetry_collector.py` — `_fetch` per-call OK demoted to TRACE (level 5); per-endpoint status flips emitted via `log_on_change`. The bare `except Exception as e:` is now `logger.exception(...)`.
+  - `session_sync.py` — `Fetched N history sessions` only emits when `N>0` or on a 0↔N transition (via `log_on_change`). `Sent session_sync to NOC Server` demoted to TRACE. All three `Failed to fetch …` ERROR sites use `logger.exception(...)`.
+  - `ssh_tunnel.py`, `command_executor.py` — sweep of `except ... as e: logger.error(f"…{e}…")` → `logger.exception(...)`. Redundant `traceback.format_exc()` lines deleted.
+- **Behavior unchanged.** No control-flow edits. Existing tests pass unchanged.
+- **New tests.** `tests/test_log_helpers.py` (7 tests) covers the helpers and library-config call. `tests/test_logging_noise_reduction.py` covers each touched call site (`TestTelemetrySummary`, `TestIncomingWSMessageSummary`, `TestTelemetryFetchPerEndpointFlip`, `TestSessionSyncQuiet`, `TestRefreshLoopsRateLimited`, `TestSessionSyncExceptionLogging`).
+- **Estimated reduction.** Library silencing (-470 K) + heartbeat demote (-89 K) + telemetry summary (-21 K) + incoming-WS demote (-21 K) + telemetry-OK to TRACE (-128 K) + session-sync demotes (-22 K) + refresh-loop rate-limit (-7 K) ≈ **758 K lines/day removed** (≈88% of the original 856 K).
+
 ## [1.1.4] — 2026-05-14
 
 ### Changed
