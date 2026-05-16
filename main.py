@@ -149,6 +149,7 @@ async def _fetch_noc_url() -> str | None:
                     data    = await resp.json()
                     noc_url = str(data.get("value", "")).strip()
                     if data.get("success") and noc_url:
+                        # KEEP — once-per-process boot trace; useful for post-mortem.
                         logger.info(f"[NocEngine] ✅ NOC URL    : {noc_url}")
                         return noc_url
                     else:
@@ -204,6 +205,7 @@ async def _fetch_charger_id() -> str:
                     serial = data.get("value", "").replace("\x00", "").strip()
                     if data.get("success") and serial:
                         ocpp_serial = serial
+                        # KEEP — once-per-process boot trace; useful for post-mortem.
                         logger.info(f"[NocEngine] ✅ OCPP serial: {ocpp_serial}")
                 else:
                     logger.warning(f"[NocEngine] OCPP serial fetch: HTTP {resp.status}")
@@ -220,6 +222,7 @@ async def _fetch_charger_id() -> str:
                     serial = str(data.get("serial_number", "")).replace("\x00", "").strip()
                     if data.get("success") and serial:
                         hw_serial = serial
+                        # KEEP — once-per-process boot trace; useful for post-mortem.
                         logger.info(f"[NocEngine] ✅ HW serial  : {hw_serial}")
                 else:
                     logger.warning(f"[NocEngine] HW serial fetch: HTTP {resp.status}")
@@ -230,6 +233,7 @@ async def _fetch_charger_id() -> str:
     if ocpp_serial and hw_serial:
         _save_cached_charger_id(ocpp_serial, hw_serial)
         charger_id = f"{ocpp_serial}-{hw_serial}"
+        # KEEP — once-per-process boot trace; useful for post-mortem.
         logger.info(f"[NocEngine] ✅ Charger ID  : {charger_id}")
         return charger_id
 
@@ -280,6 +284,7 @@ async def _main():
             logger.warning("[NocEngine] Falling back to NOC server from config.json")
 
     # 2. Startup banner (printed after charger_id is confirmed)
+    # KEEP — startup banner; one-shot at boot.
     logger.info("=" * 60)
     logger.info("  NocEngine — QFlex Remote Charger Management")
     logger.info("=" * 60)

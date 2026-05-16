@@ -458,6 +458,7 @@ class NocEngine:
 
             new_charger_id = f"{ocpp_serial}-{hw_serial}"
             if new_charger_id != self.charger_id:
+                # KEEP — fires only on actual change (≈ zero/day in steady state).
                 logger.info(
                     f"[NOC-Engine] Charger ID changed: {self.charger_id} → {new_charger_id} — reconnecting"
                 )
@@ -507,6 +508,7 @@ class NocEngine:
             self._save_cache({"noc_url": new_url})
 
             if new_url != self.noc_url:
+                # KEEP — fires only on actual change (≈ zero/day in steady state).
                 logger.info(
                     f"[NOC-Engine] NOC URL changed: {self.noc_url} → {new_url} — reconnecting"
                 )
