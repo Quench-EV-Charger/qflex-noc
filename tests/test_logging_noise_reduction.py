@@ -71,3 +71,20 @@ class TestTelemetryFetchPerEndpointFlip:
         assert "log_on_change" in src, (
             "_fetch must use log_on_change for per-endpoint status flips"
         )
+
+
+class TestSessionSyncQuiet:
+    def test_fetch_zero_history_does_not_emit_unconditionally(self):
+        import inspect
+        import session_sync
+        src = inspect.getsource(session_sync.SessionSyncManager._fetch_history)
+        # The old unconditional log must be gone.
+        assert 'logger.debug(f"[SessionSync] Fetched ' not in src
+        # The new gated emission must be present.
+        assert "log_on_change" in src or "if len(sessions)" in src
+
+    def test_send_success_demoted_below_debug(self):
+        import inspect
+        import session_sync
+        src = inspect.getsource(session_sync.SessionSyncManager._send_to_noc)
+        assert 'logger.debug(f"[SessionSync] Sent session_sync' not in src

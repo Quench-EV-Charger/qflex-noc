@@ -33,6 +33,8 @@ from typing import Optional
 
 import aiohttp
 
+from log_helpers import log_on_change
+
 logger = logging.getLogger(__name__)
 
 
@@ -229,7 +231,14 @@ class SessionSyncManager:
                     data = await resp.json()
                     if data.get("success"):
                         sessions = data.get("sessions", [])
-                        logger.debug(f"[SessionSync] Fetched {len(sessions)} history sessions")
+                        # Only emit when count is non-zero OR on a 0↔N transition.
+                        log_on_change(
+                            logger,
+                            "session_sync:history_count",
+                            len(sessions),
+                            f"[SessionSync] Fetched {len(sessions)} history sessions",
+                            level=logging.DEBUG,
+                        )
                         return sessions
                 else:
                     logger.warning(f"[SessionSync] History API error: {resp.status}")
@@ -291,7 +300,9 @@ class SessionSyncManager:
                 # Generic send with json dumps
                 await self.ws_client.send(json.dumps(message))
             
-            logger.debug(f"[SessionSync] Sent session_sync to NOC Server")
+            # TRACE: per-tick send success is not actionable; the next failure
+            # branch will log with `logger.exception`.
+            logger.log(5, "[SessionSync] Sent session_sync to NOC Server")
         except Exception as e:
             logger.error(f"[SessionSync] Failed to send to NOC: {e}")
     
