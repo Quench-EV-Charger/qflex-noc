@@ -140,6 +140,16 @@ class NocEngine:
         # SSH Tunnel manager for remote SSH access
         self._ssh_manager = SSHTunnelManager()
 
+        # Periodic summaries for high-frequency events. Constructed once;
+        # safe to use across reconnects (state is per-process, not per-WS).
+        from log_helpers import PeriodicSummary
+        self._telemetry_summary = PeriodicSummary(
+            logger, key="Telemetry", window_seconds=3600.0,
+        )
+        self._proxy_request_summary = PeriodicSummary(
+            logger, key="proxy_request", window_seconds=60.0,
+        )
+
         # Local HTTP API for version/health introspection
         engine_version = self._read_engine_version()
         self._version_api = VersionAPIServer(
@@ -354,7 +364,11 @@ class NocEngine:
                 break
 
     async def _telemetry_loop(self, ws: WSClient):
-        """Collect and push charger telemetry every N seconds."""
+        """Collect and push charger telemetry every N seconds.
+
+        Per-tick INFO line was dropped — see ``_telemetry_summary`` for a 1h
+        windowed summary and immediate OK↔FAIL flip lines.
+        """
         while True:
             await asyncio.sleep(self.telemetry_interval)
             if not ws.connected:
@@ -365,8 +379,9 @@ class NocEngine:
                     session=await self._ensure_http_session(),
                 )
                 await ws.send(self._make_msg("telemetry", payload))
-                logger.info("[NOC-Engine] 📡 Telemetry sent")
+                self._telemetry_summary.success()
             except Exception as e:
+                self._telemetry_summary.failure(str(e))
                 logger.warning(f"[NOC-Engine] Telemetry push failed: {e}")
                 break
 
