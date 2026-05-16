@@ -88,3 +88,45 @@ class TestSessionSyncQuiet:
         import session_sync
         src = inspect.getsource(session_sync.SessionSyncManager._send_to_noc)
         assert 'logger.debug(f"[SessionSync] Sent session_sync' not in src
+
+
+class TestRefreshLoopsRateLimited:
+    def test_engine_has_refresh_rate_limiters(self, tmp_path):
+        from noc_engine import NocEngine
+        from log_helpers import RateLimitedLogger
+        cfg = {
+            "charger_id": "T1",
+            "noc_server": {"host": "127.0.0.1", "port": 1},
+            "charger_ip": "127.0.0.1",
+            "charger_ports": {"system_api": 0, "charging_controller": 0,
+                              "allocation_engine": 0, "error_generation": 0},
+        }
+        engine = NocEngine(cfg, charger_id_cache_file=str(tmp_path / "c.json"))
+        for name in ("_rl_ocpp_serial", "_rl_hw_serial", "_rl_noc_url"):
+            rl = getattr(engine, name, None)
+            assert isinstance(rl, RateLimitedLogger), f"missing {name}"
+
+    def test_refresh_loops_use_logger_exception(self):
+        import inspect
+        import noc_engine
+        for fn_name in ("_charger_id_refresh_loop", "_noc_url_refresh_loop"):
+            fn = getattr(noc_engine.NocEngine, fn_name)
+            src = inspect.getsource(fn)
+            # The bare DEBUG patterns must be gone.
+            assert "logger.debug(f\"[NOC-Engine] NOC URL refresh error:" not in src
+            assert "logger.debug(f\"[NOC-Engine] Charger ID refresh:" not in src
+            assert "logger.debug(f\"[NOC-Engine] Charger ID refresh error:" not in src
+            # Rate-limited exception() must be present.
+            assert ".exception(" in src
+
+
+class TestSessionSyncExceptionLogging:
+    def test_failed_to_fetch_uses_exception(self):
+        import inspect
+        import session_sync
+        for name in ("_fetch_active_sessions", "_fetch_history"):
+            src = inspect.getsource(getattr(session_sync.SessionSyncManager, name))
+            # Old pattern is gone.
+            assert "logger.error(f\"[SessionSync] Failed to fetch" not in src
+            # New `logger.exception` is present.
+            assert "logger.exception" in src

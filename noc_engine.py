@@ -142,13 +142,20 @@ class NocEngine:
 
         # Periodic summaries for high-frequency events. Constructed once;
         # safe to use across reconnects (state is per-process, not per-WS).
-        from log_helpers import PeriodicSummary
+        from log_helpers import PeriodicSummary, RateLimitedLogger
         self._telemetry_summary = PeriodicSummary(
             logger, key="Telemetry", window_seconds=3600.0,
         )
         self._proxy_request_summary = PeriodicSummary(
             logger, key="proxy_request", window_seconds=60.0,
         )
+
+        # Rate-limit per-endpoint refresh failures. Attempts 1, 10, 100, 1000
+        # each log a stack-frame; subsequent silent until .ok() emits a single
+        # "recovered" INFO when the endpoint comes back.
+        self._rl_ocpp_serial = RateLimitedLogger(logger, key="charger_id_refresh/ocpp")
+        self._rl_hw_serial   = RateLimitedLogger(logger, key="charger_id_refresh/hw")
+        self._rl_noc_url     = RateLimitedLogger(logger, key="noc_url_refresh")
 
         # Local HTTP API for version/health introspection
         engine_version = self._read_engine_version()
@@ -417,9 +424,10 @@ class NocEngine:
                             serial = data.get("value", "").replace("\x00", "").strip()
                             if data.get("success") and serial:
                                 ocpp_serial = serial
-                except Exception as e:
-                    logger.debug(
-                        f"[NOC-Engine] Charger ID refresh: OCPP fetch failed: {e}"
+                                self._rl_ocpp_serial.ok()
+                except Exception:
+                    self._rl_ocpp_serial.exception(
+                        "OCPP serial fetch failed (URL: %s)", self._ocpp_serial_url,
                     )
 
                 try:
@@ -432,12 +440,15 @@ class NocEngine:
                             serial = str(data.get("serial_number", "")).replace("\x00", "").strip()
                             if data.get("success") and serial:
                                 hw_serial = serial
-                except Exception as e:
-                    logger.debug(
-                        f"[NOC-Engine] Charger ID refresh: HW fetch failed: {e}"
+                                self._rl_hw_serial.ok()
+                except Exception:
+                    self._rl_hw_serial.exception(
+                        "HW serial fetch failed (URL: %s)", self._hw_serial_url,
                     )
-            except Exception as e:
-                logger.debug(f"[NOC-Engine] Charger ID refresh error: {e}")
+            except Exception:
+                # Outer error: e.g. _ensure_http_session() blew up. Bucket under OCPP
+                # since that's the first endpoint we'd have hit.
+                self._rl_ocpp_serial.exception("Charger ID refresh outer error")
 
             if not (ocpp_serial and hw_serial):
                 continue
@@ -482,8 +493,12 @@ class NocEngine:
                         url = str(data.get("value", "")).strip()
                         if data.get("success") and url:
                             new_url = url
-            except Exception as e:
-                logger.debug(f"[NOC-Engine] NOC URL refresh error: {e}")
+                            self._rl_noc_url.ok()
+            except Exception:
+                self._rl_noc_url.exception(
+                    "NOC URL refresh failed (URL: %s)", self._noc_url_url,
+                )
+                continue
 
             if not new_url:
                 continue
