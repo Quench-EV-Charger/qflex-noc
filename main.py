@@ -16,6 +16,12 @@ Configuration:
     it succeeds — no fallback to config.json is used.
 """
 
+try:
+    import setproctitle
+    setproctitle.setproctitle("qflex-noc")
+except ImportError:
+    pass
+
 import asyncio
 import json
 import logging
