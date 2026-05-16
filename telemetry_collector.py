@@ -38,6 +38,8 @@ from typing import Optional
 
 import aiohttp
 
+from log_helpers import log_on_change
+
 logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
@@ -85,28 +87,51 @@ async def _fetch(
         async with session.get(url, timeout=aiohttp.ClientTimeout(total=timeout_s)) as resp:
             if resp.status == 200:
                 data = await resp.json(content_type=None)
-                logger.debug(f"[Telemetry] {key} ok ({url})")
+                # Per-call OK is TRACE (level 5) so even DEBUG stays quiet.
+                # A status-flip line goes out via log_on_change.
+                logger.log(5, f"[Telemetry] {key} ok ({url})")
+                log_on_change(
+                    logger, f"telemetry_status:{key}", "ok",
+                    f"[Telemetry] {key} ok ({url})",
+                )
                 health = {"status": "ok", "url": url, "http_code": 200}
                 return key, data, health
 
             # Non-200 response — service is up but returning an error
-            logger.warning(f"[Telemetry] {key} → HTTP {resp.status} from {url}")
+            log_on_change(
+                logger, f"telemetry_status:{key}", f"http_{resp.status}",
+                f"[Telemetry] {key} → HTTP {resp.status} from {url}",
+                level=logging.WARNING,
+            )
             health = {"status": "http_error", "url": url, "http_code": resp.status}
             return key, None, health
 
     except asyncio.TimeoutError:
-        logger.warning(f"[Telemetry] {key} timed out ({timeout_s}s): {url}")
+        log_on_change(
+            logger, f"telemetry_status:{key}", "timeout",
+            f"[Telemetry] {key} timed out ({timeout_s}s): {url}",
+            level=logging.WARNING,
+        )
         health = {"status": "timeout", "url": url}
         return key, None, health
 
     except aiohttp.ClientConnectorError as e:
-        logger.debug(f"[Telemetry] {key} service not reachable: {url}")
+        log_on_change(
+            logger, f"telemetry_status:{key}", "unreachable",
+            f"[Telemetry] {key} service not reachable: {url}",
+            level=logging.WARNING,
+        )
         health = {"status": "unreachable", "url": url, "error": str(e)}
         return key, None, health
 
-    except Exception as e:
-        logger.warning(f"[Telemetry] {key} unexpected error: {e}")
-        health = {"status": "error", "url": url, "error": str(e)}
+    except Exception:
+        logger.exception(f"[Telemetry] {key} unexpected error ({url})")
+        log_on_change(
+            logger, f"telemetry_status:{key}", "error",
+            f"[Telemetry] {key} unexpected error ({url})",
+            level=logging.ERROR,
+        )
+        health = {"status": "error", "url": url, "error": "see traceback"}
         return key, None, health
 
 

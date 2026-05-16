@@ -58,3 +58,16 @@ class TestIncomingWSMessageSummary:
         import noc_engine
         src = inspect.getsource(noc_engine.NocEngine._receive_loop)
         assert "_proxy_request_summary.increment()" in src
+
+
+class TestTelemetryFetchPerEndpointFlip:
+    def test_repeated_ok_does_not_emit_per_call(self, caplog):
+        import inspect
+        import telemetry_collector
+        src = inspect.getsource(telemetry_collector._fetch)
+        # Old per-call DEBUG must be gone (or demoted to logger.log(5, ...))
+        assert 'logger.debug(f"[Telemetry] {key} ok' not in src
+        # New flip helper must be present.
+        assert "log_on_change" in src, (
+            "_fetch must use log_on_change for per-endpoint status flips"
+        )
